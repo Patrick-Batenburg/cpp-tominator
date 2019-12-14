@@ -1,0 +1,839 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
+    <ProjectGuid>66b5dd1b-2b2c-4e45-ab9a-7e9af944fafd</ProjectGuid>
+    <avrdevice>atmega2560</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>StaticLibrary</OutputType>
+    <Language>CPP</Language>
+    <OutputFileName>lib$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.a</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <Name>ArduinoCore</Name>
+    <ArduinoIdeDir>C:\Program Files (x86)\Arduino</ArduinoIdeDir>
+    <ArduinoProjectType>Core</ArduinoProjectType>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <AssemblyName>ArduinoCore</AssemblyName>
+    <RootNamespace>ArduinoCore</RootNamespace>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <CacheFlash>true</CacheFlash>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <UncachedRange />
+    <preserveEEPROM>true</preserveEEPROM>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <BootSegment>2</BootSegment>
+    <ResetRule>0</ResetRule>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <EraseKey />
+    <AsfFrameworkConfig>
+      <framework-data xmlns="">
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.47.0" />
+        </dependencies>
+      </framework-data>
+    </AsfFrameworkConfig>
+    <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
+    <avrtoolserialnumber />
+    <avrdeviceexpectedsignature>0x1E9801</avrdeviceexpectedsignature>
+    <com_atmel_avrdbg_tool_simulator>
+      <ToolOptions>
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber>
+      </ToolNumber>
+      <ToolName>Simulator</ToolName>
+    </com_atmel_avrdbg_tool_simulator>
+    <avrtoolinterface />
+    <custom>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">custom</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Custom Programming Tool</ToolName>
+    </custom>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+        <avrgcc.common.Device>-mmcu=atmega2560 -B "%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\gcc\dev\atmega2560"</avrgcc.common.Device>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
+        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcc.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>NDEBUG</Value>
+            <Value>F_CPU=16000000L</Value>
+            <Value>ARDUINO=108010</Value>
+            <Value>ARDUINO_AVR_MEGA2560</Value>
+            <Value>ARDUINO_ARCH_AVR</Value>
+            <Value>USB_VID=0x2341</Value>
+            <Value>USB_PID=0x0010</Value>
+            <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+          </ListValues>
+        </avrgcc.compiler.symbols.DefSymbols>
+        <avrgcc.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>..\include\core</Value>
+            <Value>..\include\variants\mega</Value>
+            <Value>..\include\libraries\Stepper</Value>
+            <Value>..\include\libraries\ArduinoSTL</Value>
+            <Value>..\include\libraries\HX711</Value>
+            <Value>..\include\libraries\FreeRTOS</Value>
+          </ListValues>
+        </avrgcc.compiler.directories.IncludePaths>
+        <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+        <avrgcc.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcc.compiler.optimization.OtherFlags>
+        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+        <avrgcc.compiler.warnings.InhibitAllWarnings>True</avrgcc.compiler.warnings.InhibitAllWarnings>
+        <avrgcc.compiler.miscellaneous.OtherFlags>-std=gnu99 -std=gnu11</avrgcc.compiler.miscellaneous.OtherFlags>
+        <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcccpp.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>NDEBUG</Value>
+            <Value>F_CPU=16000000L</Value>
+            <Value>ARDUINO=108010</Value>
+            <Value>ARDUINO_AVR_MEGA2560</Value>
+            <Value>ARDUINO_ARCH_AVR</Value>
+            <Value>USB_VID=0x2341</Value>
+            <Value>USB_PID=0x0010</Value>
+            <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+          </ListValues>
+        </avrgcccpp.compiler.symbols.DefSymbols>
+        <avrgcccpp.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>..\include\core</Value>
+            <Value>..\include\variants\mega</Value>
+            <Value>..\include\libraries\Stepper</Value>
+            <Value>..\include\libraries\ArduinoSTL</Value>
+            <Value>..\include\libraries\HX711</Value>
+            <Value>..\include\libraries\FreeRTOS</Value>
+          </ListValues>
+        </avrgcccpp.compiler.directories.IncludePaths>
+        <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
+        <avrgcccpp.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcccpp.compiler.optimization.OtherFlags>
+        <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+        <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+        <avrgcccpp.compiler.warnings.InhibitAllWarnings>True</avrgcccpp.compiler.warnings.InhibitAllWarnings>
+        <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=gnu++11</avrgcccpp.compiler.miscellaneous.OtherFlags>
+        <avrgcccpp.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </avrgcccpp.linker.libraries.Libraries>
+        <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
+        <avrgcccpp.assembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+          </ListValues>
+        </avrgcccpp.assembler.general.IncludePaths>
+        <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+      </AvrGccCpp>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+  <avrgcc.common.Device>-mmcu=atmega2560 -B "%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\gcc\dev\atmega2560"</avrgcc.common.Device>
+  <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>ARDUINO=108010</Value>
+      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+      <Value>USB_VID=0x2341</Value>
+      <Value>USB_PID=0x0010</Value>
+      <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+      <Value>..\include\core</Value>
+      <Value>..\include\variants\mega</Value>
+      <Value>..\include\libraries\Stepper</Value>
+      <Value>..\include\libraries\ArduinoSTL</Value>
+      <Value>..\include\libraries\HX711</Value>
+      <Value>..\include\libraries\FreeRTOS</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcc.compiler.optimization.OtherFlags>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.InhibitAllWarnings>True</avrgcc.compiler.warnings.InhibitAllWarnings>
+  <avrgcc.compiler.miscellaneous.OtherFlags>-std=gnu99 -std=gnu11</avrgcc.compiler.miscellaneous.OtherFlags>
+  <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcccpp.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>ARDUINO=108010</Value>
+      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+      <Value>USB_VID=0x2341</Value>
+      <Value>USB_PID=0x0010</Value>
+      <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+    </ListValues>
+  </avrgcccpp.compiler.symbols.DefSymbols>
+  <avrgcccpp.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+      <Value>..\include\core</Value>
+      <Value>..\include\variants\mega</Value>
+      <Value>..\include\libraries\Stepper</Value>
+      <Value>..\include\libraries\ArduinoSTL</Value>
+      <Value>..\include\libraries\HX711</Value>
+      <Value>..\include\libraries\FreeRTOS</Value>
+    </ListValues>
+  </avrgcccpp.compiler.directories.IncludePaths>
+  <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
+  <avrgcccpp.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcccpp.compiler.optimization.OtherFlags>
+  <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+  <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+  <avrgcccpp.compiler.warnings.InhibitAllWarnings>True</avrgcccpp.compiler.warnings.InhibitAllWarnings>
+  <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=gnu++11</avrgcccpp.compiler.miscellaneous.OtherFlags>
+  <avrgcccpp.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcccpp.linker.libraries.Libraries>
+  <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
+  <avrgcccpp.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+    </ListValues>
+  </avrgcccpp.assembler.general.IncludePaths>
+  <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+</AvrGccCpp>
+    </ToolchainSettings>
+    <UsesExternalMakeFile>False</UsesExternalMakeFile>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <BuildTarget>all</BuildTarget>
+    <CleanTarget>clean</CleanTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="include\core\Arduino.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\binary.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Client.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\HardwareSerial.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\HardwareSerial_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\IPAddress.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\new.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\PluggableUSB.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Print.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Printable.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Server.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Stream.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\Udp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\USBAPI.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\USBCore.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\USBDesc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\WCharacter.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\wiring_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\core\WString.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\ArduinoSTL\ArduinoSTL.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\ArduinoSTL\system_configuration.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\ArduinoSTL\unwind-cxx.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\Arduino_FreeRTOS.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\croutine.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\event_groups.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\FreeRTOSConfig.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\FreeRTOSVariant.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\list.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\message_buffer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\mpu_wrappers.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\portable.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\portmacro.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\projdefs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\queue.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\semphr.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\stack_macros.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\stream_buffer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\FreeRTOS\timers.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\HX711\HX711.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\Stepper\Stepper.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\variants\mega\pins_arduino.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\abi.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\CDC.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial0.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial1.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial2.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\HardwareSerial3.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\hooks.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\IPAddress.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\main.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\new.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\PluggableUSB.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\PreprocessingAssembly\wiring_pulse.S">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\Print.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\Stream.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\Tone.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\USBCore.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\WInterrupts.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring_analog.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring_digital.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring_pulse.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\wiring_shift.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\WMath.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\core\WString.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\abi\abi.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\algorithm.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\ArduinoSTL.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\associative_base.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\bitset.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\char_traits.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\complex.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\del_op.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\del_opnt.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\del_ops.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\del_opv.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\del_opvnt.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\del_opvs.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\deque.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\eh_alloc.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\eh_globals.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\exception.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\func_exception.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\iomanip.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\ios.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\iostream.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\istream.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\iterator.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\limits.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\list.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\locale.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\map.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\new_handler.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\new_op.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\new_opnt.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\new_opv.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\new_opvnt.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\numeric.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\ostream.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\ostream_helpers.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\queue.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\set.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\sstream.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\stack.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\stdexcept.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\streambuf.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\string.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\support.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\typeinfo.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\utility.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\valarray.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\ArduinoSTL\vector.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\croutine.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\event_groups.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\heap_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\list.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\port.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\queue.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\stream_buffer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\tasks.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\timers.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\FreeRTOS\variantHooks.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\HX711\HX711.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\Stepper\Stepper.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="include\" />
+    <Folder Include="include\core\" />
+    <Folder Include="include\libraries\" />
+    <Folder Include="include\libraries\ArduinoSTL\" />
+    <Folder Include="include\libraries\FreeRTOS\" />
+    <Folder Include="include\libraries\HX711\" />
+    <Folder Include="include\libraries\Stepper\" />
+    <Folder Include="include\variants\" />
+    <Folder Include="include\variants\mega\" />
+    <Folder Include="src\" />
+    <Folder Include="src\core\" />
+    <Folder Include="src\core\PreprocessingAssembly\" />
+    <Folder Include="src\libraries\" />
+    <Folder Include="src\libraries\ArduinoSTL\" />
+    <Folder Include="src\libraries\ArduinoSTL\abi\" />
+    <Folder Include="src\libraries\FreeRTOS\" />
+    <Folder Include="src\libraries\HX711\" />
+    <Folder Include="src\libraries\Stepper\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\libraries\ArduinoSTL\algorithm">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\associative_base">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\basic_definitions">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\bitset">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cassert">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cctype">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cerrno">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cfloat">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\char_traits">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\climits">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\clocale">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cmath">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\complex">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\csetjmp">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\csignal">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cstdarg">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cstddef">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cstdio">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cstdlib">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cstring">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\ctime">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cwchar">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\cwctype">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\deque">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\exception">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\functional">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\func_exception">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\initializer_list">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\iomanip">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\ios">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\iosfwd">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\iostream">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\istream">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\istream_helpers">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\iterator">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\iterator_base">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\limits">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\list">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\locale">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\map">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\memory">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\new">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\numeric">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\ostream">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\ostream_helpers">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\queue">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\serstream">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\set">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\sstream">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\stack">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\stdexcept">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\streambuf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\string">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\string_iostream">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\support">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\typeinfo">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\type_traits">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\utility">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\valarray">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="include\libraries\ArduinoSTL\vector">
+      <SubType>compile</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>

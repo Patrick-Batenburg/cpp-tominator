@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
+    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <avrdevice>ATmega2560</avrdevice>
+    <avrdeviceseries>mega</avrdeviceseries>
+    <OutputType>Executable</OutputType>
+    <Language>CPP</Language>
+    <OutputFileName>$(MSBuildProjectName)</OutputFileName>
+    <ArduinoProjectType>Sketch</ArduinoProjectType>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <Name>Tominator</Name>
+    <RootNamespace>Tominator</RootNamespace>
+    <ArduinoIdeDir>C:\Program Files (x86)\Arduino</ArduinoIdeDir>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <CacheFlash>true</CacheFlash>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <UncachedRange />
+    <preserveEEPROM>true</preserveEEPROM>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <BootSegment>2</BootSegment>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <AssemblyName>Tominator</AssemblyName>
+    <ResetRule>0</ResetRule>
+    <EraseKey />
+    <UseGdb>False</UseGdb>
+    <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
+    <avrtoolserialnumber />
+    <avrdeviceexpectedsignature>0x1E9801</avrdeviceexpectedsignature>
+    <CustomProgrammingToolCommand>
+    </CustomProgrammingToolCommand>
+    <avrtoolinterface />
+    <com_atmel_avrdbg_tool_simulator>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Simulator</ToolName>
+    </com_atmel_avrdbg_tool_simulator>
+    <custom>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">custom</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Custom Programming Tool</ToolName>
+    </custom>
+    <AsfFrameworkConfig>
+      <framework-data xmlns="">
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.47.0" />
+        </dependencies>
+      </framework-data>
+    </AsfFrameworkConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+        <avrgcc.common.Device>-mmcu=atmega2560 -B "%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\gcc\dev\atmega2560"</avrgcc.common.Device>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
+        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned />
+        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned />
+        <avrgcc.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>NDEBUG</Value>
+            <Value>F_CPU=16000000L</Value>
+            <Value>ARDUINO=108010</Value>
+            <Value>ARDUINO_AVR_MEGA2560</Value>
+            <Value>ARDUINO_ARCH_AVR</Value>
+            <Value>USB_VID=0x2341</Value>
+            <Value>USB_PID=0x0010</Value>
+            <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+          </ListValues>
+        </avrgcc.compiler.symbols.DefSymbols>
+        <avrgcc.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>..\include</Value>
+            <Value>..\include\States\BaseGrid</Value>
+            <Value>..\include\Strategies\Modes</Value>
+            <Value>..\include\States\Machine</Value>
+          </ListValues>
+        </avrgcc.compiler.directories.IncludePaths>
+        <avrgcc.compiler.optimization.level />
+        <avrgcc.compiler.optimization.PrepareFunctionsForGarbageCollection />
+        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcc.compiler.optimization.DebugLevel />
+        <avrgcc.compiler.warnings.AllWarnings />
+        <avrgcc.compiler.warnings.InhibitAllWarnings>True</avrgcc.compiler.warnings.InhibitAllWarnings>
+        <avrgcc.compiler.miscellaneous.OtherFlags />
+        <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcccpp.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>NDEBUG</Value>
+            <Value>F_CPU=16000000L</Value>
+            <Value>ARDUINO=108010</Value>
+            <Value>ARDUINO_AVR_MEGA2560</Value>
+            <Value>ARDUINO_ARCH_AVR</Value>
+            <Value>USB_VID=0x2341</Value>
+            <Value>USB_PID=0x0010</Value>
+            <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+            <Value>BOARD=STK600_MEGA</Value>
+            <Value>BOARD=USER_BOARD</Value>
+          </ListValues>
+        </avrgcccpp.compiler.symbols.DefSymbols>
+        <avrgcccpp.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>..\include</Value>
+            <Value>..\include\States\BaseGrid</Value>
+            <Value>..\include\Strategies\Modes</Value>
+            <Value>..\include\States\Machine</Value>
+          </ListValues>
+        </avrgcccpp.compiler.directories.IncludePaths>
+        <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
+        <avrgcccpp.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcccpp.compiler.optimization.OtherFlags>
+        <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+        <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+        <avrgcccpp.compiler.warnings.InhibitAllWarnings>True</avrgcccpp.compiler.warnings.InhibitAllWarnings>
+        <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=gnu++11</avrgcccpp.compiler.miscellaneous.OtherFlags>
+        <avrgcccpp.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </avrgcccpp.linker.libraries.Libraries>
+        <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
+        <avrgcccpp.assembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+          </ListValues>
+        </avrgcccpp.assembler.general.IncludePaths>
+        <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+      </AvrGccCpp>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+        <avrgcc.common.Device>-mmcu=atmega2560 -B "%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\gcc\dev\atmega2560"</avrgcc.common.Device>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
+        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned />
+        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned />
+        <avrgcc.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>DEBUG</Value>
+            <Value>F_CPU=16000000L</Value>
+            <Value>ARDUINO=108010</Value>
+            <Value>ARDUINO_AVR_MEGA2560</Value>
+            <Value>ARDUINO_ARCH_AVR</Value>
+            <Value>USB_VID=0x2341</Value>
+            <Value>USB_PID=0x0010</Value>
+            <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+          </ListValues>
+        </avrgcc.compiler.symbols.DefSymbols>
+        <avrgcc.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>..\include</Value>
+            <Value>..\include\States\BaseGrid</Value>
+            <Value>..\include\Strategies\Modes</Value>
+            <Value>..\include\States\Machine</Value>
+          </ListValues>
+        </avrgcc.compiler.directories.IncludePaths>
+        <avrgcc.compiler.optimization.level />
+        <avrgcc.compiler.optimization.PrepareFunctionsForGarbageCollection />
+        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcc.compiler.optimization.DebugLevel />
+        <avrgcc.compiler.warnings.AllWarnings />
+        <avrgcc.compiler.warnings.InhibitAllWarnings>True</avrgcc.compiler.warnings.InhibitAllWarnings>
+        <avrgcc.compiler.miscellaneous.OtherFlags />
+        <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcccpp.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>DEBUG</Value>
+            <Value>F_CPU=16000000L</Value>
+            <Value>ARDUINO=108010</Value>
+            <Value>ARDUINO_AVR_MEGA2560</Value>
+            <Value>ARDUINO_ARCH_AVR</Value>
+            <Value>USB_VID=0x2341</Value>
+            <Value>USB_PID=0x0010</Value>
+            <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+            <Value>BOARD=STK600_MEGA</Value>
+            <Value>BOARD=USER_BOARD</Value>
+          </ListValues>
+        </avrgcccpp.compiler.symbols.DefSymbols>
+        <avrgcccpp.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>..\include</Value>
+            <Value>..\include\States\BaseGrid</Value>
+            <Value>..\include\Strategies\Modes</Value>
+            <Value>..\include\States\Machine</Value>
+          </ListValues>
+        </avrgcccpp.compiler.directories.IncludePaths>
+        <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
+        <avrgcccpp.compiler.optimization.OtherFlags>-fno-threadsafe-statics</avrgcccpp.compiler.optimization.OtherFlags>
+        <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+        <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+        <avrgcccpp.compiler.warnings.InhibitAllWarnings>True</avrgcccpp.compiler.warnings.InhibitAllWarnings>
+        <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=gnu++11</avrgcccpp.compiler.miscellaneous.OtherFlags>
+        <avrgcccpp.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </avrgcccpp.linker.libraries.Libraries>
+        <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
+        <avrgcccpp.assembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+          </ListValues>
+        </avrgcccpp.assembler.general.IncludePaths>
+        <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+      </AvrGccCpp>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="include\BaseGrid.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Carriage.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Claw.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\ConveyorBelt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\DCMotor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Frame.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Grid.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Machine.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\RobotArm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\RotaryEncoder.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\BaseGrid\BaseGridState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\BaseGrid\FirstRowEmptyState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\BaseGrid\NoneRowEmptyState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\BaseGrid\SecondRowEmptyState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\BaseGrid\ThirdRowEmptyState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\Machine\BaseMachineState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\Machine\BootUpState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\Machine\InitializeState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\Machine\RunningState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\States\Machine\StandbyState.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Strategies\Modes\BaseMode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Strategies\Modes\Mode0_Default.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Strategies\Modes\Mode1_ClawManualPlacedWaterBalloon.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Strategies\Modes\Mode2_Quickness.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Strategies\Modes\Mode3_GrabWaterBalloon.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Strategies\Modes\Mode4_PlaceWaterballoonOnConveyorBelt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Strategies\Modes\Mode5_Sorting.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\TominatorPins.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\TominatorVariables.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\UltrasonicSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\WaterBalloon.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Sketch.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\BaseGrid.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Carriage.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Claw.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ConveyorBelt.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\DCMotor.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Frame.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Grid.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Machine.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\RobotArm.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\RotaryEncoder.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\BaseGrid\BaseGridState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\BaseGrid\FirstRowEmptyState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\BaseGrid\NoneRowEmptyState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\BaseGrid\SecondRowEmptyState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\BaseGrid\ThirdRowEmptyState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\Machine\BaseMachineState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\Machine\BootUpState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\Machine\InitializeState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\Machine\RunningState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\States\Machine\StandbyState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Strategies\Modes\BaseMode.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Strategies\Modes\Mode0_Default.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Strategies\Modes\Mode1_ClawManualPlacedWaterBalloon.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Strategies\Modes\Mode2_Quickness.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Strategies\Modes\Mode3_GrabWaterBalloon.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Strategies\Modes\Mode4_PlaceWaterballoonOnConveyorBelt.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Strategies\Modes\Mode5_Sorting.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\UltrasonicSensor.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\WaterBalloon.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Content Include="readme.html">
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArduinoCore\ArduinoCore.cppproj">
+      <Name>ArduinoCore</Name>
+      <Project>66b5dd1b-2b2c-4e45-ab9a-7e9af944fafd</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="include\" />
+    <Folder Include="include\Strategies" />
+    <Folder Include="include\States" />
+    <Folder Include="include\States\BaseGrid" />
+    <Folder Include="include\States\Machine" />
+    <Folder Include="include\Strategies\Modes\" />
+    <Folder Include="src\" />
+    <Folder Include="src\States" />
+    <Folder Include="src\States\Machine" />
+    <Folder Include="src\States\BaseGrid" />
+    <Folder Include="src\Strategies\" />
+    <Folder Include="src\Strategies\Modes\" />
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>
