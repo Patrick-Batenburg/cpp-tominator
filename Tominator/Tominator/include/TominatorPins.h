@@ -27,7 +27,7 @@
 #define STP_CLAW_PULSE 28					// STP4 grijper Pulse
 #define STP_CLAW_DIRECTION 29				// STP4 grijper Direction
 
-#define REED1_GRID 31						// Reed1 - Einde bovenloop as pallet
+#define REED1_GRID_SIDE 31					// Reed1 - Einde bovenloop as pallet
 #define REED2_SORTING_SIDE 32				// Reed2 - Einde bovenloop as uitsorteerkant
 #define HALL_CARRIAGE_TOP 33				// Hall1 - Hoogte carriage positie boven
 #define HALL_CARRIAGE_MIDDLE 34				// Hall2 - Hoogte carriage positie midden

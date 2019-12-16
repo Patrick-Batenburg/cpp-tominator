@@ -143,8 +143,8 @@ void setup()
 		}
 	}
 	
-	// Use INT0(pin2) falling edge interrupt for resuming tasks
-	attachInterrupt(digitalPinToInterrupt(2), InterruptHandler, RISING);
+	// Use falling edge interrupt for resuming tasks. DIGITAL PINS USABLE FOR INTERRUPTS: 2, 3, 18, 19, 20, 21
+	attachInterrupt(digitalPinToInterrupt(18), InterruptHandler, RISING);
 	
 	//			Function		Name								Stack size		Priority
 	xTaskCreate(TaskMain,		(const portCHAR *) "Blink",			128,	NULL,	1,  NULL);
@@ -158,13 +158,7 @@ void setup()
 	
 	pinMode(PIN_ENABLE_STEPPER_MOTOR, OUTPUT);
 	
-	pinMode(REED1_GRID, INPUT);
-	pinMode(REED2_SORTING_SIDE, INPUT);
 	pinMode(REED3_CONVEYOR_BELT, INPUT);
-	pinMode(REED6_HOMING_Y, INPUT);
-	pinMode(REED7_HOMING_X, INPUT);
-	pinMode(REED8_HOMING_Z, INPUT);
-	pinMode(REED9_HOMING_CLAW, INPUT);
 	
 	pinMode(P1_LED_STATE, OUTPUT);
 	pinMode(P2_LED_STANDBY_EMERGENCY, OUTPUT);

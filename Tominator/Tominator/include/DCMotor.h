@@ -82,14 +82,14 @@ public:
 	/**
 		Sets the motor speed between 0 and 255.
 
-		@param speed The speed.
+		@param speed The speed to use.
 	*/
 	void SetSpeed(int speed);
     
 	/**
 		Sets the motor speed between 0 - 100%.
 
-		@param percentage The percentage.
+		@param percentage The percentage of motor speed to utilize.
 	*/
 	void SetSpeedInPercentage(int percentage);
 private:

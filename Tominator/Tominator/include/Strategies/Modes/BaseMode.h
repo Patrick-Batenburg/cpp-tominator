@@ -29,9 +29,10 @@ public:
 		@return A string that represents the current object class name.
 	*/
 	virtual std::string ToString();
+
 private:
 	/**
-		Defines a set of instructions.
+		Allows an interface for defining a set of instructions/operations (modes) on the machine.
 	*/
 	virtual void HandlePlaceholder(Machine* machine) = 0;
 };

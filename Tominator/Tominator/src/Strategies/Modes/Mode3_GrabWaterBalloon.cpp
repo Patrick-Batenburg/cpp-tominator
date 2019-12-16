@@ -13,8 +13,8 @@ GrabWaterBalloonMode::~GrabWaterBalloonMode()
 
 void GrabWaterBalloonMode::HandlePlaceholder(Machine* machine)
 {
-	machine->HandleArm(0, 0, 0);	// Go to grid.
-	machine->CloseClaw();			// Grab water balloon.
+	machine->HandleRobotArm(0, 0, 0);	// Go to grid.
+	machine->CloseClaw();				// Grab water balloon.
 }
 
 string GrabWaterBalloonMode::ToString()

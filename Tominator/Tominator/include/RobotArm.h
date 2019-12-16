@@ -6,10 +6,13 @@ class RobotArm
 private:
 	int xPulsePin;
 	int xDirectionPin;
+	int xHomingPin;
 	int yPulsePin;
 	int yDirectionPin;
+	int yHomingPin;
 	int zPulsePin;
 	int zDirectionPin;
+	int zHomingPin;
 	int x;
 	int y;
 	int z;
@@ -29,27 +32,16 @@ public:
 
 		@param xPulsePin		The robot arm's X-axis stepper motor pulse pin.
 		@param xDirectionPin	The robot arm's X-axis stepper motor direction pin.
+		@param xHomingPin		The robot arm's X-axis homing pin.
 		@param yPulsePin		The robot arm's Y-axis stepper motor pulse pin.
 		@param yDirectionPin	The robot arm's Y-axis stepper motor direction pin.
+		@param yHomingPin		The robot arm's Y-axis homing pin.
 		@param zPulsePin		The robot arm's Z-axis stepper motor pulse pin.
 		@param zDirectionPin	The robot arm's Z-axis stepper motor direction pin.
+		@param zHomingPin		The robot arm's Z-axis homing pin.
 		@param claw				The claw object.
 	*/
-	RobotArm(int xPulsePin, int xDirectionPin, int yPulsePin, int yDirectionPin, int zPulsePin, int zDirectionPin, Claw claw);
-
-	/**
-		Initializes a new instance of the RobotArm class.
-
-		@param xPulsePin		The robot arm's X-axis stepper motor pulse pin.
-		@param xDirectionPin	The robot arm's X-axis stepper motor direction pin.
-		@param yPulsePin		The robot arm's Y-axis stepper motor pulse pin.
-		@param yDirectionPin	The robot arm's Y-axis stepper motor direction pin.
-		@param zPulsePin		The robot arm's Z-axis stepper motor pulse pin.
-		@param zDirectionPin	The robot arm's Z-axis stepper motor direction pin.
-		@param clawPulsePin		The claw's stepper motor pulse pin.
-		@param clawDirectionPin The claw's stepper motor direction pin.
-	*/
-	RobotArm(int xPulsePin, int xDirectionPin, int yPulsePin, int yDirectionPin, int zPulsePin, int zDirectionPin, int clawPulsePin, int clawDirectionPin);
+	RobotArm(int xPulsePin, int xDirectionPin, int xHomingPin, int yPulsePin, int yDirectionPin, int yHomingPin, int zPulsePin, int zDirectionPin, int zHomingPin, Claw claw);
 
 	/**
 		Deconstruct the instance of the RobotArm class.
@@ -60,6 +52,17 @@ public:
 		Handles the X, Y and Z-axis of the robot arm.
 	*/
 	void HandleArm(int x, int y, int z);
+	
+	/**
+		Makes the robot arm return to its default position. x:0, y:0, z:0
+	*/
+	void Homing();
+
+	/**
+		Makes the robot arm and claw return to its default position. x:0, y:0, z:0, claw open
+	*/
+	void HomingWithClaw();
+
 
 	/**
 		Opens the claw.
@@ -113,6 +116,13 @@ public:
 	*/
 	void SetZAxis(int value);
 
+	/**
+		Gets the claw object.
+
+		@return The claw object.
+	*/
+	Claw GetClaw();
+
 private:
 	/**
 		Checks whenever the specified value is out of bounds.
@@ -121,6 +131,7 @@ private:
 		@return The same value if not out of bounds. If out of bounds, the nearest minimum or maximum value is returned instead.
 	*/
 	int CheckXAxisBoundary(int value);
+
 	/**
 		Checks whenever the specified value is out of bounds.
 

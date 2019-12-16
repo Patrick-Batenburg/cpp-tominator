@@ -17,6 +17,7 @@ Machine::Machine()
 	DCMotor frameDCMotor = DCMotor(PIN_FRAME_IN1_DIRECTION, PIN_FRAME_IN2_DIRECTION, PIN_FRAME_PWM);
 	UltrasonicSensor gridSideSensor = UltrasonicSensor(B1_ULTRASONIC_TRIGGER, B1_ULTRASONIC_ECHO);
 	UltrasonicSensor sortingSideSensor = UltrasonicSensor(B2_ULTRASONIC_TRIGGER, B2_ULTRASONIC_ECHO);
+	Claw claw = Claw(STP_CLAW_PULSE, STP_CLAW_DIRECTION, REED9_HOMING_CLAW);
 	
 	this->mode = new DefaultMode();
 	this->state = new BootUpState();
@@ -24,8 +25,8 @@ Machine::Machine()
 	this->grid = Grid();
 	this->conveyorBelt = ConveyorBelt(conveyorBeltDCMotor);	
 	this->carriage = Carriage(carriageDCMotor, HALL_CARRIAGE_BOTTOM, HALL_CARRIAGE_MIDDLE, HALL_CARRIAGE_TOP);
-	this->frame = Frame(frameDCMotor, gridSideSensor, sortingSideSensor, REED1_GRID, REED2_SORTING_SIDE, &this->grid, &this->conveyorBelt);
-	this->robotArm = RobotArm(STP_X_PULSE, STP_X_DIRECTION, STP_Y_PULSE, STP_Y_DIRECTION, STP_Z_PULSE, STP_Z_DIRECTION, STP_CLAW_PULSE, STP_CLAW_DIRECTION);
+	this->frame = Frame(frameDCMotor, gridSideSensor, sortingSideSensor, REED1_GRID_SIDE, REED2_SORTING_SIDE, &this->grid, &this->conveyorBelt);
+	this->robotArm = RobotArm(STP_X_PULSE, STP_X_DIRECTION, REED7_HOMING_X, STP_Y_PULSE, STP_Y_DIRECTION, REED6_HOMING_Y, STP_Z_PULSE, STP_Z_DIRECTION, REED8_HOMING_Z, claw);
 	this->rotaryEncoder = RotaryEncoder(S4_ROTARY_ENCODER_CLK, S4_ROTARY_ENCODER_DT);
 	this->loadCell.begin(HX1_LOAD_CELL_DT, HX1_LOAD_CELL_SCK);
 	this->loadCell.set_scale(loadCellDivider);
@@ -183,9 +184,27 @@ void Machine::OpenClaw()
 	this->robotArm.OpenClaw();
 }
 
-void Machine::HandleArm(int x, int y, int z)
+void Machine::HandleRobotArm(int x, int y, int z)
 {
 	this->robotArm.HandleArm(x, y, z);
+}
+
+void Machine::HomingRobotArm(int homeWhat)
+{
+	switch (homeWhat)
+	{
+		case 1:
+			this->robotArm.Homing();
+			break;
+		case 2:
+			this->robotArm.GetClaw().Homing();
+			break;
+		case 0:
+		default:
+			this->robotArm.HomingWithClaw();
+			break;
+	}
+	
 }
 
 void Machine::TurnOnFrameMotor(DirectionType direction)

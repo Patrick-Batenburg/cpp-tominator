@@ -19,6 +19,7 @@ void StandbyState::Start(Machine* machine)
 	machine->SetConveyorBelt(ConveyorBelt());
 	machine->SetGrid(Grid());
 	machine->SelectMode(machine->GetRotaryEncoder().GetCounter());
+	machine->HomingRobotArm();
 
 	if (DEBUG)
 	{

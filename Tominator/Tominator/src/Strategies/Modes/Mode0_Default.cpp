@@ -19,12 +19,12 @@ void DefaultMode::HandlePlaceholder(Machine* machine)
 		{
 			WaterBalloon waterBalloon = WaterBalloon(machine->GetGrid().GetWaterBalloonPositions()[i][j].GetWeight());
 			//std::cout << to_string(waterBalloon.GetWeight()) << " ";
-			machine->HandleArm(machine->GetGrid().GetCurrentRow(), machine->GetGrid().GetCurrentColumn(), 0); // Go to grid.
-			machine->CloseClaw();				// Grab water balloon.
+			machine->HandleRobotArm(machine->GetGrid().GetCurrentRow(), machine->GetGrid().GetCurrentColumn(), 0); // Go to grid.
+			machine->CloseClaw();					// Grab water balloon.
 			machine->SetCurrentWaterBalloon(waterBalloon);
 			machine->WeighWaterBalloon();
-			machine->HandleArm(0, 0, 0);		// Go to conveyor belt.
-			machine->OpenClaw();				// Let go of water balloon.
+			machine->HandleRobotArm(0, 0, 0);		// Go to conveyor belt.
+			machine->OpenClaw();					// Let go of water balloon.
 
 			if (machine->GetConveyorBelt().GetTransportedWaterBalloons() == machine->GetConveyorBelt().GetTransportedWaterBalloonsGoal())
 			{

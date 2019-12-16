@@ -13,10 +13,10 @@ PlaceWaterballoonOnConveyorBeltMode::~PlaceWaterballoonOnConveyorBeltMode()
 
 void PlaceWaterballoonOnConveyorBeltMode::HandlePlaceholder(Machine* machine)
 {
-	machine->CloseClaw();			// Grab water balloon.
+	machine->CloseClaw();				// Grab water balloon.
 	machine->WeighWaterBalloon();
-	machine->HandleArm(0, 0, 0);	// Go to conveyor belt.
-	machine->OpenClaw();			// Let go of water balloon.
+	machine->HandleRobotArm(0, 0, 0);	// Go to conveyor belt.
+	machine->OpenClaw();				// Let go of water balloon.
 }
 
 string PlaceWaterballoonOnConveyorBeltMode::ToString()

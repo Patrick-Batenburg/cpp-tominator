@@ -5,7 +5,8 @@ class Claw
 private:
 	int pulsePin;
 	int directionPin;
-	
+	int homingPin;
+
 public:
 	/**
 		Initializes a new instance of the Claw class.
@@ -17,8 +18,9 @@ public:
 
 		@param pulsePin		The claw's stepper motor pulse pin.
 		@param directionPin The claw's stepper motor direction pin.
+		@param homingPin	The claw's homing pin.
 	*/
-	Claw(int pulsePin, int directionPin);
+	Claw(int pulsePin, int directionPin, int homingPin);
 
 	/**
 		Deconstruct the instance of the Claw class.
@@ -34,6 +36,33 @@ public:
 		Closes the claw.
 	*/
 	void Close();
+
+	/**
+		Makes the claw return to its default position, which is open.
+	*/	
+	void Homing();	
+	
+	/**
+		Gets the pulse pin.
+		
+		@return The pulse pin.
+	*/
+	int GetPulsePin();
+
+	/**
+		Gets the direction pin.
+		
+		@return The direction pin.
+	*/
+	int GetDirectionPin();
+
+	/**
+		Gets the homing pin.
+		
+		@return The homing pin.
+	*/
+	int GetHomingPin();
+	
 private:
 
 	/**
