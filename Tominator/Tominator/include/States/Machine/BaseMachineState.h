@@ -33,9 +33,10 @@ public:
 	virtual void EmergencyStop(Machine* machine);
 
 	/**
-		Returns a string that represents the current object class name.
-		
-		@return A string that represents the current object class name.
+		Returns a string that represents the current state.
+		Only useful for comparisons and debug purposes.
+	
+		@return A string that represents the current state.
 	*/
 	virtual std::string ToString();
 };

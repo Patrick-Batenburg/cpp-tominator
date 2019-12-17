@@ -15,11 +15,13 @@ public:
 	~QuicknessMode();
 
 	/**
-		Returns a string that represents the current object class name.
+		Returns a string that represents the current mode.
+		Only useful for comparisons and debug purposes.
 		
-		@return A string that represents the current object class name.
+		@return A string that represents the current mode.
 	*/
 	virtual std::string ToString();
+
 private:
 	/**
 		Defines a set of instructions.

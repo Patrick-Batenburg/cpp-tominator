@@ -1,5 +1,6 @@
 #include "RobotArm.h"
 #include "TominatorPins.h"
+#include <Arduino.h>
 
 RobotArm::RobotArm()
 {
@@ -197,6 +198,9 @@ void RobotArm::Homing()
 		// If all homing pins are HIGH then we successfully managed to return back to the default position.
 		if (digitalRead(this->xHomingPin) == HIGH && digitalRead(this->yHomingPin) == HIGH && digitalRead(this->zHomingPin) == HIGH)
 		{
+			this->SetXAxis(0);
+			this->SetYAxis(0);
+			this->SetYAxis(0);
 			reachedEnd = true;
 		}
 	}
@@ -262,6 +266,9 @@ void RobotArm::HomingWithClaw()
 		// If all homing pins are HIGH then we successfully managed to return back to the default position.
 		if (digitalRead(this->xHomingPin) == HIGH && digitalRead(this->yHomingPin) == HIGH && digitalRead(this->zHomingPin) == HIGH && digitalRead(this->claw.GetHomingPin()) == HIGH)
 		{
+			this->SetXAxis(0);
+			this->SetYAxis(0);
+			this->SetYAxis(0);
 			reachedEnd = true;
 		}
 	}

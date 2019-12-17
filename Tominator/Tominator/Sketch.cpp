@@ -152,19 +152,14 @@ void setup()
 	
 	pinMode(LED_BUILTIN, OUTPUT);
 		
-	pinMode(PIN_START, INPUT);
-	pinMode(PIN_RESET, INPUT);
-	pinMode(PIN_EMERGENCY_STOP, INPUT);
+	pinMode(PIN_START_BUTTON, INPUT);
+	pinMode(PIN_RESET_BUTTON, INPUT);
+	pinMode(PIN_EMERGENCY_STOP_BUTTON, INPUT);
 	
 	pinMode(PIN_ENABLE_STEPPER_MOTOR, OUTPUT);
-	
-	pinMode(REED3_CONVEYOR_BELT, INPUT);
-	
+		
 	pinMode(P1_LED_STATE, OUTPUT);
 	pinMode(P2_LED_STANDBY_EMERGENCY, OUTPUT);
-
-	pinMode(PIN_A0, OUTPUT);
-	pinMode(PIN_A1, OUTPUT);
 	
 	Serial.begin(9600);
 	machine = Machine();	

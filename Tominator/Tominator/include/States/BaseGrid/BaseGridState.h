@@ -18,6 +18,7 @@ class BaseGridState
 {
 private:
 	std::map<std::string, StateType> stateTypes;
+
 public:
 	/**
 		Initializes a new instance of the BaseGridState class.
@@ -42,9 +43,10 @@ public:
 	std::map<std::string, StateType> GetStateTypes();
 
 	/**
-		Returns a string that represents the current object class name.
+		Returns a string that represents the current state.
+		Only useful for comparisons and debug purposes.
 		
-		@return A string that represents the current object class name.
+		@return A string that represents the current state.
 	*/
 	virtual std::string ToString();
 };

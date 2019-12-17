@@ -10,7 +10,9 @@ private:
 	enum WaterBalloonType thirdRowType;
 	int transportedWaterBalloons;
 	int transportedWaterBalloonsGoal;
+	int reedPin;
 	DCMotor dcMotor; 
+
 public:
 	/**
 		Initializes a new instance of the ConveyorBelt class.
@@ -21,8 +23,9 @@ public:
 		Initializes a new instance of the ConveyorBelt class.
 		
 		@param dcMotor	The DCMotor object.
+		@param reedPin	The reed contact located under the wall strip.
 	*/
-	ConveyorBelt(DCMotor dcMotor);
+	ConveyorBelt(DCMotor dcMotor, int reedPin);
 
 	/**
 		Deconstruct the instance of the ConveyorBelt class.

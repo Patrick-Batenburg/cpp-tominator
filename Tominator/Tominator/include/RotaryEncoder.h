@@ -8,6 +8,7 @@ private:
 	int dtPin;
 	int counter;
 	byte state;
+
 public:
 	/**
 		Initializes a new instance of the RotaryEncoder class.

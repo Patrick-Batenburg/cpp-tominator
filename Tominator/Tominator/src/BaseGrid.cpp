@@ -9,15 +9,36 @@ BaseGrid::BaseGrid()
 	this->currentRow = 0;
 	this->currentColumn = 0;
 	this->state = new NoneRowEmptyState();
+	this->selectedCell.Row = this->currentRow;
+	this->selectedCell.Column = this->currentColumn;
+	this->selectedCell.InitialType = WaterBalloonType::Empty;
+}
+
+BaseGrid::BaseGrid(WaterBalloonType type) : BaseGrid()
+{
+	this->waterBalloonPositions = vector<vector<WaterBalloon>>(3, vector<WaterBalloon>(3, WaterBalloon(type)));
+	this->selectedCell.InitialType = type;
 }
 
 BaseGrid::~BaseGrid()
 {
 }
 
-BaseGrid::BaseGrid(WaterBalloonType type) : BaseGrid()
+Cell BaseGrid::GetNearestUnusedCell()
 {
-	this->waterBalloonPositions = vector<vector<WaterBalloon>>(3, vector<WaterBalloon>(3, WaterBalloon(type)));
+    for (int i = 0; i < this->GetWaterBalloonPositions().size(); i++)
+	{
+	    for (int j = 0; j < this->GetWaterBalloonPositions()[i].size(); j++)
+		{
+			if (this->GetWaterBalloonPositions()[i][j].GetType() == this->selectedCell.InitialType)
+			{
+				this->selectedCell.Row = i;
+				this->selectedCell.Column = j;
+			}
+		}
+    }
+	
+	return this->selectedCell;
 }
 
 int BaseGrid::GetCurrentRow()

@@ -5,6 +5,7 @@ class UltrasonicSensor
 private:
 	int triggerPin;
 	int echoPin;
+
 public:
 	/**
 		Initializes a new instance of the UltrasonicSensor class.

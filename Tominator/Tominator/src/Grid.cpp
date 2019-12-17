@@ -15,7 +15,7 @@ Grid::~Grid()
 {
 }
 
-void Grid::MoveToNextSection()
+void Grid::SelectNextPosition()
 {
 	this->waterBalloonPositions[this->GetCurrentRow()][this->GetCurrentColumn()].SetType(WaterBalloonType::Empty);
 

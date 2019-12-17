@@ -1,18 +1,17 @@
 #pragma once
 #include "BaseMode.h"
 
-class PlaceWaterballoonOnConveyorBeltMode : public BaseMode
+class OpenAndCloseClawMode : public BaseMode
 {
-public:
 	/**
-		Initializes a new instance of the PlaceWaterballoonOnConveyorBeltMode class.
+		Initializes a new instance of the OpenAndCloseClawMode class.
 	*/
-	PlaceWaterballoonOnConveyorBeltMode();
+	OpenAndCloseClawMode();
 
 	/**
-		Deconstruct the instance of the PlaceWaterballoonOnConveyorBeltMode class.
+		Deconstruct the instance of the OpenAndCloseClawMode class.
 	*/
-	~PlaceWaterballoonOnConveyorBeltMode();
+	~OpenAndCloseClawMode();
 
 	/**
 		Returns a string that represents the current mode.

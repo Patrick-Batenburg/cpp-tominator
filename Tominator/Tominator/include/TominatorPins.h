@@ -1,5 +1,5 @@
 #pragma once
-#include <Arduino.h>
+#include <pins_arduino.h>
 
 #define PIN_FRAME_IN1_DIRECTION 2			// frame aandrijving IN1 richting
 #define PIN_FRAME_IN2_DIRECTION 3			// frame aandrijving IN2 richting
@@ -13,11 +13,11 @@
 #define PIN_CONVEYOR_BELT_IN2_DIRECTION 9	// Transportband IN2 richting
 #define PIN_CONVEYOR_BELT_PWM 10			// Transportband PWM
 
-#define PIN_START 15						// Startknop N/O
-#define PIN_RESET 17						// Resetknop N/C
-#define PIN_EMERGENCY_STOP 19				// Noodstop N/O
+#define PIN_START_BUTTON 15					// Startknop N/O
+#define PIN_RESET_BUTTON 17					// Resetknop N/C
+#define PIN_EMERGENCY_STOP_BUTTON 19		// Noodstop N/O
 
-#define PIN_ENABLE_STEPPER_MOTOR 21			// Stappenmotoren enable
+#define PIN_ENABLE_STEPPER_MOTOR 30			// Stappenmotoren enable
 #define STP_X_PULSE 24						// STP1 X-as Pulse
 #define STP_X_DIRECTION 25					// STP1 X-as Direction
 #define STP_Y_PULSE 22						// STP2 Y-as Pulse
@@ -50,6 +50,6 @@
 #define B1_ULTRASONIC_ECHO 48				// B1 Ultrasoon Echo
 #define B2_ULTRASONIC_TRIGGER 49			// B2 Ultrasoon Trig
 #define B2_ULTRASONIC_ECHO 50				// B2 Ultrasoon Echo
-	
-// PIN_A0 - Display SDA, pin al gedefineert in Arduino.h
-// PIN_A1 - Display SCL, pin al gedefineert in Arduino.h
+
+// Display SDA, defined in pins_arduino.h as SDA
+// Display SCL, defined in pins_arduino.h as SCL

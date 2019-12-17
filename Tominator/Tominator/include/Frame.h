@@ -16,6 +16,7 @@ private:
 	UltrasonicSensor sortingSideUltrasonicSensor;
 	Grid* grid;
 	ConveyorBelt* conveyorBelt;
+
 public:
 	/**
 		Initializes a new instance of the Frame class.
@@ -30,8 +31,8 @@ public:
 		@param sortingSideUltrasonicSensor	The ultrasonic sensor object located at the sorting side.
 		@param reedGridSidePin				The reed contact located at the grid side.
 		@param reedSortingSidePin			The reed contact located at the sorting side.
-		@param grid							The grid pointer object for relation data.
-		@param conveyorBelt					The conveyor belt pointer for relation data.
+		@param grid							The grid pointer object needed for relational data access.
+		@param conveyorBelt					The conveyor belt pointer object needed for relational data access.
 	*/
 	Frame(DCMotor dcMotor, UltrasonicSensor gridSideUltrasonicSensor, UltrasonicSensor sortingSideUltrasonicSensor, int reedGridSidePin, int reedSortingSidePin, Grid* grid, ConveyorBelt* conveyorBelt);
 	

@@ -10,6 +10,7 @@
 #include "RobotArm.h"
 #include "Carriage.h"
 #include "Frame.h"
+#include "ControlPanel.h"
 #include <HX711.h>
 
 class Machine
@@ -27,6 +28,7 @@ private:
 	RotaryEncoder rotaryEncoder;
 	Carriage carriage;
 	Frame frame;
+	ControlPanel controlPanel;
 
 public:
 	/**
@@ -46,7 +48,16 @@ public:
 	*/
 	~Machine();
 
+	/**
+		Executes a set of instructions defined in a mode as long the machine resides in the correct state.
+	*/
 	void StartMode();
+	
+	/**
+		Sets the machine's selected mode based on int-value.
+
+		@param value The new selected mode.
+	*/
 	void SelectMode(int value);
 
 	/**
@@ -63,7 +74,15 @@ public:
 		Indicates that the emergency stop button was pressed. Calls underlying EmergencyStop() method in the state the machine resides in. Leads to a guranteed state change (BootUpState).
 	*/
 	void EmergencyStopButtonPressed();
+
+	/**
+		Sorts the water balloons present on the conveyor belt. First the carriage is handled to be on the correct height before any actual sorting can take place.
+	*/
 	void SortWaterBalloons();
+
+	/**
+		Weigh the grabbed/placed water balloon in the claw.
+	*/
 	void WeighWaterBalloon();
 
 	/**
@@ -83,12 +102,17 @@ public:
 
 	/**
 		Applies homing to the robot arm. By default it will home the X, Y, Z-axis and claw simultaneously.
-		0 = Homing is applied to the X, Y, Z-axis and claw.
-		1 = Homing only applied to the X, Y and Z-axis
-		2 = Homing only applied to the claw.
+		0 = Homing is applied to the X, Y, Z-axis and claw (default).
+		1 = Homing is only applied to the X, Y and Z-axis
+		2 = Homing is only applied to the claw.
 	*/
 	void HomingRobotArm(int homeWhat = 0);
 	
+	/**
+		Turns the frame's DC motor on.
+
+		@param direction The direction the DC motor starts in.
+	*/
 	void TurnOnFrameMotor(DirectionType direction);
 
 	/**
@@ -96,6 +120,11 @@ public:
 	*/	
 	void TurnOffFrameMotor();
 
+	/**
+		Turns the frame's DC motor on.
+
+		@param direction The direction the DC motor starts in.
+	*/	
 	void TurnOnCarriageMotor(DirectionType direction);
 
 	/**
@@ -103,6 +132,11 @@ public:
 	*/	
 	void TurnOffCarriageMotor();
 
+	/**
+		Turns the frame's DC motor on.
+
+		@param direction The direction the DC motor starts in.
+	*/
 	void TurnOnConveyorBeltMotor(DirectionType direction);
 
 	/**

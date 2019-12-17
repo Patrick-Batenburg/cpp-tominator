@@ -7,6 +7,7 @@
 #include "Mode3_GrabWaterBalloon.h"
 #include "Mode4_PlaceWaterballoonOnConveyorBelt.h"
 #include "Mode5_Sorting.h"
+#include "TominatorPins.h"
 
 using namespace std;
 
@@ -18,12 +19,12 @@ Machine::Machine()
 	UltrasonicSensor gridSideSensor = UltrasonicSensor(B1_ULTRASONIC_TRIGGER, B1_ULTRASONIC_ECHO);
 	UltrasonicSensor sortingSideSensor = UltrasonicSensor(B2_ULTRASONIC_TRIGGER, B2_ULTRASONIC_ECHO);
 	Claw claw = Claw(STP_CLAW_PULSE, STP_CLAW_DIRECTION, REED9_HOMING_CLAW);
-	
 	this->mode = new DefaultMode();
 	this->state = new BootUpState();
 	this->currentWaterBalloon = WaterBalloon();
 	this->grid = Grid();
-	this->conveyorBelt = ConveyorBelt(conveyorBeltDCMotor);	
+	this->controlPanel = ControlPanel(PIN_START_BUTTON, PIN_RESET_BUTTON, PIN_EMERGENCY_STOP_BUTTON);
+	this->conveyorBelt = ConveyorBelt(conveyorBeltDCMotor, REED3_CONVEYOR_BELT);	
 	this->carriage = Carriage(carriageDCMotor, HALL_CARRIAGE_BOTTOM, HALL_CARRIAGE_MIDDLE, HALL_CARRIAGE_TOP);
 	this->frame = Frame(frameDCMotor, gridSideSensor, sortingSideSensor, REED1_GRID_SIDE, REED2_SORTING_SIDE, &this->grid, &this->conveyorBelt);
 	this->robotArm = RobotArm(STP_X_PULSE, STP_X_DIRECTION, REED7_HOMING_X, STP_Y_PULSE, STP_Y_DIRECTION, REED6_HOMING_Y, STP_Z_PULSE, STP_Z_DIRECTION, REED8_HOMING_Z, claw);
@@ -33,17 +34,19 @@ Machine::Machine()
 	this->loadCell.set_offset(loadCellOffset);
 }
 
-Machine::~Machine()
-{
-}
-
 Machine::Machine(vector<vector<WaterBalloon>> waterBalloonPositions) : Machine()
 {
 	this->grid = Grid(waterBalloonPositions);
 }
 
+Machine::~Machine()
+{
+}
+
 void Machine::StartMode()
 {	
+	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
+	
 	if (this->state->ToString() == RUNNING_STATE)
 	{
 		this->mode->Execute(this);
@@ -146,12 +149,7 @@ void Machine::SortWaterBalloons()
 		}
 	}
 
-	while (speed > 0)
-	{
-		speed--;
-		this->conveyorBelt.HandleDCMotor();
-	}
-
+	this->conveyorBelt.HandleDCMotor();
 	this->conveyorBelt.GetState()->Next(&this->conveyorBelt);	
 }
 
@@ -169,7 +167,7 @@ void Machine::WeighWaterBalloon()
 		if (this->conveyorBelt.CanAddWaterBalloon(this->currentWaterBalloon))
 		{
 			this->conveyorBelt.AddWaterBalloon(this->currentWaterBalloon);
-			this->grid.MoveToNextSection();
+			this->grid.SelectNextPosition();
 		}
 	}
 }
@@ -245,6 +243,7 @@ BaseMachineState* Machine::GetState()
 void Machine::SetState(BaseMachineState* value)
 {
 	this->state = value;
+	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }
 
 BaseMode* Machine::GetMode()
@@ -255,6 +254,7 @@ BaseMode* Machine::GetMode()
 void Machine::SetMode(BaseMode* value)
 {
 	this->mode = value;
+	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }
 
 Grid Machine::GetGrid()

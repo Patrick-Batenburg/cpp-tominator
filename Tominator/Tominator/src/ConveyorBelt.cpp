@@ -5,14 +5,16 @@ ConveyorBelt::ConveyorBelt() : BaseGrid()
 {
 	this->transportedWaterBalloons = 0;
 	this->transportedWaterBalloonsGoal = 9;
+	this->reedPin = 0;
 	this->firstRowType = WaterBalloonType::Empty;
 	this->secondRowType = WaterBalloonType::Empty;
 	this->thirdRowType = WaterBalloonType::Empty;
 }
 
-ConveyorBelt::ConveyorBelt(DCMotor dcMotor) : ConveyorBelt()
+ConveyorBelt::ConveyorBelt(DCMotor dcMotor, int reedPin) : ConveyorBelt()
 {
 	this->dcMotor = dcMotor;
+	this->reedPin = reedPin;
 }
 
 ConveyorBelt::~ConveyorBelt()
@@ -23,6 +25,10 @@ bool ConveyorBelt::CanAddWaterBalloon(WaterBalloon waterBalloon)
 {
 	bool suceeded = false;
 
+	// Water balloons always get added from left to right.
+	// If the very first cell of a row is either empty or the same type as the water balloon, then update the corresponding row type variable.
+	// If there was only checked whenever the first was only empty, then this may lead to all 3 row type variables becoming the same type other than empty.
+	// Essentially, assigning duplicate types to a row type variable is what we want to avoid here.
 	if (this->waterBalloonPositions[0][0].GetType() == WaterBalloonType::Empty || this->waterBalloonPositions[0][0].GetType() == waterBalloon.GetType())
 	{
 		this->firstRowType = waterBalloon.GetType();
@@ -36,6 +42,9 @@ bool ConveyorBelt::CanAddWaterBalloon(WaterBalloon waterBalloon)
 		this->thirdRowType = waterBalloon.GetType();
 	}
 
+	// If the water balloon type matches any of the 3 row type variables, set the corresponding row. 
+	// We then loop through that row to see if there space to place a new water balloon. This is indicated by a WaterBalloonType::Empty in the 2D matrix.
+	// If this succeeds, then we return true and set the column. If it fails somehow, for example all rows appeared to be filled, then we return false.
 	if (waterBalloon.GetType() == this->GetFirstRowType())
 	{
 		this->SetCurrentRow(0);
@@ -62,10 +71,6 @@ bool ConveyorBelt::CanAddWaterBalloon(WaterBalloon waterBalloon)
 				this->SetCurrentColumn(i);
 				break;
 			}
-			else
-			{
-				suceeded = false;
-			}
 		}
 	}
 	else if (waterBalloon.GetType() == this->GetThirdRowType())
@@ -79,10 +84,6 @@ bool ConveyorBelt::CanAddWaterBalloon(WaterBalloon waterBalloon)
 				suceeded = true;
 				this->SetCurrentColumn(i);
 				break;
-			}
-			else
-			{
-				suceeded = false;
 			}
 		}
 	}
@@ -100,7 +101,10 @@ void ConveyorBelt::HandleDCMotor()
 {
 	if (this->GetTransportedWaterBalloons() == this->GetTransportedWaterBalloonsGoal())
 	{
-		this->dcMotor.Run();
+		while (digitalRead(this->reedPin) == LOW)
+		{
+			this->dcMotor.Run();
+		}	
 	}
 }
 

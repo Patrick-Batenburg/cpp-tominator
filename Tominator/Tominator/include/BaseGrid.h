@@ -3,11 +3,18 @@
 #include "BaseGridState.h"
 #include <vector>
 
+struct Cell {
+	int Row;
+	int Column;
+	WaterBalloonType InitialType;
+};
+
 class BaseGrid
 {
 private:
 	int currentRow;
 	int currentColumn;
+	Cell selectedCell;
 
 protected:
 	std::vector<std::vector<WaterBalloon>> waterBalloonPositions;
@@ -30,6 +37,13 @@ public:
 		Deconstruct the instance of the BaseGrid class.
 	*/
 	~BaseGrid();
+
+	/**
+		Gets the nearest unused cell.
+		
+		@return The cell that is unused.
+	*/	
+	Cell GetNearestUnusedCell(); 
 
 	/**
 		Gets the current selected row.
