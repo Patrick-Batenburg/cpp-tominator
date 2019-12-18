@@ -182,6 +182,11 @@ void Machine::OpenClaw()
 	this->robotArm.OpenClaw();
 }
 
+void Machine::HandleFrame(DirectionType direction)
+{
+	this->frame.HandleDCMotor(direction);
+}
+
 void Machine::HandleRobotArm(int x, int y, int z)
 {
 	this->robotArm.HandleArm(x, y, z);

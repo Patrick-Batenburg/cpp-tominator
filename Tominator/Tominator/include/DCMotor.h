@@ -92,6 +92,7 @@ public:
 		@param percentage The percentage of motor speed to utilize.
 	*/
 	void SetSpeedInPercentage(int percentage);
+
 private:
 	/**
 		Makes the DC motor start in the forward direction.

@@ -374,6 +374,9 @@
     <Compile Include="include\Strategies\Modes\Mode6_OpenAndCloseClaw.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\Strategies\Modes\Mode7_DriveFrameBackAndForth.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\TominatorPins.h">
       <SubType>compile</SubType>
     </Compile>
@@ -474,6 +477,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Strategies\Modes\Mode6_OpenAndCloseClaw.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Strategies\Modes\Mode7_DriveFrameBackAndForth.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\UltrasonicSensor.cpp">

@@ -46,6 +46,60 @@ void ControlPanel::Print(string data1, string data2)
 	}
 }
 
+void ControlPanel::HandleStandbyLED()
+{
+
+}
+
+void ControlPanel::HandleRunningLED()
+{
+
+}
+
+void ControlPanel::HandleEmergencyLED()
+{
+
+}
+
+void ControlPanel::CheckButtonPress(Machine* machine)
+{
+	int buttonState = digitalRead(this->emergencyStopButtonPin);	
+
+	if (buttonState == HIGH)
+	{
+		this->EmergencyStopButtonPressedEvent(machine);
+	}
+	
+	buttonState = digitalRead(this->resetButtonPin);
+
+	if (buttonState == HIGH)
+	{
+		this->ResetButtonPressedEvent(machine);
+	}
+	
+	buttonState = digitalRead(this->startButtonPin);
+
+	if (buttonState == HIGH)
+	{
+		this->StartButtonPressedEvent(machine);
+	}
+}
+
+void ControlPanel::StartButtonPressedEvent(Machine* machine)
+{
+	machine->StartButtonPressed();
+}
+
+void ControlPanel::ResetButtonPressedEvent(Machine* machine)
+{
+	machine->ResetButtonPressed();
+}
+
+void ControlPanel::EmergencyStopButtonPressedEvent(Machine* machine)
+{
+	machine->EmergencyStopButtonPressed();
+}
+
 int ControlPanel::GetStartButtonPin()
 {
 	return this->startButtonPin;

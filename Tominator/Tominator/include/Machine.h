@@ -96,12 +96,21 @@ public:
 	void CloseClaw();
 	
 	/**
+		Handles the frame to reach its destination.
+	*/
+	void HandleFrame(DirectionType direction);
+
+	/**
 		Handles the X, Y and Z-axis of the robot arm.
+
+		@param direction The direction the frame is suppsed to go into.
 	*/
 	void HandleRobotArm(int x, int y, int z);
 
 	/**
 		Applies homing to the robot arm. By default it will home the X, Y, Z-axis and claw simultaneously.
+		
+		@param homeWhat Indicates what needs homing based on int-value.
 		0 = Homing is applied to the X, Y, Z-axis and claw (default).
 		1 = Homing is only applied to the X, Y and Z-axis
 		2 = Homing is only applied to the claw.

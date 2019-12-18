@@ -15,7 +15,7 @@ void SortingMode::HandlePlaceholder(Machine* machine)
 {
 	// Grab a water balloon from the grid, weigh it and place onto the conveyor belt. Repeat this process 3x after which 1 row should be filled and can be sorted.
 	
-	Cell nearestCell = machine->GetConveyorBelt().GetNearestUnusedCell(); // Helper method to get the next position, but very time consuming due to reiterating over a 2D matrix every time it is called.
+	Cell nearestCell = machine->GetConveyorBelt().GetNearestUnusedCell(); // Helper method to get the next position, but is very time consuming due to reiterating over a 2D matrix every time it is called.
 	machine->GetConveyorBelt().SetTransportedWaterBalloonsGoal(3); // Need only 3 water balloons instead of the default 9.
 
 	machine->HomingRobotArm();																				// Homes to default position. x:0, y:0

@@ -24,19 +24,36 @@ BaseGrid::~BaseGrid()
 {
 }
 
-Cell BaseGrid::GetNearestUnusedCell()
+Cell BaseGrid::GetNearestUnusedCell(bool reiterating)
 {
-    for (int i = 0; i < this->GetWaterBalloonPositions().size(); i++)
+	if (reiterating)
 	{
-	    for (int j = 0; j < this->GetWaterBalloonPositions()[i].size(); j++)
+		for (int i = 0; i < this->GetWaterBalloonPositions().size(); i++)
 		{
-			if (this->GetWaterBalloonPositions()[i][j].GetType() == this->selectedCell.InitialType)
+			for (int j = 0; j < this->GetWaterBalloonPositions()[i].size(); j++)
 			{
-				this->selectedCell.Row = i;
-				this->selectedCell.Column = j;
+				if (this->GetWaterBalloonPositions()[i][j].GetType() == this->selectedCell.InitialType)
+				{
+					this->selectedCell.Row = i;
+					this->selectedCell.Column = j;
+				}
 			}
 		}
-    }
+	}
+	else
+	{
+		for (int i = this->selectedCell.Row; i < this->GetWaterBalloonPositions().size(); i++)
+		{
+			for (int j = this->selectedCell.Column; j < this->GetWaterBalloonPositions()[i].size(); j++)
+			{
+				if (this->GetWaterBalloonPositions()[i][j].GetType() == this->selectedCell.InitialType)
+				{
+					this->selectedCell.Row = i;
+					this->selectedCell.Column = j;
+				}
+			}
+		}
+	}
 	
 	return this->selectedCell;
 }

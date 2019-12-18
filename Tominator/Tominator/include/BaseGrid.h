@@ -41,9 +41,10 @@ public:
 	/**
 		Gets the nearest unused cell.
 		
+		@param reiterating Determines whenever or not to start from the beginning.	
 		@return The cell that is unused.
 	*/	
-	Cell GetNearestUnusedCell(); 
+	Cell GetNearestUnusedCell(bool reiterating = true); 
 
 	/**
 		Gets the current selected row.

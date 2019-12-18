@@ -40,6 +40,26 @@ public:
 	void Print(std::string data1, std::string data2 = "");
 
 	/**
+		Handles how the LED reacts in a standby state.
+	*/
+	void HandleStandbyLED();
+
+	/**
+		Handles how the LED reacts in a running state.
+	*/
+	void HandleRunningLED();
+
+	/**
+		Handles how the LED reacts in a emergency state.
+	*/
+	void HandleEmergencyLED();	
+	
+	/**
+		Checks if a button press occurred.
+	*/
+	void CheckButtonPress(Machine* machine);
+
+	/**
 		Indicates that the start button was pressed.
 	*/
 	void StartButtonPressedEvent(Machine* machine);

@@ -15,6 +15,7 @@ StandbyState::~StandbyState()
 void StandbyState::Start(Machine* machine)
 {
 	machine->SetState(new InitializeState());	
+	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, HIGH);
 	machine->SetCurrentWaterBalloon(WaterBalloon());
 	machine->SetConveyorBelt(ConveyorBelt());
 	machine->SetGrid(Grid());
@@ -29,11 +30,10 @@ void StandbyState::Start(Machine* machine)
 			{ WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1) },
 			{ WaterBalloon(WaterBalloonType::Unkown, 1),	WaterBalloon(WaterBalloonType::Unkown, 2),		WaterBalloon(WaterBalloonType::Unkown, 2) }
 		};
-
-		machine->SetGrid(waterBalloonPositions);
+		
+		Grid predeterminedGrid = Grid(waterBalloonPositions);
+		machine->SetGrid(predeterminedGrid);
 	}
-	
-	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, HIGH);
 }
 
 string StandbyState::ToString()

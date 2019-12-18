@@ -5,7 +5,7 @@
 #define STEPS_PER_REVOLUTION 2000
 
 
-// All states and modes mainly useful for debug purposes or to show on screen in what state/mode the machine resides in
+// All states and modes mainly useful for comparisons or debug purposes, such as showing on screen in what state/mode the machine resides in
 #define BASE_GRID_STATE "BaseGridState"
 #define NONE_ROW_EMPTY_STATE "None Row Empty"
 #define FIRST_ROW_EMPTY_STATE "First Row Empty"
@@ -26,3 +26,4 @@
 #define MODE4 "MODE4"
 #define MODE5 "MODE5"
 #define MODE6 "MODE6"
+#define MODE7 "MODE7"
