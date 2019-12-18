@@ -7,6 +7,8 @@
 #include "Mode3_GrabWaterBalloon.h"
 #include "Mode4_PlaceWaterballoonOnConveyorBelt.h"
 #include "Mode5_Sorting.h"
+#include "Mode6_OpenAndCloseClaw.h"
+#include "Mode7_DriveFrameBackAndForth.h"
 #include "TominatorPins.h"
 
 using namespace std;
@@ -71,6 +73,12 @@ void Machine::SelectMode(int value)
 			break;
 		case 5:
 			this->SetMode(new SortingMode());
+			break;
+		case 6:
+			this->SetMode(new OpenAndCloseClawMode());
+			break;
+		case 7:
+			this->SetMode(new DriveFrameBackAndForthMode());
 			break;
 		case 0:
 		default:
