@@ -106,15 +106,15 @@ void Frame::HandleDCMotorOffset(DirectionType direction)
 	{
 		switch (this->conveyorBelt->GetState()->GetStateTypes()[this->conveyorBelt->GetState()->ToString()])
 		{
-			case StateType::FirstRowEmptyStateType:
+			case BaseGridStateType::FirstRowEmptyStateType:
 				offset = 1;
 				break;
-			case StateType::SecondRowEmptyStateType:
+			case BaseGridStateType::SecondRowEmptyStateType:
 				offset = 2;
 				break;
-			case StateType::BaseGridStateType:
-			case StateType::NoneRowEmptyStateType:
-			case StateType::ThirdRowEmptyStateType:
+			case BaseGridStateType::BaseGridType:
+			case BaseGridStateType::NoneRowEmptyStateType:
+			case BaseGridStateType::ThirdRowEmptyStateType:
 			default:
 				offset = 0;
 				break;
@@ -124,15 +124,15 @@ void Frame::HandleDCMotorOffset(DirectionType direction)
 	{	
 		switch (this->grid->GetState()->GetStateTypes()[this->grid->GetState()->ToString()])
 		{
-			case StateType::FirstRowEmptyStateType:
+			case BaseGridStateType::FirstRowEmptyStateType:
 				offset = 1;
 				break;
-			case StateType::SecondRowEmptyStateType:
+			case BaseGridStateType::SecondRowEmptyStateType:
 				offset = 2;
 				break;
-			case StateType::BaseGridStateType:
-			case StateType::NoneRowEmptyStateType:
-			case StateType::ThirdRowEmptyStateType:
+			case BaseGridStateType::BaseGridType:
+			case BaseGridStateType::NoneRowEmptyStateType:
+			case BaseGridStateType::ThirdRowEmptyStateType:
 			default:
 				offset = 0;
 				break;

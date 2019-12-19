@@ -9,7 +9,7 @@ private:
 	int startButtonPin;
 	int resetButtonPin;
 	int emergencyStopButtonPin;
-	LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
+	LiquidCrystal_I2C lcd;
 
 public:
 	/**
@@ -19,12 +19,18 @@ public:
 
 	/**
 		Initializes a new instance of the ControlPanel class.
+	*/
+	ControlPanel(LiquidCrystal_I2C lcd);
+
+
+	/**
+		Initializes a new instance of the ControlPanel class.
 
 		@param startButtonPin			The start button pin.
 		@param resetButtonPin			The reset button pin.
 		@param emergencyStopButtonPin	The emergency stop pin.
 	*/
-	ControlPanel(int startButtonPin, int resetButtonPin, int emergencyStopButtonPin);
+	ControlPanel(LiquidCrystal_I2C lcd, int startButtonPin, int resetButtonPin, int emergencyStopButtonPin);
 
 	/**
 		Deconstruct the instance of the ControlPanel class.
@@ -52,6 +58,7 @@ public:
 		Checks if a button press occurred.
 	*/
 	void CheckButtonPress(Machine* machine);
+	void CheckButtonPress(Machine machine);
 
 	/**
 		Indicates that the start button was pressed.
@@ -67,6 +74,20 @@ public:
 		Indicates that the emergency stop button was pressed.
 	*/
 	void EmergencyStopButtonPressedEvent(Machine* machine);
+	/**
+		Indicates that the start button was pressed.
+	*/
+	void StartButtonPressedEvent(Machine machine);
+
+	/**
+		Indicates that the reset button was pressed.
+	*/
+	void ResetButtonPressedEvent(Machine machine);
+
+	/**
+		Indicates that the emergency stop button was pressed.
+	*/
+	void EmergencyStopButtonPressedEvent(Machine machine);
 	
 	/**
 		Gets the start button pin.

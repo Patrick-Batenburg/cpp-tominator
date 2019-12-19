@@ -6,28 +6,26 @@ using namespace std;
 
 ControlPanel::ControlPanel()
 {
+	pinMode(SDA, OUTPUT);
+	pinMode(SCL, OUTPUT);
 }
 
-ControlPanel::ControlPanel(int startButtonPin, int resetButtonPin, int emergencyStopButtonPin)
+ControlPanel::ControlPanel(LiquidCrystal_I2C lcd) : ControlPanel()
+{
+	this->lcd = lcd;
+	this->lcd.init();
+	this->lcd.backlight();
+}
+
+ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, int startButtonPin, int resetButtonPin, int emergencyStopButtonPin) : ControlPanel(lcd)
 {
 	this->startButtonPin = startButtonPin;
 	this->resetButtonPin = resetButtonPin;
 	this->emergencyStopButtonPin = emergencyStopButtonPin;
 	pinMode(this->startButtonPin, INPUT);
 	pinMode(this->resetButtonPin, INPUT);
-	pinMode(this->emergencyStopButtonPin, INPUT);
-	
-	pinMode(SDA, OUTPUT);
-	pinMode(SCL, OUTPUT);
-	
-	lcd.init();
-	lcd.backlight();
+	pinMode(this->emergencyStopButtonPin, INPUT);	
 }
-
-//ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, int startButtonPin, int resetButtonPin, int emergencyStopButtonPin) : ControlPanel(startButtonPin, resetButtonPin, emergencyStopButtonPin)
-//{
-	//this->lcd = lcd;
-//}
 
 ControlPanel::~ControlPanel()
 {
@@ -85,6 +83,30 @@ void ControlPanel::CheckButtonPress(Machine* machine)
 	}
 }
 
+void ControlPanel::CheckButtonPress(Machine machine)
+{
+	int buttonState = digitalRead(this->emergencyStopButtonPin);
+
+	if (buttonState == HIGH)
+	{
+		this->EmergencyStopButtonPressedEvent(machine);
+	}
+	
+	buttonState = digitalRead(this->resetButtonPin);
+
+	if (buttonState == HIGH)
+	{
+		this->ResetButtonPressedEvent(machine);
+	}
+	
+	buttonState = digitalRead(this->startButtonPin);
+
+	if (buttonState == HIGH)
+	{
+		this->StartButtonPressedEvent(machine);
+	}
+}
+
 void ControlPanel::StartButtonPressedEvent(Machine* machine)
 {
 	machine->StartButtonPressed();
@@ -98,6 +120,21 @@ void ControlPanel::ResetButtonPressedEvent(Machine* machine)
 void ControlPanel::EmergencyStopButtonPressedEvent(Machine* machine)
 {
 	machine->EmergencyStopButtonPressed();
+}
+
+void ControlPanel::StartButtonPressedEvent(Machine machine)
+{
+	machine.StartButtonPressed();
+}
+
+void ControlPanel::ResetButtonPressedEvent(Machine machine)
+{
+	machine.ResetButtonPressed();
+}
+
+void ControlPanel::EmergencyStopButtonPressedEvent(Machine machine)
+{
+	machine.EmergencyStopButtonPressed();
 }
 
 int ControlPanel::GetStartButtonPin()

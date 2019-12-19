@@ -15,6 +15,10 @@
 #include <stack_macros.h>
 #include <task.h>
 #include <timers.h>
+#include "Mode8_SwitchingModes.h"
+#include "RunningState.h"
+#include "StandbyState.h"
+#include "stdlib.h"
 
 using namespace std;
 
@@ -154,21 +158,76 @@ void setup()
 		
 	pinMode(P1_LED_STATE, OUTPUT);
 	pinMode(P2_LED_STANDBY_EMERGENCY, OUTPUT);
-	
 	Serial.begin(9600);
-	machine = Machine();	
-	DefaultModeTest();
+	LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
+	machine = Machine(lcd);	
+	
+	//DefaultModeTest();
+	
+	//machine.SetState(new StandbyState());
+	//machine.SetMode(new SwitchingModesMode());
+	//machine.SetState(new RunningState());
+	//
+	//machine.StartMode();
+	Machine* machinePtr = &machine;
+	
 	vTaskStartScheduler();
 }
 
+int buttonState;
+int i = 0;
+string convert = "";
+char buffer [33];
 void loop()
 {	
-	//digitalWrite(LED_BUILTIN, HIGH);
-	//delay(1000);
-	//digitalWrite(LED_BUILTIN, LOW);
-	//delay(1000);
+	//DefaultModeTest();
+
+	//i++;
+	//itoa (i,buffer,10);
+	//
+	//for (int j = 0; j < sizeof(buffer); j++)
+	//{
+		//convert.a;
+	//}
 	
-	DefaultModeTest();
+	buttonState = digitalRead(PIN_START_BUTTON);
+
+	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+	if (buttonState == HIGH)
+	{
+		machine.GetControlPanel().Print("start press", convert);
+		machine.StartButtonPressed();
+	}
+	
+	buttonState = digitalRead(PIN_RESET_BUTTON);
+
+	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+	if (buttonState == HIGH)
+	{
+		machine.GetControlPanel().Print("reset press", convert);
+		machine.ResetButtonPressed();
+	}
+	
+	if (machine.GetState()->ToString() == BOOT_UP_STATE)
+	{
+		machine.GetControlPanel().HandleLED(P1_LED_STATE, false);
+	}
+	else if (machine.GetState()->ToString() == STANDBY_STATE)
+	{
+		machine.GetControlPanel().HandleLED(P2_LED_STANDBY_EMERGENCY);
+	}
+	else if (machine.GetState()->ToString() == INITIALIZE_STATE)
+	{
+		machine.GetControlPanel().HandleLED(P1_LED_STATE);
+	}
+	else if (machine.GetState()->ToString() == RUNNING_STATE)
+	{
+		machine.GetControlPanel().HandleLED(P1_LED_STATE, true, 500);
+	}
+	else
+	{		
+		machine.GetControlPanel().HandleLED(P2_LED_STANDBY_EMERGENCY, true, 500);
+	}
 }
 
 

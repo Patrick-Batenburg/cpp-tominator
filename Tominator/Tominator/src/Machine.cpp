@@ -9,7 +9,9 @@
 #include "Mode5_Sorting.h"
 #include "Mode6_OpenAndCloseClaw.h"
 #include "Mode7_DriveFrameBackAndForth.h"
+#include "Mode8_SwitchingModes.h"
 #include "TominatorPins.h"
+#include <LiquidCrystal_I2C.h>
 
 using namespace std;
 
@@ -25,7 +27,6 @@ Machine::Machine()
 	this->state = new BootUpState();
 	this->currentWaterBalloon = WaterBalloon();
 	this->grid = Grid();
-	this->controlPanel = ControlPanel(PIN_START_BUTTON, PIN_RESET_BUTTON, PIN_EMERGENCY_STOP_BUTTON);
 	this->conveyorBelt = ConveyorBelt(conveyorBeltDCMotor, REED3_CONVEYOR_BELT);	
 	this->carriage = Carriage(carriageDCMotor, HALL_CARRIAGE_BOTTOM, HALL_CARRIAGE_MIDDLE, HALL_CARRIAGE_TOP);
 	this->frame = Frame(frameDCMotor, gridSideSensor, sortingSideSensor, REED1_GRID_SIDE, REED2_SORTING_SIDE, &this->grid, &this->conveyorBelt);
@@ -39,6 +40,12 @@ Machine::Machine()
 Machine::Machine(vector<vector<WaterBalloon>> waterBalloonPositions) : Machine()
 {
 	this->grid = Grid(waterBalloonPositions);
+}
+
+Machine::Machine(LiquidCrystal_I2C lcd) : Machine()
+{
+	this->controlPanel = ControlPanel(lcd, PIN_START_BUTTON, PIN_RESET_BUTTON, PIN_EMERGENCY_STOP_BUTTON);
+ 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }
 
 Machine::~Machine()
@@ -57,33 +64,39 @@ void Machine::StartMode()
 
 void Machine::SelectMode(int value)
 {
-	switch (value)
+	if (this->state->ToString() == STANDBY_STATE)
 	{
-		case 1:
-			this->SetMode(new ClawManualPlacedWaterBalloonMode());
-			break;
-		case 2:
-			this->SetMode(new QuicknessMode());
-			break;
-		case 3:
-			this->SetMode(new GrabWaterBalloonMode());
-			break;
-		case 4:
-			this->SetMode(new PlaceWaterballoonOnConveyorBeltMode());
-			break;
-		case 5:
-			this->SetMode(new SortingMode());
-			break;
-		case 6:
-			this->SetMode(new OpenAndCloseClawMode());
-			break;
-		case 7:
-			this->SetMode(new DriveFrameBackAndForthMode());
-			break;
-		case 0:
-		default:
-			this->SetMode(new DefaultMode());
-			break;
+		switch (value)
+		{
+			case 1:
+				this->SetMode(new ClawManualPlacedWaterBalloonMode());
+				break;
+			case 2:
+				this->SetMode(new QuicknessMode());
+				break;
+			case 3:
+				this->SetMode(new GrabWaterBalloonMode());
+				break;
+			case 4:
+				this->SetMode(new PlaceWaterballoonOnConveyorBeltMode());
+				break;
+			case 5:
+				this->SetMode(new SortingMode());
+				break;
+			case 6:
+				this->SetMode(new OpenAndCloseClawMode());
+				break;
+			case 7:
+				this->SetMode(new DriveFrameBackAndForthMode());
+				break;
+			case 8:
+				this->SetMode(new SwitchingModesMode());
+				break;
+			case 0:
+			default:
+				this->SetMode(new DefaultMode());
+				break;
+		}
 	}
 }
 
@@ -117,17 +130,17 @@ void Machine::SortWaterBalloons()
 
 	switch (this->conveyorBelt.GetState()->GetStateTypes()[this->conveyorBelt.GetState()->ToString()])
 	{
-		case StateType::NoneRowEmptyStateType:
+		case BaseGridStateType::NoneRowEmptyStateType:
 			sortingArea = this->GetConveyorBelt().GetFirstRowType();
 			break;		
-		case StateType::FirstRowEmptyStateType:
+		case BaseGridStateType::FirstRowEmptyStateType:
 			sortingArea = this->GetConveyorBelt().GetSecondRowType();
 			break;
-		case StateType::SecondRowEmptyStateType:
+		case BaseGridStateType::SecondRowEmptyStateType:
 			sortingArea = this->GetConveyorBelt().GetThirdRowType();
 			break;
-		case StateType::BaseGridStateType:
-		case StateType::ThirdRowEmptyStateType:
+		case BaseGridStateType::BaseGridType:
+		case BaseGridStateType::ThirdRowEmptyStateType:
 		default:
 			sortingArea = 0;
 			break;

@@ -27,3 +27,4 @@
 #define MODE5 "MODE5"
 #define MODE6 "MODE6"
 #define MODE7 "MODE7"
+#define MODE8 "MODE8"

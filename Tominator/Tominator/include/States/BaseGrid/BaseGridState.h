@@ -3,9 +3,9 @@
 #include <string>
 #include <map>
 
-enum StateType
+enum BaseGridStateType
 {
-	BaseGridStateType,
+	BaseGridType,
 	NoneRowEmptyStateType,
 	FirstRowEmptyStateType,
 	SecondRowEmptyStateType,
@@ -17,7 +17,7 @@ class BaseGrid; // forward declaration
 class BaseGridState
 {
 private:
-	std::map<std::string, StateType> stateTypes;
+	std::map<std::string, BaseGridStateType> stateTypes;
 
 public:
 	/**
@@ -40,7 +40,7 @@ public:
 		
 		@return All the different grid states.
 	*/
-	std::map<std::string, StateType> GetStateTypes();
+	std::map<std::string, BaseGridStateType> GetStateTypes();
 
 	/**
 		Returns a string that represents the current state.

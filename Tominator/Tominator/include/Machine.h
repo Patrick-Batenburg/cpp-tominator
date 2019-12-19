@@ -12,6 +12,7 @@
 #include "Frame.h"
 #include "ControlPanel.h"
 #include <HX711.h>
+#include <LiquidCrystal_I2C.h>
 
 class Machine
 {
@@ -29,12 +30,14 @@ private:
 	Carriage carriage;
 	Frame frame;
 	ControlPanel controlPanel;
+	LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
 
 public:
 	/**
 		Initializes a new instance of the Machine class.
 	*/
 	Machine();
+	Machine(LiquidCrystal_I2C lcd);
 
 	/**
 		Initializes a new instance of the Machine class.
