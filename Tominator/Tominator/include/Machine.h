@@ -97,13 +97,17 @@ public:
 	
 	/**
 		Handles the frame to reach its destination.
+		
+		@param direction The direction the frame needs to go to.
 	*/
 	void HandleFrame(DirectionType direction);
 
 	/**
 		Handles the X, Y and Z-axis of the robot arm.
 
-		@param direction The direction the frame is suppsed to go into.
+		@param x The X-axis the robot needs to go to.
+		@param y The Y-axis the robot needs to go to.
+		@param z The Z-axis the robot needs to go to.
 	*/
 	void HandleRobotArm(int x, int y, int z);
 
