@@ -3,6 +3,7 @@
 
 class DriveFrameBackAndForthMode : public BaseMode
 {
+public:
 	/**
 		Initializes a new instance of the DriveFrameBackAndForthMode class.
 	*/

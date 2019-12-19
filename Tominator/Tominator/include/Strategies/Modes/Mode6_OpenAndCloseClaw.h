@@ -3,6 +3,7 @@
 
 class OpenAndCloseClawMode : public BaseMode
 {
+public:
 	/**
 		Initializes a new instance of the OpenAndCloseClawMode class.
 	*/
