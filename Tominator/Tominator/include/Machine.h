@@ -229,4 +229,11 @@ public:
 		@return The rotary encoder object.
 	*/
 	RotaryEncoder GetRotaryEncoder();
+
+	/**
+		Gets the control panel object.
+		
+		@return The control panel object.
+	*/	
+	ControlPanel GetControlPanel();
 };

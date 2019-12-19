@@ -46,19 +46,19 @@ void ControlPanel::Print(string data1, string data2)
 	}
 }
 
-void ControlPanel::HandleStandbyLED()
+void ControlPanel::HandleLED(int ledPin, bool blinking, int delayInMilliseconds)
 {
-
-}
-
-void ControlPanel::HandleRunningLED()
-{
-
-}
-
-void ControlPanel::HandleEmergencyLED()
-{
-
+	if (blinking)
+	{
+		digitalWrite(ledPin, HIGH);
+		delay(delayInMilliseconds);
+		digitalWrite(ledPin, LOW);
+		delay(delayInMilliseconds);
+	}
+	else
+	{
+		digitalWrite(ledPin, HIGH);		
+	}
 }
 
 void ControlPanel::CheckButtonPress(Machine* machine)

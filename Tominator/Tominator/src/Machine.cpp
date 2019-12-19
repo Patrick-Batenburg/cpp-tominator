@@ -168,6 +168,7 @@ void Machine::WeighWaterBalloon()
 	//weight = this->currentWaterBalloon.GetWeight();
 	weight = this->loadCell.get_units(10);
 	
+	
 	if (weight >= 0.8)
 	{
 		this->currentWaterBalloon.SetWeight(weight);
@@ -294,6 +295,11 @@ void Machine::SetConveyorBelt(ConveyorBelt value)
 RotaryEncoder Machine::GetRotaryEncoder()
 {
 	return this->rotaryEncoder;
+}
+
+ControlPanel Machine::GetControlPanel()
+{
+	return this->controlPanel;
 }
 
 WaterBalloon Machine::GetCurrentWaterBalloon()

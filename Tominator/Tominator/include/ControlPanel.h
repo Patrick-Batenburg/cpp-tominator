@@ -40,19 +40,13 @@ public:
 	void Print(std::string data1, std::string data2 = "");
 
 	/**
-		Handles how the LED reacts in a standby state.
-	*/
-	void HandleStandbyLED();
+		Handle a LED. Has options for blinking and how often it should blink
 
-	/**
-		Handles how the LED reacts in a running state.
+		@param ledPin				The pin of the LED.		
+		@param blinking				Determines whenever or not the LED should blink. Default value = true.		
+		@param delayInMilliseconds	The delay in milliseconds that is needed for blinking. Default value = 1000.
 	*/
-	void HandleRunningLED();
-
-	/**
-		Handles how the LED reacts in a emergency state.
-	*/
-	void HandleEmergencyLED();	
+	void HandleLED(int ledPin, bool blinking = true, int delayInMilliseconds = 1000);
 	
 	/**
 		Checks if a button press occurred.
