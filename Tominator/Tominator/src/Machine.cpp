@@ -56,10 +56,10 @@ void Machine::StartMode()
 {	
 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 	
-	if (this->state->ToString() == RUNNING_STATE)
-	{
-		this->mode->Execute(this);
-	}
+	//if (this->state->ToString() == RUNNING_STATE)
+	//{
+		//this->mode->Execute(this);
+	//}
 }
 
 void Machine::SelectMode(int value)

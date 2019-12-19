@@ -1,8 +1,6 @@
 #include "Mode6_OpenAndCloseClaw.h"
 #include "Machine.h"
 
-using namespace std;
-
 OpenAndCloseClawMode::OpenAndCloseClawMode()
 {
 }
@@ -17,7 +15,7 @@ void OpenAndCloseClawMode::HandlePlaceholder(Machine* machine)
 	machine->CloseClaw();
 }
 
-string OpenAndCloseClawMode::ToString()
+String OpenAndCloseClawMode::ToString()
 {
 	return MODE6;
 }

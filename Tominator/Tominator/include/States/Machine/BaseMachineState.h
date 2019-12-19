@@ -1,7 +1,7 @@
 #pragma once
 #include "TominatorVariables.h"
-#include <string>
 #include <map>
+#include <WString.h>
 
 enum BaseMachineStateType
 {
@@ -17,7 +17,7 @@ class Machine; // forward declaration
 class BaseMachineState
 {
 private:
-	std::map<std::string, BaseMachineStateType> stateTypes;
+	std::map<String, BaseMachineStateType> stateTypes;
 
 public:
 	/**
@@ -50,13 +50,13 @@ public:
 		
 		@return All the different grid states.
 	*/
-	std::map<std::string, BaseMachineStateType> GetStateTypes();
+	std::map<String, BaseMachineStateType> GetStateTypes();
 
 	/**
-		Returns a string that represents the current state.
+		Returns a String that represents the current state.
 		Only useful for comparisons and debug purposes.
 	
-		@return A string that represents the current state.
+		@return A String that represents the current state.
 	*/
-	virtual std::string ToString();
+	virtual String ToString();
 };

@@ -1,8 +1,6 @@
 #include "Mode4_PlaceWaterballoonOnConveyorBelt.h"
 #include "Machine.h"
 
-using namespace std;
-
 PlaceWaterballoonOnConveyorBeltMode::PlaceWaterballoonOnConveyorBeltMode()
 {
 }
@@ -19,7 +17,7 @@ void PlaceWaterballoonOnConveyorBeltMode::HandlePlaceholder(Machine* machine)
 	machine->OpenClaw();				// Let go of water balloon.
 }
 
-string PlaceWaterballoonOnConveyorBeltMode::ToString()
+String PlaceWaterballoonOnConveyorBeltMode::ToString()
 {
 	return MODE4;
 }

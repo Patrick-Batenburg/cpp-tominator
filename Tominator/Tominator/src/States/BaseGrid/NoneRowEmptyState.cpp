@@ -2,8 +2,6 @@
 #include "FirstRowEmptyState.h"
 #include "BaseGrid.h"
 
-using namespace std;
-
 NoneRowEmptyState::NoneRowEmptyState()
 {
 } 
@@ -17,7 +15,7 @@ void NoneRowEmptyState::Next(BaseGrid* baseGrid)
 	baseGrid->SetState(new FirstRowEmptyState());
 }
 
-string NoneRowEmptyState::ToString()
+String NoneRowEmptyState::ToString()
 {
 	return NONE_ROW_EMPTY_STATE;
 }

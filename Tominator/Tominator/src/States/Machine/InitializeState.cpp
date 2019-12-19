@@ -3,8 +3,6 @@
 #include "Machine.h"
 #include "TominatorVariables.h"
 
-using namespace std;
-
 InitializeState::InitializeState()
 {
 }
@@ -19,7 +17,7 @@ void InitializeState::Start(Machine* machine)
 	machine->StartMode();
 }
 
-string InitializeState::ToString()
+String InitializeState::ToString()
 {
 	return INITIALIZE_STATE;
 }

@@ -2,8 +2,6 @@
 #include "Machine.h"
 #include <pins_arduino.h>
 
-using namespace std;
-
 ControlPanel::ControlPanel()
 {
 	pinMode(SDA, OUTPUT);
@@ -31,20 +29,20 @@ ControlPanel::~ControlPanel()
 {
 } 
 
-void ControlPanel::Print(string data1, string data2)
+void ControlPanel::Print(String data1, String data2)
 {
 	lcd.clear();
 	lcd.home();
-	lcd.print(data1.c_str());
+	lcd.print(data1);
 	
 	if (data2 != "")
 	{
 		lcd.setCursor(0, 1);
-		lcd.print(data2.c_str());
+		lcd.print(data2);
 	}
 }
 
-void ControlPanel::HandleLED(int ledPin, bool blinking, int delayInMilliseconds)
+void ControlPanel::TurnOnLED(int ledPin, bool blinking /*= true*/, int delayInMilliseconds /*= 1000*/)
 {
 	if (blinking)
 	{
@@ -57,6 +55,11 @@ void ControlPanel::HandleLED(int ledPin, bool blinking, int delayInMilliseconds)
 	{
 		digitalWrite(ledPin, HIGH);		
 	}
+}
+
+void ControlPanel::TurnOffLED(int ledPin)
+{
+	digitalWrite(ledPin, LOW);
 }
 
 void ControlPanel::CheckButtonPress(Machine* machine)

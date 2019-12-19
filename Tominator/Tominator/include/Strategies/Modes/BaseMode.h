@@ -1,6 +1,6 @@
 #pragma once
 #include "TominatorVariables.h"
-#include <string>
+#include <WString.h>
 
 class Machine; // forward declaration
 class BaseMachineState; // forward declaration
@@ -29,7 +29,7 @@ public:
 		
 		@return A string that represents the current mode.
 	*/
-	virtual std::string ToString();
+	virtual String ToString();
 
 private:
 	/**

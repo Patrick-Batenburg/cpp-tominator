@@ -1,8 +1,6 @@
 #include "BaseGridState.h"
 #include "BaseGrid.h"
 
-using namespace std;
-
 BaseGridState::BaseGridState()
 {	
 	this->stateTypes[BASE_GRID_STATE] = BaseGridStateType::BaseGridType;
@@ -21,12 +19,12 @@ void BaseGridState::Next(BaseGrid* baseGrid)
 	//baseGrid->SetState(this);
 }
 
-std::map<std::string, BaseGridStateType> BaseGridState::GetStateTypes()
+std::map<String, BaseGridStateType> BaseGridState::GetStateTypes()
 {
 	return this->stateTypes;
 }
 
-string BaseGridState::ToString()
+String BaseGridState::ToString()
 {
 	return BASE_GRID_STATE;
 }

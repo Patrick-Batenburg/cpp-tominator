@@ -2,8 +2,6 @@
 #include "BootUpState.h"
 #include "Machine.h"
 
-using namespace std;
-
 BaseMachineState::BaseMachineState()
 {
 	this->stateTypes[BASE_MACHINE_STATE] = BaseMachineStateType::BaseMachineType;
@@ -31,12 +29,12 @@ void BaseMachineState::EmergencyStop(Machine* machine)
 	machine->SetState(new BootUpState());
 }
 
-std::map<std::string, BaseMachineStateType> BaseMachineState::GetStateTypes()
+std::map<String, BaseMachineStateType> BaseMachineState::GetStateTypes()
 {
 	return this->stateTypes;
 }
 
-string BaseMachineState::ToString()
+String BaseMachineState::ToString()
 {
 	return BASE_MACHINE_STATE;
 }

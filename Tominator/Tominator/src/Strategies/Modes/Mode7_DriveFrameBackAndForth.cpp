@@ -1,8 +1,6 @@
 #include "Mode7_DriveFrameBackAndForth.h"
 #include "Machine.h"
 
-using namespace std;
-
 DriveFrameBackAndForthMode::DriveFrameBackAndForthMode()
 {
 }
@@ -18,7 +16,7 @@ void DriveFrameBackAndForthMode::HandlePlaceholder(Machine* machine)
 	machine->HandleFrame(DirectionType::Reverse);
 }
 
-string DriveFrameBackAndForthMode::ToString()
+String DriveFrameBackAndForthMode::ToString()
 {
 	return MODE7;
 }

@@ -1,8 +1,6 @@
 #include "Mode1_ClawManualPlacedWaterBalloon.h"
 #include "Machine.h"
 
-using namespace std;
-
 ClawManualPlacedWaterBalloonMode::ClawManualPlacedWaterBalloonMode()
 {
 }
@@ -22,7 +20,7 @@ void ClawManualPlacedWaterBalloonMode::HandlePlaceholder(Machine* machine)
 	//machine->SortWaterBalloons();
 }
 
-string ClawManualPlacedWaterBalloonMode::ToString()
+String ClawManualPlacedWaterBalloonMode::ToString()
 {
 	return MODE1;
 }

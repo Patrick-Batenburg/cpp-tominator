@@ -2,8 +2,6 @@
 #include "Machine.h"
 #include "StandbyState.h"
 
-using namespace std;
-
 SwitchingModesMode::SwitchingModesMode()
 {
 }
@@ -36,7 +34,7 @@ void SwitchingModesMode::HandlePlaceholder(Machine* machine)
 	}
 }
 
-string SwitchingModesMode::ToString()
+String SwitchingModesMode::ToString()
 {
 	return MODE8;
 }

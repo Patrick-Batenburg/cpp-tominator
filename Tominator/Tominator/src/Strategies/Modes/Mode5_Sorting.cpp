@@ -1,8 +1,6 @@
 #include "Mode5_Sorting.h"
 #include "Machine.h"
 
-using namespace std;
-
 SortingMode::SortingMode()
 {
 }
@@ -44,7 +42,7 @@ void SortingMode::HandlePlaceholder(Machine* machine)
 	machine->SortWaterBalloons();
 }
 
-string SortingMode::ToString()
+String SortingMode::ToString()
 {
 	return MODE5;
 }

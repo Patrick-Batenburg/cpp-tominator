@@ -25,5 +25,5 @@ public:
 		
 		@return A string that represents the current state.
 	*/
-	virtual std::string ToString();
+	virtual String ToString();
 };

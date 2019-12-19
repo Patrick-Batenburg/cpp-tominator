@@ -20,7 +20,7 @@ public:
 		
 		@return A string that represents the current mode.
 	*/
-	virtual std::string ToString();
+	virtual String ToString();
 
 private:
 	/**

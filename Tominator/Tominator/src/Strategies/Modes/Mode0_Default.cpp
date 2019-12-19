@@ -1,8 +1,6 @@
 #include "Mode0_Default.h"
 #include "Machine.h"
 
-using namespace std;
-
 DefaultMode::DefaultMode()
 {
 }
@@ -34,7 +32,7 @@ void DefaultMode::HandlePlaceholder(Machine* machine)
 	}
 }
 
-string DefaultMode::ToString()
+String DefaultMode::ToString()
 {
 	return MODE0;
 }

@@ -28,7 +28,7 @@ SemaphoreHandle_t semaphore;
 void TaskMain(void *pvParameters);
 void TaskAnalogRead(void *pvParameters);
 
-inline const string ToString(WaterBalloonType value)
+inline const String ToString(WaterBalloonType value)
 {
 	switch (value)
 	{
@@ -49,7 +49,7 @@ inline const string ToString(WaterBalloonType value)
 
 void DefaultModeTest()
 {
-	string row = "Row 1: ";
+	String row = "Row 1: ";
 	
 	cout << "State Test:" << endl;
 	cout << "Current state: " << machine.GetState()->ToString() << endl << endl;
@@ -176,26 +176,20 @@ void setup()
 
 int buttonState;
 int i = 0;
-string convert = "";
-char buffer [33];
+String converted;
+
 void loop()
 {	
 	//DefaultModeTest();
 
-	//i++;
-	//itoa (i,buffer,10);
-	//
-	//for (int j = 0; j < sizeof(buffer); j++)
-	//{
-		//convert.a;
-	//}
+	i++;
+	converted = String(i);
 	
 	buttonState = digitalRead(PIN_START_BUTTON);
 
 	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
 	if (buttonState == HIGH)
 	{
-		machine.GetControlPanel().Print("start press", convert);
 		machine.StartButtonPressed();
 	}
 	
@@ -204,30 +198,64 @@ void loop()
 	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
 	if (buttonState == HIGH)
 	{
-		machine.GetControlPanel().Print("reset press", convert);
 		machine.ResetButtonPressed();
 	}
 	
-	if (machine.GetState()->ToString() == BOOT_UP_STATE)
+
+	switch (machine.GetState()->GetStateTypes()[machine.GetState()->ToString()])
 	{
-		machine.GetControlPanel().HandleLED(P1_LED_STATE, false);
+		case BaseMachineStateType::BootUpStateType:
+			machine.GetControlPanel().TurnOnLED(P1_LED_STATE, false);
+			break;
+		case BaseMachineStateType::StandbyStateType:
+			machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY);
+			//machine.GetControlPanel().TurnOffLED(P1_LED_STATE);
+			//delay(1000);
+			break;
+		case BaseMachineStateType::InitializeStateType:
+			machine.GetControlPanel().TurnOnLED(P1_LED_STATE);
+			break;
+		case BaseMachineStateType::RunningStateType:
+			machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 500);
+			break;
+		case BaseMachineStateType::BaseMachineType:
+		default:
+			machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 250);
+			machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY, true, 250);
+			break;
 	}
-	else if (machine.GetState()->ToString() == STANDBY_STATE)
+	
+	buttonState = digitalRead(PIN_EMERGENCY_STOP_BUTTON);
+
+	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+	if (buttonState == LOW) 
 	{
-		machine.GetControlPanel().HandleLED(P2_LED_STANDBY_EMERGENCY);
+		machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 250);
+		machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY, true, 250);
 	}
-	else if (machine.GetState()->ToString() == INITIALIZE_STATE)
-	{
-		machine.GetControlPanel().HandleLED(P1_LED_STATE);
-	}
-	else if (machine.GetState()->ToString() == RUNNING_STATE)
-	{
-		machine.GetControlPanel().HandleLED(P1_LED_STATE, true, 500);
-	}
-	else
-	{		
-		machine.GetControlPanel().HandleLED(P2_LED_STANDBY_EMERGENCY, true, 500);
-	}
+	
+	//if (machine.GetState()->ToString() == BOOT_UP_STATE)
+	//{
+		//machine.GetControlPanel().TurnOnLED(P1_LED_STATE, false);
+	//}
+	//else if (machine.GetState()->ToString() == INITIALIZE_STATE)
+	//{
+		//machine.GetControlPanel().TurnOnLED(P1_LED_STATE);
+	//}
+	//else if (machine.GetState()->ToString() == RUNNING_STATE)
+	//{
+		//machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 500);
+	//}
+	//else if (machine.GetState()->ToString() == STANDBY_STATE)
+	//{
+		//machine.GetControlPanel().TurnOffLED(P1_LED_STATE);
+		//machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY);
+	//}	
+	//else
+	//{		
+		//machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 250);
+		//machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY, true, 250);
+	//}
 }
 
 

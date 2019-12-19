@@ -1,8 +1,6 @@
 #include "Mode2_Quickness.h"
 #include "Machine.h"
 
-using namespace std;
-
 QuicknessMode::QuicknessMode()
 {
 }
@@ -26,7 +24,7 @@ void QuicknessMode::HandlePlaceholder(Machine* machine)
 	machine->OpenClaw();				// Let go of water balloon 3.
 }
 
-string QuicknessMode::ToString()
+String QuicknessMode::ToString()
 {
 	return MODE2;
 }

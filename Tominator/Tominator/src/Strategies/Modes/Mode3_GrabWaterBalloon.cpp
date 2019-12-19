@@ -1,8 +1,6 @@
 #include "Mode3_GrabWaterBalloon.h"
 #include "Machine.h"
 
-using namespace std;
-
 GrabWaterBalloonMode::GrabWaterBalloonMode()
 {
 }
@@ -17,7 +15,7 @@ void GrabWaterBalloonMode::HandlePlaceholder(Machine* machine)
 	machine->CloseClaw();				// Grab water balloon.
 }
 
-string GrabWaterBalloonMode::ToString()
+String GrabWaterBalloonMode::ToString()
 {
 	return MODE3;
 }

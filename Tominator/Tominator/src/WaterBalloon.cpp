@@ -6,8 +6,6 @@ WaterBalloon::WaterBalloon()
 	this->weight = 0;
 }
 
-
-
 WaterBalloon::WaterBalloon(WaterBalloonType type) : WaterBalloon()
 {
 	this->type = type;

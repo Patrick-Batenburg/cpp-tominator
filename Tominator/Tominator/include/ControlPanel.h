@@ -1,6 +1,5 @@
 #pragma once
 #include <LiquidCrystal_I2C.h>
-#include <string>
 
 class Machine;
 class ControlPanel
@@ -43,16 +42,23 @@ public:
 		@param data1 The string of data to print on the first row of the display.
 		@param data2 The string of data to print on the second row of the display. If empty, nothing is printed.
 	*/
-	void Print(std::string data1, std::string data2 = "");
+	void Print(String data1, String data2 = "");
 
 	/**
-		Handle a LED. Has options for blinking and how often it should blink
+		Turns a LED on. Has options for blinking and how often it should blink.
 
 		@param ledPin				The pin of the LED.		
 		@param blinking				Determines whenever or not the LED should blink. Default value = true.		
 		@param delayInMilliseconds	The delay in milliseconds that is needed for blinking. Default value = 1000.
 	*/
-	void HandleLED(int ledPin, bool blinking = true, int delayInMilliseconds = 1000);
+	void TurnOnLED(int ledPin, bool blinking = true, int delayInMilliseconds = 1000);
+
+	/**
+		Turns a LED off.
+
+		@param ledPin				The pin of the LED.
+	*/	
+	void TurnOffLED(int ledPin);
 	
 	/**
 		Checks if a button press occurred.
