@@ -1,4 +1,5 @@
 #pragma once
+#include "RotaryEncoder.h"
 #include <LiquidCrystal_I2C.h>
 
 class Machine;
@@ -8,6 +9,7 @@ private:
 	int startButtonPin;
 	int resetButtonPin;
 	int emergencyStopButtonPin;
+	RotaryEncoder rotaryEncoder;
 	LiquidCrystal_I2C lcd;
 
 public:
@@ -25,11 +27,13 @@ public:
 	/**
 		Initializes a new instance of the ControlPanel class.
 
+		@param lcd						The LCD display object.
+		@param rotaryEncoder			The rotary encoder object.
 		@param startButtonPin			The start button pin.
 		@param resetButtonPin			The reset button pin.
 		@param emergencyStopButtonPin	The emergency stop pin.
 	*/
-	ControlPanel(LiquidCrystal_I2C lcd, int startButtonPin, int resetButtonPin, int emergencyStopButtonPin);
+	ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, int startButtonPin, int resetButtonPin, int emergencyStopButtonPin);
 
 	/**
 		Deconstruct the instance of the ControlPanel class.
@@ -115,4 +119,11 @@ public:
 		@return The emergency stop button pin.
 	*/
 	int GetEmergencyStopButtonPin();
+
+	/**
+		Gets the rotary encoder object.
+		
+		@return The rotary encoder object.
+	*/
+	RotaryEncoder GetRotaryEncoder();
 };

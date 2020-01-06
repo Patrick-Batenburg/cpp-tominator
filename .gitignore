@@ -32,3 +32,5 @@
 .vpprefdata/
 *.vpp~*
 *.lock
+*.lck
+*.bak*

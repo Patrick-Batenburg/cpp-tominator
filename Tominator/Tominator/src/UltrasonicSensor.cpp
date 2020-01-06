@@ -26,3 +26,11 @@ int UltrasonicSensor::GetEchoPin()
 {
 	return this->echoPin;
 }
+
+int UltrasonicSensor::GetDuration()
+{
+	digitalWrite(this->triggerPin, HIGH);
+	delayMicroseconds(10);
+	digitalWrite(this->triggerPin, LOW);
+	return pulseIn(this->echoPin, HIGH);
+}

@@ -56,12 +56,12 @@ public:
 	/**
 		Makes the robot arm return to its default position. x:0, y:0, z:0
 	*/
-	void Homing();
+	void Home();
 
 	/**
 		Makes the robot arm and claw return to its default position. x:0, y:0, z:0, claw open
 	*/
-	void HomingWithClaw();
+	void HomeWithClaw();
 
 
 	/**

@@ -15,11 +15,12 @@ ControlPanel::ControlPanel(LiquidCrystal_I2C lcd) : ControlPanel()
 	this->lcd.backlight();
 }
 
-ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, int startButtonPin, int resetButtonPin, int emergencyStopButtonPin) : ControlPanel(lcd)
+ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, int startButtonPin, int resetButtonPin, int emergencyStopButtonPin) : ControlPanel(lcd)
 {
 	this->startButtonPin = startButtonPin;
 	this->resetButtonPin = resetButtonPin;
 	this->emergencyStopButtonPin = emergencyStopButtonPin;
+	this->rotaryEncoder = rotaryEncoder;
 	pinMode(this->startButtonPin, INPUT);
 	pinMode(this->resetButtonPin, INPUT);
 	pinMode(this->emergencyStopButtonPin, INPUT);	
@@ -153,4 +154,9 @@ int ControlPanel::GetResetButtonPin()
 int ControlPanel::GetEmergencyStopButtonPin()
 {
 	return this->emergencyStopButtonPin;
+}
+
+RotaryEncoder ControlPanel::GetRotaryEncoder()
+{
+	return this->rotaryEncoder;
 }

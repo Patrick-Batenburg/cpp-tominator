@@ -169,7 +169,6 @@ void setup()
 	//machine.SetState(new RunningState());
 	//
 	//machine.StartMode();
-	Machine* machinePtr = &machine;
 	
 	vTaskStartScheduler();
 }

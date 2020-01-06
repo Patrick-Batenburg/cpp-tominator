@@ -38,4 +38,11 @@ public:
 		@return The echo pin.
 	*/
 	int GetEchoPin();
+
+	/**
+		Performs a pulseIn and gets the duration.
+		
+		@return The duration from the pulseIn.
+	*/	
+	int GetDuration();
 };

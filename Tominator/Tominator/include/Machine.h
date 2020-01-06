@@ -26,7 +26,6 @@ private:
 	Grid grid;
 	ConveyorBelt conveyorBelt;
 	RobotArm robotArm;
-	RotaryEncoder rotaryEncoder;
 	Carriage carriage;
 	Frame frame;
 	ControlPanel controlPanel;
@@ -229,13 +228,6 @@ public:
 		@param value The conveyor belt object.
 	*/
 	void SetConveyorBelt(ConveyorBelt value);
-
-	/**
-		Gets the rotary encoder object.
-		
-		@return The rotary encoder object.
-	*/
-	RotaryEncoder GetRotaryEncoder();
 
 	/**
 		Gets the control panel object.

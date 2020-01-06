@@ -35,7 +35,6 @@ void Frame::HandleDCMotor(DirectionType direction)
 	
 	digitalWrite(this->gridSideUltrasonicSensor.GetTriggerPin(), LOW);
 	digitalWrite(this->sortingSideUltrasonicSensor.GetTriggerPin(), LOW);
-
 	delayMicroseconds(2);
 	
 	while(!reachedEnd)
@@ -48,17 +47,11 @@ void Frame::HandleDCMotor(DirectionType direction)
 		// DirectionType::Reverse = false, go to grid side.
 		if (direction)
 		{
-			digitalWrite(this->sortingSideUltrasonicSensor.GetTriggerPin(), HIGH);
-			delayMicroseconds(10);
-			digitalWrite(this->sortingSideUltrasonicSensor.GetTriggerPin(), LOW);
-			duration = pulseIn(this->sortingSideUltrasonicSensor.GetEchoPin(), HIGH);
+			duration = this->sortingSideUltrasonicSensor.GetDuration();
 		}
 		else
 		{
-			digitalWrite(this->gridSideUltrasonicSensor.GetTriggerPin(), HIGH);
-			delayMicroseconds(10);
-			digitalWrite(this->gridSideUltrasonicSensor.GetTriggerPin(), LOW);
-			duration = pulseIn(this->gridSideUltrasonicSensor.GetEchoPin(), HIGH);
+			duration = this->gridSideUltrasonicSensor.GetDuration();
 		}
 		
 		distance = duration * 0.034 / 2;

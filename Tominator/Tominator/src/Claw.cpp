@@ -31,7 +31,7 @@ void Claw::Close()
 	HandleStepper();
 }
 
-void Claw::Homing()
+void Claw::Home()
 {
 	bool reachedEnd = false;
 	digitalWrite(this->directionPin, HIGH);

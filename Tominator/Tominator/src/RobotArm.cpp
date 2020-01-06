@@ -145,7 +145,7 @@ void RobotArm::HandleArm(int newX, int newY, int newZ)
 	}
 }
 
-void RobotArm::Homing()
+void RobotArm::Home()
 {
 //REED6_HOMING_Y 37
 //REED7_HOMING_X 38
@@ -206,7 +206,7 @@ void RobotArm::Homing()
 	}
 }
 
-void RobotArm::HomingWithClaw()
+void RobotArm::HomeWithClaw()
 {
 	//REED6_HOMING_Y 37
 	//REED7_HOMING_X 38

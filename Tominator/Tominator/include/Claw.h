@@ -40,7 +40,7 @@ public:
 	/**
 		Makes the claw return to its default position, which is open.
 	*/	
-	void Homing();	
+	void Home();	
 	
 	/**
 		Gets the pulse pin.
