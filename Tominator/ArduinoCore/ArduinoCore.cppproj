@@ -102,6 +102,7 @@
             <Value>..\include\variants\mega</Value>
             <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\ArduinoSTL</Value>
+            <Value>..\include\libraries\EasyButton</Value>
             <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\FreeRTOS</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
@@ -137,6 +138,7 @@
             <Value>..\include\variants\mega</Value>
             <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\ArduinoSTL</Value>
+            <Value>..\include\libraries\EasyButton</Value>
             <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\FreeRTOS</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
@@ -197,6 +199,7 @@
             <Value>..\include\variants\mega</Value>
             <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\ArduinoSTL</Value>
+            <Value>..\include\libraries\EasyButton</Value>
             <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\FreeRTOS</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
@@ -232,6 +235,7 @@
             <Value>..\include\variants\mega</Value>
             <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\ArduinoSTL</Value>
+            <Value>..\include\libraries\EasyButton</Value>
             <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\FreeRTOS</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
@@ -330,6 +334,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\libraries\ArduinoSTL\unwind-cxx.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\EasyButton\EasyButton.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\EasyButton\EasyButtonTouch.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\libraries\FreeRTOS\Arduino_FreeRTOS.h">
@@ -617,6 +627,12 @@
     <Compile Include="src\libraries\ArduinoSTL\vector.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\libraries\EasyButton\EasyButton.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\EasyButton\EasyButtonTouch.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\libraries\FreeRTOS\croutine.c">
       <SubType>compile</SubType>
     </Compile>
@@ -671,6 +687,7 @@
     <Folder Include="include\libraries\FreeRTOS\" />
     <Folder Include="include\libraries\HX711\" />
     <Folder Include="include\libraries\LiquidCrystal_I2C\" />
+    <Folder Include="include\libraries\EasyButton" />
     <Folder Include="include\libraries\Wire" />
     <Folder Include="include\libraries\Stepper\" />
     <Folder Include="include\libraries\Wire\utility\" />
@@ -682,6 +699,7 @@
     <Folder Include="src\libraries\" />
     <Folder Include="src\libraries\ArduinoSTL\" />
     <Folder Include="src\libraries\ArduinoSTL\abi\" />
+    <Folder Include="src\libraries\EasyButton\" />
     <Folder Include="src\libraries\FreeRTOS\" />
     <Folder Include="src\libraries\HX711\" />
     <Folder Include="src\libraries\LiquidCrystal_I2C\" />

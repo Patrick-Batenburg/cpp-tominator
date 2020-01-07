@@ -37,6 +37,11 @@ public:
 		Deconstruct the instance of the BaseGrid class.
 	*/
 	~BaseGrid();
+	
+	/**
+		Clears the 2D matrix to it's default values.
+	*/
+	void Clear();
 
 	/**
 		Gets the nearest unused cell.

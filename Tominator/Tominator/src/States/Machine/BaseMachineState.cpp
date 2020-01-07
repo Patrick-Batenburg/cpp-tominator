@@ -25,8 +25,8 @@ void BaseMachineState::Reset(Machine* machine)
 
 void BaseMachineState::EmergencyStop(Machine* machine)
 {
-	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, LOW);
-	machine->SetState(new BootUpState());
+	//digitalWrite(PIN_ENABLE_STEPPER_MOTOR, LOW);
+	//machine->SetState(new BootUpState());
 }
 
 std::map<String, BaseMachineStateType> BaseMachineState::GetStateTypes()

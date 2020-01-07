@@ -24,6 +24,11 @@ BaseGrid::~BaseGrid()
 {
 }
 
+void BaseGrid::Clear()
+{
+	this->waterBalloonPositions = vector<vector<WaterBalloon>>(3, vector<WaterBalloon>(3, WaterBalloon(this->selectedCell.InitialType)));
+}
+
 Cell BaseGrid::GetNearestUnusedCell(bool reiterating)
 {
 	if (reiterating)

@@ -309,7 +309,6 @@ void Machine::SetConveyorBelt(ConveyorBelt value)
 
 }
 
-
 ControlPanel Machine::GetControlPanel()
 {
 	return this->controlPanel;

@@ -1,5 +1,6 @@
 ﻿#include "Machine.h"
 #include <ArduinoSTL.h>
+#include <EasyButton.h>
 #include <Arduino_FreeRTOS.h>
 #include <croutine.h>
 #include <event_groups.h>
@@ -20,10 +21,11 @@
 #include "StandbyState.h"
 #include "stdlib.h"
 
-using namespace std;
-
 Machine machine;
 SemaphoreHandle_t semaphore;
+EasyButton startButton(PIN_START_BUTTON);
+EasyButton resetButton(PIN_RESET_BUTTON);
+EasyButton emergencyButton(PIN_EMERGENCY_STOP_BUTTON);
 
 void TaskMain(void *pvParameters);
 void TaskAnalogRead(void *pvParameters);
@@ -150,6 +152,25 @@ void InterruptHandler()
 	xSemaphoreGiveFromISR(semaphore, NULL);
 }
 
+void OnStartButtonPressed()
+{
+	machine.StartButtonPressed();
+	Serial.println("OnStartButtonPressed()");
+}
+
+// Callback function to be called when button2 is pressed
+void OnResetButtonPressed()
+{
+	machine.ResetButtonPressed();
+	Serial.println("OnResetButtonPressed()");
+}
+
+void OnEmergencyButtonPressed()
+{
+	machine.EmergencyStopButtonPressed();
+	Serial.println("OnEmergencyButtonPressed()");
+}
+
 void setup()
 {
 	// Semaphores are useful to stop a Task proceeding, where it should be paused to wait, because it is sharing a resource
@@ -178,8 +199,12 @@ void setup()
 	LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
 	machine = Machine(lcd);	
 	Serial.begin(9600);
-
-	//DefaultModeTest();
+	startButton.begin();
+	resetButton.begin();
+	emergencyButton.begin();
+	startButton.onPressed(OnStartButtonPressed);
+	resetButton.onPressed(OnResetButtonPressed);
+	emergencyButton.onPressed(OnEmergencyButtonPressed);
 	
 	//vTaskStartScheduler();
 }
@@ -191,22 +216,9 @@ String converted;
 
 void loop()
 {
-	startButtonState = digitalRead(PIN_START_BUTTON);
-	resetButtonState = digitalRead(PIN_RESET_BUTTON);
-
-	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-	if (startButtonState == HIGH)
-	{
-		machine.StartButtonPressed();
-		Serial.println("StartButtonPressed()");
-	}	
-
-	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-	if (resetButtonState == HIGH)
-	{
-		machine.ResetButtonPressed();
-		Serial.println("ResetButtonPressed()");
-	}
+	startButton.read();
+	resetButton.read();
+	emergencyButton.read();
 
 	//switch (machine.GetState()->GetStateTypes()[machine.GetState()->ToString()])
 	//{

@@ -104,6 +104,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\EasyButton</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
@@ -146,6 +147,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\EasyButton</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
@@ -210,6 +212,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\EasyButton</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
@@ -252,6 +255,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\EasyButton</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
