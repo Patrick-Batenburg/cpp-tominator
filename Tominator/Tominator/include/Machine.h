@@ -39,13 +39,6 @@ public:
 	Machine(LiquidCrystal_I2C lcd);
 
 	/**
-		Initializes a new instance of the Machine class.
-
-		@param waterBalloonPositions	The 2D matrix of water balloons to populate the grid with. May have predetermined water balloon weights for simulations/test runs.
-	*/
-	Machine(std::vector<std::vector<WaterBalloon>> waterBalloonPositions);
-
-	/**
 		Deconstruct the instance of the Machine class.
 	*/
 	~Machine();

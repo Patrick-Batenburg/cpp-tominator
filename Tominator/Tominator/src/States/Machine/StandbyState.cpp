@@ -2,8 +2,6 @@
 #include "InitializeState.h"
 #include "Machine.h"
 
-using namespace std;
-
 StandbyState::StandbyState()
 {
 }
@@ -14,6 +12,7 @@ StandbyState::~StandbyState()
 
 void StandbyState::Start(Machine* machine)
 {
+	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, HIGH);
 	//machine->SetState(new InitializeState());	
 	//machine->SetCurrentWaterBalloon(WaterBalloon());
 	//machine->GetConveyorBelt().Clear();
@@ -23,7 +22,7 @@ void StandbyState::Start(Machine* machine)
 
 	if (DEBUG)
 	{
-		vector<vector<WaterBalloon>> waterBalloonPositions
+		std::vector<std::vector<WaterBalloon>> waterBalloonPositions
 		{
 			{ WaterBalloon(WaterBalloonType::Unkown, 2),	WaterBalloon(WaterBalloonType::Unkown, 1),		WaterBalloon(WaterBalloonType::Unkown, 1.5) },
 			{ WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1) },

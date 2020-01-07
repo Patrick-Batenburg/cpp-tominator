@@ -17,6 +17,10 @@ using namespace std;
 
 Machine::Machine()
 {
+}
+
+Machine::Machine(LiquidCrystal_I2C lcd) : Machine()
+{
 	DCMotor conveyorBeltDCMotor = DCMotor(PIN_CONVEYOR_BELT_IN1_DIRECTION, PIN_CONVEYOR_BELT_IN2_DIRECTION, PIN_CONVEYOR_BELT_PWM);
 	DCMotor carriageDCMotor = DCMotor(PIN_CARRIAGE_IN1_DIRECTION, PIN_CARRIAGE_IN2_DIRECTION, PIN_CARRIAGE_PWM);
 	DCMotor frameDCMotor = DCMotor(PIN_FRAME_IN1_DIRECTION, PIN_FRAME_IN2_DIRECTION, PIN_FRAME_PWM);
@@ -27,22 +31,13 @@ Machine::Machine()
 	this->state = new BootUpState();
 	this->currentWaterBalloon = WaterBalloon();
 	this->grid = Grid();
-	this->conveyorBelt = ConveyorBelt(conveyorBeltDCMotor, REED3_CONVEYOR_BELT);	
+	this->conveyorBelt = ConveyorBelt(conveyorBeltDCMotor, REED3_CONVEYOR_BELT);
 	this->carriage = Carriage(carriageDCMotor, HALL_CARRIAGE_BOTTOM, HALL_CARRIAGE_MIDDLE, HALL_CARRIAGE_TOP);
 	this->frame = Frame(frameDCMotor, gridSideSensor, sortingSideSensor, REED1_GRID_SIDE, REED2_SORTING_SIDE, &this->grid, &this->conveyorBelt);
 	this->robotArm = RobotArm(STP_X_PULSE, STP_X_DIRECTION, REED7_HOMING_X, STP_Y_PULSE, STP_Y_DIRECTION, REED6_HOMING_Y, STP_Z_PULSE, STP_Z_DIRECTION, REED8_HOMING_Z, claw);
 	this->loadCell.begin(HX1_LOAD_CELL_DT, HX1_LOAD_CELL_SCK);
 	this->loadCell.set_scale(loadCellDivider);
 	this->loadCell.set_offset(loadCellOffset);
-}
-
-Machine::Machine(vector<vector<WaterBalloon>> waterBalloonPositions) : Machine()
-{
-	this->grid = Grid(waterBalloonPositions);
-}
-
-Machine::Machine(LiquidCrystal_I2C lcd) : Machine()
-{
 	this->controlPanel = ControlPanel(lcd, RotaryEncoder(S4_ROTARY_ENCODER_CLK, S4_ROTARY_ENCODER_DT), PIN_START_BUTTON, PIN_RESET_BUTTON, PIN_EMERGENCY_STOP_BUTTON);
  	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }

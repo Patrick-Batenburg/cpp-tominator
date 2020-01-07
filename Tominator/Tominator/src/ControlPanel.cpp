@@ -45,100 +45,22 @@ void ControlPanel::Print(String data1, String data2)
 
 void ControlPanel::TurnOnLED(int ledPin, bool blinking /*= true*/, int delayInMilliseconds /*= 1000*/)
 {
-	if (blinking)
-	{
-		digitalWrite(ledPin, HIGH);
-		delay(delayInMilliseconds);
-		digitalWrite(ledPin, LOW);
-		delay(delayInMilliseconds);
-	}
-	else
-	{
-		digitalWrite(ledPin, HIGH);		
-	}
+	//if (blinking)
+	//{
+		//digitalWrite(ledPin, HIGH);
+		//delay(delayInMilliseconds);
+		//digitalWrite(ledPin, LOW);
+		//delay(delayInMilliseconds);
+	//}
+	//else
+	//{
+		//digitalWrite(ledPin, HIGH);		
+	//}
 }
 
 void ControlPanel::TurnOffLED(int ledPin)
 {
 	digitalWrite(ledPin, LOW);
-}
-
-void ControlPanel::CheckButtonPress(Machine* machine)
-{
-	int buttonState = digitalRead(this->emergencyStopButtonPin);	
-
-	if (buttonState == HIGH)
-	{
-		this->EmergencyStopButtonPressedEvent(machine);
-	}
-	
-	buttonState = digitalRead(this->resetButtonPin);
-
-	if (buttonState == HIGH)
-	{
-		this->ResetButtonPressedEvent(machine);
-	}
-	
-	buttonState = digitalRead(this->startButtonPin);
-
-	if (buttonState == HIGH)
-	{
-		this->StartButtonPressedEvent(machine);
-	}
-}
-
-void ControlPanel::CheckButtonPress(Machine machine)
-{
-	int buttonState = digitalRead(this->emergencyStopButtonPin);
-
-	if (buttonState == HIGH)
-	{
-		this->EmergencyStopButtonPressedEvent(machine);
-	}
-	
-	buttonState = digitalRead(this->resetButtonPin);
-
-	if (buttonState == HIGH)
-	{
-		this->ResetButtonPressedEvent(machine);
-	}
-	
-	buttonState = digitalRead(this->startButtonPin);
-
-	if (buttonState == HIGH)
-	{
-		this->StartButtonPressedEvent(machine);
-	}
-}
-
-void ControlPanel::StartButtonPressedEvent(Machine* machine)
-{
-	machine->StartButtonPressed();
-}
-
-void ControlPanel::ResetButtonPressedEvent(Machine* machine)
-{
-	machine->ResetButtonPressed();
-}
-
-void ControlPanel::EmergencyStopButtonPressedEvent(Machine* machine)
-{
-	machine->EmergencyStopButtonPressed();
-}
-
-void ControlPanel::StartButtonPressedEvent(Machine machine)
-{
-	machine.StartButtonPressed();
-}
-
-void ControlPanel::ResetButtonPressedEvent(Machine machine)
-{
-	machine.ResetButtonPressed();
-}
-
-void ControlPanel::EmergencyStopButtonPressedEvent(Machine machine)
-{
-	machine.EmergencyStopButtonPressed();
 }
 
 int ControlPanel::GetStartButtonPin()

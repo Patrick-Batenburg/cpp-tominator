@@ -65,41 +65,6 @@ public:
 	void TurnOffLED(int ledPin);
 	
 	/**
-		Checks if a button press occurred.
-	*/
-	void CheckButtonPress(Machine* machine);
-	void CheckButtonPress(Machine machine);
-
-	/**
-		Indicates that the start button was pressed.
-	*/
-	void StartButtonPressedEvent(Machine* machine);
-
-	/**
-		Indicates that the reset button was pressed.
-	*/
-	void ResetButtonPressedEvent(Machine* machine);
-
-	/**
-		Indicates that the emergency stop button was pressed.
-	*/
-	void EmergencyStopButtonPressedEvent(Machine* machine);
-	/**
-		Indicates that the start button was pressed.
-	*/
-	void StartButtonPressedEvent(Machine machine);
-
-	/**
-		Indicates that the reset button was pressed.
-	*/
-	void ResetButtonPressedEvent(Machine machine);
-
-	/**
-		Indicates that the emergency stop button was pressed.
-	*/
-	void EmergencyStopButtonPressedEvent(Machine machine);
-	
-	/**
 		Gets the start button pin.
 		
 		@return The start button pin.

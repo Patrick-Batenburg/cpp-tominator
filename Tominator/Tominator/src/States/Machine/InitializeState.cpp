@@ -5,7 +5,6 @@
 
 InitializeState::InitializeState()
 {
-	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, HIGH);
 }
 
 InitializeState::~InitializeState()
