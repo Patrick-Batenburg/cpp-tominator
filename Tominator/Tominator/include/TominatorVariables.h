@@ -1,7 +1,7 @@
 #pragma once
 #include "TominatorPins.h"
 
-#define DEBUG false
+#define DEBUG true
 #define STEPS_PER_REVOLUTION 2000
 
 

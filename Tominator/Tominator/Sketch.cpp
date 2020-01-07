@@ -51,81 +51,98 @@ void DefaultModeTest()
 {
 	String row = "Row 1: ";
 	
-	cout << "State Test:" << endl;
-	cout << "Current state: " << machine.GetState()->ToString() << endl << endl;
+	Serial.println("State Test:");
+
+	Serial.print("Current state: " + machine.GetState()->ToString());
+	Serial.println();
+	Serial.println();
 	
 	machine.ResetButtonPressed();
-	cout << "ResetButtonPressed: " << endl;
-	cout << "Current state: " << machine.GetState()->ToString() << endl << endl;
+	Serial.println("ResetButtonPressed()");
+	Serial.print("Current state: " + machine.GetState()->ToString());
+	Serial.println();
+	Serial.println();
 	
 	machine.StartButtonPressed();
-	cout << "StartButtonPressed: " << endl;
-	cout << "Current state: " << machine.GetState()->ToString() << endl << endl;
+	Serial.println("StartButtonPressed()");
+	Serial.print("Current state: " + machine.GetState()->ToString());
+	Serial.println();
+	Serial.println();
 	
 	//machine.EmergencyStopButtonPressed();
-	//cout << "EmergencyStopButtonPressed: " << endl;
-	//cout << "Current state: " << machine.GetState()->ToString() << endl << endl;
+	//Serial.println("EmergencyStopButtonPressed()");
+	//Serial.print("Current state: " + machine.GetState()->ToString());
+	//Serial.println();
+	//Serial.println();
 	
 	machine.StartButtonPressed();
-	cout << "StartButtonPressed: " << endl;
-	cout << "Current state: " << machine.GetState()->ToString() << endl << endl;
+	Serial.println("StartButtonPressed()");
+	Serial.print("Current state: " + machine.GetState()->ToString());
+	Serial.println();
+	Serial.println();
 	
-
-	machine.EmergencyStopButtonPressed();
-	cout << "EmergencyStopButtonPressed: " << endl;
-	cout << "Current state: " << machine.GetState()->ToString() << endl << endl;
+	//machine.EmergencyStopButtonPressed();
+	//Serial.println("EmergencyStopButtonPressed()");
+	//Serial.print("Current state: " + machine.GetState()->ToString());
+	//Serial.println();
+	//Serial.println();
 
 	
-	cout << "Grid Before:" << endl;
+	Serial.println("Grid Before");
 	
 	for (int i = 0; i < machine.GetGrid().GetWaterBalloonPositions().size(); i++)
 	{
 		for (int j = 0; j < machine.GetGrid().GetWaterBalloonPositions()[i].size(); j++)
 		{
 			WaterBalloon waterBalloon = WaterBalloon(machine.GetGrid().GetWaterBalloonPositions()[i][j].GetWeight());
-			cout << waterBalloon.GetType() << " ";
+			Serial.print(waterBalloon.GetType());
+			Serial.print(" ");
 		}
 		
-		cout << endl;
+		Serial.println();
 	}
 	
-	cout << endl;
-	cout << "Conveyor Belt:" << endl;
+	Serial.println();
+	Serial.println("Conveyor Belt:");
 	
 	for (int i = 0; i < machine.GetConveyorBelt().GetWaterBalloonPositions().size(); i++)
 	{
 		for (int j = 0; j < machine.GetConveyorBelt().GetWaterBalloonPositions()[i].size(); j++)
 		{
-			cout << machine.GetConveyorBelt().GetWaterBalloonPositions()[i][j].GetType() << " ";
+			Serial.print(machine.GetConveyorBelt().GetWaterBalloonPositions()[i][j].GetType());
+			Serial.print(" ");
 		}
 		
-		cout << endl;
+		Serial.println();
 	}
 	
-	cout << endl;
-	cout << "Grid After:" << endl;
+	Serial.println();
+	Serial.println("Grid After:");
 	
 	for (int i = 0; i < machine.GetGrid().GetWaterBalloonPositions().size(); i++)
 	{
 		for (int j = 0; j < machine.GetGrid().GetWaterBalloonPositions()[i].size(); j++)
 		{
-			cout << machine.GetGrid().GetWaterBalloonPositions()[i][j].GetType() << " ";
+			Serial.print(machine.GetGrid().GetWaterBalloonPositions()[i][j].GetType());
+			Serial.print(" ");
 		}
 		
-		cout << endl;
+		Serial.println();
 	}
 	
-	cout << endl;
-	cout << row + ToString(machine.GetConveyorBelt().GetFirstRowType()) << endl;
+	Serial.println();
+	Serial.println(row + ToString(machine.GetConveyorBelt().GetFirstRowType()));
 	
 	row = "Row 2: ";
-	cout << row + ToString(machine.GetConveyorBelt().GetSecondRowType()) << endl;
+	Serial.println(row + ToString(machine.GetConveyorBelt().GetSecondRowType()));
 	
 	
 	row = "Row 3: ";
-	cout << row + ToString(machine.GetConveyorBelt().GetThirdRowType()) << endl;
-	cout << endl;
-	cout << "transported water balloons: " << machine.GetConveyorBelt().GetTransportedWaterBalloons() << endl << endl;
+	Serial.println(row + ToString(machine.GetConveyorBelt().GetThirdRowType()));
+	Serial.println();
+	Serial.print("transported water balloons: ");
+	Serial.println(machine.GetConveyorBelt().GetTransportedWaterBalloons());
+	Serial.println();
 }
 
 void InterruptHandler()
@@ -137,101 +154,91 @@ void setup()
 {
 	// Semaphores are useful to stop a Task proceeding, where it should be paused to wait, because it is sharing a resource
 	// Semaphores should only be used whilst the scheduler is running, but we can set it up here.
-	if (semaphore == NULL)  // Check to confirm that the Semaphore has not already been created.
-	{
-		semaphore = xSemaphoreCreateBinary();
-		
-		if (semaphore != NULL)
-		{
-			xSemaphoreGive(semaphore);
-		}
-	}
+	//if (semaphore == NULL)  // Check to confirm that the Semaphore has not already been created.
+	//{
+		//semaphore = xSemaphoreCreateBinary();
+		//
+		//if (semaphore != NULL)
+		//{
+			//xSemaphoreGive(semaphore);
+		//}
+	//}
 	
 	// Use falling edge interrupt for resuming tasks. DIGITAL PINS USABLE FOR INTERRUPTS: 2, 3, 18, 19, 20, 21
-	attachInterrupt(digitalPinToInterrupt(18), InterruptHandler, RISING);
+	//attachInterrupt(digitalPinToInterrupt(18), InterruptHandler, RISING);
 	
 	//			Function		Name								Stack size		Priority
-	xTaskCreate(TaskMain,		(const portCHAR *) "Blink",			128,	NULL,	1,  NULL);
-	xTaskCreate(TaskAnalogRead, (const portCHAR *) "AnalogRead",	128,	NULL,	2,  NULL);
+	//xTaskCreate(TaskMain,		(const portCHAR *) "Blink",			128,	NULL,	1,  NULL);
+	//xTaskCreate(TaskAnalogRead, (const portCHAR *) "AnalogRead",	128,	NULL,	2,  NULL);
 	
 	pinMode(LED_BUILTIN, OUTPUT);
 		
 	pinMode(P1_LED_STATE, OUTPUT);
 	pinMode(P2_LED_STANDBY_EMERGENCY, OUTPUT);
-	Serial.begin(9600);
 	LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
 	machine = Machine(lcd);	
-	
+	Serial.begin(9600);
+
 	//DefaultModeTest();
 	
-	//machine.SetState(new StandbyState());
-	//machine.SetMode(new SwitchingModesMode());
-	//machine.SetState(new RunningState());
-	//
-	//machine.StartMode();
-	
-	vTaskStartScheduler();
+	//vTaskStartScheduler();
 }
 
-int buttonState;
+int startButtonState;
+int resetButtonState;
 int i = 0;
 String converted;
 
 void loop()
-{	
-	//DefaultModeTest();
-
-	i++;
-	converted = String(i);
-	
-	buttonState = digitalRead(PIN_START_BUTTON);
+{
+	startButtonState = digitalRead(PIN_START_BUTTON);
+	resetButtonState = digitalRead(PIN_RESET_BUTTON);
 
 	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-	if (buttonState == HIGH)
+	if (startButtonState == HIGH)
 	{
 		machine.StartButtonPressed();
-	}
-	
-	buttonState = digitalRead(PIN_RESET_BUTTON);
+		Serial.println("StartButtonPressed()");
+	}	
 
 	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-	if (buttonState == HIGH)
+	if (resetButtonState == HIGH)
 	{
 		machine.ResetButtonPressed();
+		Serial.println("ResetButtonPressed()");
 	}
-	
 
-	switch (machine.GetState()->GetStateTypes()[machine.GetState()->ToString()])
-	{
-		case BaseMachineStateType::BootUpStateType:
-			machine.GetControlPanel().TurnOnLED(P1_LED_STATE, false);
-			break;
-		case BaseMachineStateType::StandbyStateType:
-			machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY);
-			//machine.GetControlPanel().TurnOffLED(P1_LED_STATE);
-			//delay(1000);
-			break;
-		case BaseMachineStateType::InitializeStateType:
-			machine.GetControlPanel().TurnOnLED(P1_LED_STATE);
-			break;
-		case BaseMachineStateType::RunningStateType:
-			machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 500);
-			break;
-		case BaseMachineStateType::BaseMachineType:
-		default:
-			machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 250);
-			machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY, true, 250);
-			break;
-	}
-	
-	buttonState = digitalRead(PIN_EMERGENCY_STOP_BUTTON);
-
-	// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-	if (buttonState == LOW) 
-	{
-		machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 250);
-		machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY, true, 250);
-	}
+	//switch (machine.GetState()->GetStateTypes()[machine.GetState()->ToString()])
+	//{
+		//case BaseMachineStateType::BootUpStateType:
+			//machine.GetControlPanel().TurnOnLED(P1_LED_STATE, false);
+			//break;
+		//case BaseMachineStateType::StandbyStateType:
+			//machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY);
+			////machine.GetControlPanel().TurnOffLED(P1_LED_STATE);
+			////delay(1000);
+			//break;
+		//case BaseMachineStateType::InitializeStateType:
+			//machine.GetControlPanel().TurnOnLED(P1_LED_STATE);
+			//break;
+		//case BaseMachineStateType::RunningStateType:
+			//machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 500);
+			//break;
+		//case BaseMachineStateType::BaseMachineType:
+		//default:
+			//machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 250);
+			//machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY, true, 250);
+			//break;
+	//}
+	//
+	//buttonState = digitalRead(PIN_EMERGENCY_STOP_BUTTON);
+//
+	//// check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+	//if (buttonState == LOW) 
+	//{
+		//machine.GetControlPanel().TurnOnLED(P1_LED_STATE, true, 250);
+		//machine.GetControlPanel().TurnOnLED(P2_LED_STANDBY_EMERGENCY, true, 250);
+	//}
 	
 	//if (machine.GetState()->ToString() == BOOT_UP_STATE)
 	//{

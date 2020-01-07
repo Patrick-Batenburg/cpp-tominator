@@ -14,6 +14,7 @@ WaterBalloon::WaterBalloon(WaterBalloonType type) : WaterBalloon()
 WaterBalloon::WaterBalloon(float weight) : WaterBalloon()
 {
 	this->weight = weight;
+	this->CalculateType();
 }
 
 WaterBalloon::WaterBalloon(WaterBalloonType type, float weight)
@@ -26,6 +27,26 @@ WaterBalloon::~WaterBalloon()
 {
 }
 
+void WaterBalloon::CalculateType()
+{
+	if (this->weight >= 0.8 && this->weight <= 1.2)
+	{
+		this->SetType(WaterBalloonType::Small);
+	}
+	else if (this->weight >= 1.3 && this->weight <= 1.7)
+	{
+		this->SetType(WaterBalloonType::Medium);
+	}
+	else if (this->weight >= 1.8 && this->weight <= 2.2)
+	{
+		this->SetType(WaterBalloonType::Large);
+	}
+	else
+	{
+		this->SetType(WaterBalloonType::Unkown);
+	}
+}
+
 float WaterBalloon::GetWeight()
 {
 	return this->weight;
@@ -34,23 +55,7 @@ float WaterBalloon::GetWeight()
 void WaterBalloon::SetWeight(float value)
 {
 	this->weight = value;
-
-	if (value >= 0.8 && value <= 1.2)
-	{
-		this->SetType(WaterBalloonType::Small);
-	}
-	else if (value >= 1.3 && value <= 1.7)
-	{
-		this->SetType(WaterBalloonType::Medium);
-	}
-	else if (value >= 1.8 && value <= 2.2)
-	{
-		this->SetType(WaterBalloonType::Large);
-	}
-	else
-	{
-		this->SetType(WaterBalloonType::Unkown);
-	}
+	this->CalculateType();
 }
 
 WaterBalloonType WaterBalloon::GetType()

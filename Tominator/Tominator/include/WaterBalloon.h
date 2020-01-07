@@ -50,6 +50,12 @@ public:
 		Deconstruct the instance of the WaterBalloon class.
 	*/
 	~WaterBalloon();
+
+	/**
+		Sets the water balloon's type based on the water balloon's weight.
+	*/
+	void CalculateType();
+
 	
 	/**
 		Gets the water balloon's weight.

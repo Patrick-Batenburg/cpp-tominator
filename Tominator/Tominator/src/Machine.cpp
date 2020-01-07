@@ -55,10 +55,10 @@ void Machine::StartMode()
 {	
 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 	
-	//if (this->state->ToString() == RUNNING_STATE)
-	//{
-		//this->mode->Execute(this);
-	//}
+	if (this->state->ToString() == RUNNING_STATE)
+	{
+		this->mode->Execute(this);
+	}
 }
 
 void Machine::SelectMode(int value)
@@ -177,9 +177,14 @@ void Machine::WeighWaterBalloon()
 {
 	float weight = 0;
 
-	//weight = this->currentWaterBalloon.GetWeight();
-	weight = this->loadCell.get_units(10);
-	
+	if (DEBUG)
+	{
+		weight = this->currentWaterBalloon.GetWeight();
+	}
+	else
+	{
+		weight = this->loadCell.get_units(10);
+	}
 	
 	if (weight >= 0.8)
 	{
