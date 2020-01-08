@@ -45,17 +45,17 @@ void ControlPanel::Print(String data1, String data2)
 
 void ControlPanel::TurnOnLED(int ledPin, bool blinking /*= true*/, int delayInMilliseconds /*= 1000*/)
 {
-	//if (blinking)
-	//{
-		//digitalWrite(ledPin, HIGH);
-		//delay(delayInMilliseconds);
-		//digitalWrite(ledPin, LOW);
-		//delay(delayInMilliseconds);
-	//}
-	//else
-	//{
-		//digitalWrite(ledPin, HIGH);		
-	//}
+	if (blinking)
+	{
+		digitalWrite(ledPin, HIGH);
+		delay(delayInMilliseconds);
+		digitalWrite(ledPin, LOW);
+		delay(delayInMilliseconds);
+	}
+	else
+	{
+		digitalWrite(ledPin, HIGH);		
+	}
 }
 
 void ControlPanel::TurnOffLED(int ledPin)

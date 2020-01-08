@@ -13,8 +13,6 @@
 #include "TominatorPins.h"
 #include <LiquidCrystal_I2C.h>
 
-using namespace std;
-
 Machine::Machine()
 {
 }
