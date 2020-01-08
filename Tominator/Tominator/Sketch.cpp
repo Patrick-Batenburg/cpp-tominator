@@ -3,6 +3,7 @@
 #include <ArduinoSTL.h>
 #include <EasyButton.h>
 #include <jled.h>
+#include <MemoryFree.h>
 
 Machine machine;
 EasyButton startButton = EasyButton(PIN_START_BUTTON);
@@ -228,5 +229,7 @@ void loop()
     //HandleLEDs();
 	DefaultModeTest();
 
-	delay(5000);
+	Serial.print("Memory: ");
+	Serial.println(freeMemory(), DEC); 
+	delay(1000);
 }

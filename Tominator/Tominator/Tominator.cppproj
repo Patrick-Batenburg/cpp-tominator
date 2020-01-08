@@ -108,6 +108,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\MemoryFree</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire\utility</Value>
@@ -152,6 +153,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\MemoryFree</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire\utility</Value>
@@ -218,6 +220,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\MemoryFree</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire\utility</Value>
@@ -262,6 +265,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\MemoryFree</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire\utility</Value>

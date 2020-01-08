@@ -90,6 +90,7 @@ BaseGridState* BaseGrid::GetState()
 
 void BaseGrid::SetState(BaseGridState* value)
 {
+	delete this->state;
 	this->state = value;
 }
 

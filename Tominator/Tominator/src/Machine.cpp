@@ -266,6 +266,8 @@ BaseMachineState* Machine::GetState()
 
 void Machine::SetState(BaseMachineState* value)
 {
+	delete this->state;
+	
 	this->state = value;
 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }
@@ -277,6 +279,7 @@ BaseMode* Machine::GetMode()
 
 void Machine::SetMode(BaseMode* value)
 {
+	delete this->mode;
 	this->mode = value;
 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }
@@ -299,7 +302,6 @@ ConveyorBelt Machine::GetConveyorBelt()
 void Machine::SetConveyorBelt(ConveyorBelt value)
 {
 	this->conveyorBelt = value;
-
 }
 
 ControlPanel Machine::GetControlPanel()

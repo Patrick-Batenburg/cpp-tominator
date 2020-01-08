@@ -105,6 +105,7 @@
             <Value>..\include\libraries\FreeRTOS</Value>
             <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>..\include\libraries\MemoryFree</Value>
             <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\Wire</Value>
             <Value>..\include\libraries\Wire\utility</Value>
@@ -142,6 +143,7 @@
             <Value>..\include\libraries\FreeRTOS</Value>
             <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>..\include\libraries\MemoryFree</Value>
             <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\Wire</Value>
             <Value>..\include\libraries\Wire\utility</Value>
@@ -204,6 +206,7 @@
             <Value>..\include\libraries\FreeRTOS</Value>
             <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>..\include\libraries\MemoryFree</Value>
             <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\Wire</Value>
             <Value>..\include\libraries\Wire\utility</Value>
@@ -241,6 +244,7 @@
             <Value>..\include\libraries\FreeRTOS</Value>
             <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>..\include\libraries\MemoryFree</Value>
             <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\Wire</Value>
             <Value>..\include\libraries\Wire\utility</Value>
@@ -419,6 +423,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\libraries\LiquidCrystal_I2C\LiquidCrystal_I2C.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\MemoryFree\MemoryFree.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\libraries\Stepper\Stepper.h">
@@ -697,6 +704,9 @@
     <Compile Include="src\libraries\LiquidCrystal_I2C\LiquidCrystal_I2C.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\libraries\MemoryFree\MemoryFree.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\libraries\Stepper\Stepper.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -717,6 +727,7 @@
     <Folder Include="include\libraries\LiquidCrystal_I2C\" />
     <Folder Include="include\libraries\EasyButton" />
     <Folder Include="include\libraries\jled" />
+    <Folder Include="include\libraries\MemoryFree" />
     <Folder Include="include\libraries\Wire" />
     <Folder Include="include\libraries\Stepper\" />
     <Folder Include="include\libraries\Wire\utility\" />
@@ -733,6 +744,7 @@
     <Folder Include="src\libraries\HX711\" />
     <Folder Include="src\libraries\jled\" />
     <Folder Include="src\libraries\LiquidCrystal_I2C\" />
+    <Folder Include="src\libraries\MemoryFree\" />
     <Folder Include="src\libraries\Stepper\" />
     <Folder Include="src\libraries\Wire\" />
     <Folder Include="src\libraries\Wire\utility" />
