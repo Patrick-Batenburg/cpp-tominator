@@ -1,5 +1,5 @@
 #include "BaseMachineState.h"
-#include "BootUpState.h"
+#include "EmergencyState.h"
 #include "Machine.h"
 
 BaseMachineState::BaseMachineState()
@@ -9,6 +9,7 @@ BaseMachineState::BaseMachineState()
 	this->stateTypes[STANDBY_STATE] = BaseMachineStateType::StandbyStateType;
 	this->stateTypes[INITIALIZE_STATE] = BaseMachineStateType::InitializeStateType;
 	this->stateTypes[RUNNING_STATE] = BaseMachineStateType::RunningStateType;
+	this->stateTypes[EMERGENCY_STATE] = BaseMachineStateType::EmergencyStateType;
 }
 
 BaseMachineState::~BaseMachineState()
@@ -26,7 +27,7 @@ void BaseMachineState::Reset(Machine* machine)
 void BaseMachineState::EmergencyStop(Machine* machine)
 {
 	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, LOW);
-	machine->SetState(new BootUpState());
+	machine->SetState(new EmergencyState());
 }
 
 std::map<String, BaseMachineStateType> BaseMachineState::GetStateTypes()

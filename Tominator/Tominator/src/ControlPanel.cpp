@@ -8,22 +8,13 @@ ControlPanel::ControlPanel()
 	pinMode(SCL, OUTPUT);
 }
 
-ControlPanel::ControlPanel(LiquidCrystal_I2C lcd) : ControlPanel()
+ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, EasyButton startButton, EasyButton resetButton, EasyButton emergencyStopButton)
 {
 	this->lcd = lcd;
-	this->lcd.init();
-	this->lcd.backlight();
-}
-
-ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, int startButtonPin, int resetButtonPin, int emergencyStopButtonPin) : ControlPanel(lcd)
-{
-	this->startButtonPin = startButtonPin;
-	this->resetButtonPin = resetButtonPin;
-	this->emergencyStopButtonPin = emergencyStopButtonPin;
 	this->rotaryEncoder = rotaryEncoder;
-	pinMode(this->startButtonPin, INPUT);
-	pinMode(this->resetButtonPin, INPUT);
-	pinMode(this->emergencyStopButtonPin, INPUT);	
+	this->startButton = startButton;
+	this->resetButton = resetButton;
+	this->emergencyStopButton = emergencyStopButton;
 }
 
 ControlPanel::~ControlPanel()
@@ -43,39 +34,19 @@ void ControlPanel::Print(String data1, String data2)
 	}
 }
 
-void ControlPanel::TurnOnLED(int ledPin, bool blinking /*= true*/, int delayInMilliseconds /*= 1000*/)
+EasyButton ControlPanel::GetStartButton()
 {
-	if (blinking)
-	{
-		digitalWrite(ledPin, HIGH);
-		delay(delayInMilliseconds);
-		digitalWrite(ledPin, LOW);
-		delay(delayInMilliseconds);
-	}
-	else
-	{
-		digitalWrite(ledPin, HIGH);		
-	}
+	return this->startButton;
 }
 
-void ControlPanel::TurnOffLED(int ledPin)
+EasyButton ControlPanel::GetResetButton()
 {
-	digitalWrite(ledPin, LOW);
+	return this->resetButton;
 }
 
-int ControlPanel::GetStartButtonPin()
+EasyButton ControlPanel::GetEmergencyStopButton()
 {
-	return this->startButtonPin;
-}
-
-int ControlPanel::GetResetButtonPin()
-{
-	return this->resetButtonPin;
-}
-
-int ControlPanel::GetEmergencyStopButtonPin()
-{
-	return this->emergencyStopButtonPin;
+	return this->emergencyStopButton;
 }
 
 RotaryEncoder ControlPanel::GetRotaryEncoder()

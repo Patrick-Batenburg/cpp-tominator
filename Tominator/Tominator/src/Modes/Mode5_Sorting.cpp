@@ -16,7 +16,7 @@ void SortingMode::HandlePlaceholder(Machine* machine)
 	Cell nearestCell = machine->GetConveyorBelt().GetNearestUnusedCell(); // Helper method to get the next position, but is very time consuming due to reiterating over a 2D matrix every time it is called.
 	machine->GetConveyorBelt().SetTransportedWaterBalloonsGoal(3); // Need only 3 water balloons instead of the default 9.
 
-	machine->HomingRobotArm();																				// Homes to default position. x:0, y:0
+	machine->HomeRobotArm();																				// Homes to default position. x:0, y:0
 	
 	machine->HandleRobotArm(machine->GetGrid().GetCurrentRow(), machine->GetGrid().GetCurrentColumn(), 3);	// Go to 1st water balloon
 	machine->CloseClaw();																					// Grab the 1st water balloon

@@ -10,6 +10,7 @@ enum BaseMachineStateType
 	StandbyStateType,
 	InitializeStateType,
 	RunningStateType,
+	EmergencyStateType
 };
 
 class Machine; // forward declaration

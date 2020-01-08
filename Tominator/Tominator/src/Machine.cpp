@@ -15,10 +15,6 @@
 
 Machine::Machine()
 {
-}
-
-Machine::Machine(LiquidCrystal_I2C lcd) : Machine()
-{
 	DCMotor conveyorBeltDCMotor = DCMotor(PIN_CONVEYOR_BELT_IN1_DIRECTION, PIN_CONVEYOR_BELT_IN2_DIRECTION, PIN_CONVEYOR_BELT_PWM);
 	DCMotor carriageDCMotor = DCMotor(PIN_CARRIAGE_IN1_DIRECTION, PIN_CARRIAGE_IN2_DIRECTION, PIN_CARRIAGE_PWM);
 	DCMotor frameDCMotor = DCMotor(PIN_FRAME_IN1_DIRECTION, PIN_FRAME_IN2_DIRECTION, PIN_FRAME_PWM);
@@ -36,8 +32,12 @@ Machine::Machine(LiquidCrystal_I2C lcd) : Machine()
 	this->loadCell.begin(HX1_LOAD_CELL_DT, HX1_LOAD_CELL_SCK);
 	this->loadCell.set_scale(loadCellDivider);
 	this->loadCell.set_offset(loadCellOffset);
-	this->controlPanel = ControlPanel(lcd, RotaryEncoder(S4_ROTARY_ENCODER_CLK, S4_ROTARY_ENCODER_DT), PIN_START_BUTTON, PIN_RESET_BUTTON, PIN_EMERGENCY_STOP_BUTTON);
- 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
+}
+
+Machine::Machine(ControlPanel controlPanel) : Machine()
+{
+	this->controlPanel = controlPanel;
+	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }
 
 Machine::~Machine()
@@ -211,7 +211,7 @@ void Machine::HandleRobotArm(int x, int y, int z)
 	this->robotArm.HandleArm(x, y, z);
 }
 
-void Machine::HomingRobotArm(int homeWhat)
+void Machine::HomeRobotArm(int homeWhat /*= 0*/)
 {
 	switch (homeWhat)
 	{

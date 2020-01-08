@@ -17,6 +17,7 @@
 #define STANDBY_STATE "Standby"
 #define INITIALIZE_STATE "Initialize"
 #define RUNNING_STATE "Running"
+#define EMERGENCY_STATE "Emergency"
 
 #define BASE_MODE "BaseMode"
 #define MODE0 "MODE0"

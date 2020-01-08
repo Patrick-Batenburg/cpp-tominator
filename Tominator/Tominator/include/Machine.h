@@ -29,14 +29,13 @@ private:
 	Carriage carriage;
 	Frame frame;
 	ControlPanel controlPanel;
-	LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
 
 public:
 	/**
 		Initializes a new instance of the Machine class.
 	*/
 	Machine();
-	Machine(LiquidCrystal_I2C lcd);
+	Machine(ControlPanel controlPanel);
 
 	/**
 		Deconstruct the instance of the Machine class.
@@ -114,7 +113,7 @@ public:
 		1 = Homing is only applied to the X, Y and Z-axis
 		2 = Homing is only applied to the claw.
 	*/
-	void HomingRobotArm(int homeWhat = 0);
+	void HomeRobotArm(int homeWhat = 0);
 	
 	/**
 		Turns the frame's DC motor on.

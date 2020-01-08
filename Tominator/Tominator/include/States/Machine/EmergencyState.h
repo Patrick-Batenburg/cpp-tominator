@@ -1,23 +1,23 @@
 #pragma once
 #include "BaseMachineState.h"
 
-class InitializeState : public BaseMachineState
+class EmergencyState : public BaseMachineState
 {
 public:
 	/**
-		Initializes a new instance of the InitializeState class.
+		Initializes a new instance of the EmergencyState class.
 	*/
-	InitializeState();
+	EmergencyState();
 
 	/**
-		Deconstruct the instance of the InitializeState class.
+		Deconstruct the instance of the EmergencyState class.
 	*/
-	~InitializeState();
+	~EmergencyState();
 
 	/**
 		Provides the Machine with a new running state.
 	*/
-	virtual void Start(Machine* machine);
+	virtual void Reset(Machine* machine);
 
 	/**
 		Returns a string that represents the current state.

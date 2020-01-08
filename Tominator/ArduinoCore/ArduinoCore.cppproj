@@ -100,14 +100,15 @@
             <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
             <Value>..\include\core</Value>
             <Value>..\include\variants\mega</Value>
-            <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\ArduinoSTL</Value>
             <Value>..\include\libraries\EasyButton</Value>
-            <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\FreeRTOS</Value>
+            <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\Wire</Value>
             <Value>..\include\libraries\Wire\utility</Value>
+            <Value>..\include\libraries\jled</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -136,14 +137,15 @@
             <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
             <Value>..\include\core</Value>
             <Value>..\include\variants\mega</Value>
-            <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\ArduinoSTL</Value>
             <Value>..\include\libraries\EasyButton</Value>
-            <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\FreeRTOS</Value>
+            <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\Wire</Value>
             <Value>..\include\libraries\Wire\utility</Value>
+            <Value>..\include\libraries\jled</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
         <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -197,14 +199,15 @@
             <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
             <Value>..\include\core</Value>
             <Value>..\include\variants\mega</Value>
-            <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\ArduinoSTL</Value>
             <Value>..\include\libraries\EasyButton</Value>
-            <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\FreeRTOS</Value>
+            <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\Wire</Value>
             <Value>..\include\libraries\Wire\utility</Value>
+            <Value>..\include\libraries\jled</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -233,14 +236,15 @@
             <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
             <Value>..\include\core</Value>
             <Value>..\include\variants\mega</Value>
-            <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\ArduinoSTL</Value>
             <Value>..\include\libraries\EasyButton</Value>
-            <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\FreeRTOS</Value>
+            <Value>..\include\libraries\HX711</Value>
             <Value>..\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>..\include\libraries\Stepper</Value>
             <Value>..\include\libraries\Wire</Value>
             <Value>..\include\libraries\Wire\utility</Value>
+            <Value>..\include\libraries\jled</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
         <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -394,6 +398,24 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\libraries\HX711\HX711.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\jled\arduino_hal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\jled\esp32_hal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\jled\esp8266_hal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\jled\jled.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\jled\jled_base.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\libraries\jled\jled_hal.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\libraries\LiquidCrystal_I2C\LiquidCrystal_I2C.h">
@@ -666,6 +688,12 @@
     <Compile Include="src\libraries\HX711\HX711.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\libraries\jled\esp32_hal.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\libraries\jled\jled_base.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\libraries\LiquidCrystal_I2C\LiquidCrystal_I2C.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -688,6 +716,7 @@
     <Folder Include="include\libraries\HX711\" />
     <Folder Include="include\libraries\LiquidCrystal_I2C\" />
     <Folder Include="include\libraries\EasyButton" />
+    <Folder Include="include\libraries\jled" />
     <Folder Include="include\libraries\Wire" />
     <Folder Include="include\libraries\Stepper\" />
     <Folder Include="include\libraries\Wire\utility\" />
@@ -702,6 +731,7 @@
     <Folder Include="src\libraries\EasyButton\" />
     <Folder Include="src\libraries\FreeRTOS\" />
     <Folder Include="src\libraries\HX711\" />
+    <Folder Include="src\libraries\jled\" />
     <Folder Include="src\libraries\LiquidCrystal_I2C\" />
     <Folder Include="src\libraries\Stepper\" />
     <Folder Include="src\libraries\Wire\" />

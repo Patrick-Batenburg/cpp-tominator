@@ -100,20 +100,21 @@
         </avrgcc.compiler.symbols.DefSymbols>
         <avrgcc.compiler.directories.IncludePaths>
           <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
-            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\EasyButton</Value>
-            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire\utility</Value>
-            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\jled</Value>
             <Value>..\include</Value>
+            <Value>..\include\Modes</Value>
             <Value>..\include\States\BaseGrid</Value>
-            <Value>..\include\Strategies\Modes</Value>
             <Value>..\include\States\Machine</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
@@ -143,20 +144,21 @@
         </avrgcccpp.compiler.symbols.DefSymbols>
         <avrgcccpp.compiler.directories.IncludePaths>
           <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
-            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\EasyButton</Value>
-            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire\utility</Value>
-            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\jled</Value>
             <Value>..\include</Value>
+            <Value>..\include\Modes</Value>
             <Value>..\include\States\BaseGrid</Value>
-            <Value>..\include\Strategies\Modes</Value>
             <Value>..\include\States\Machine</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
@@ -208,20 +210,21 @@
         </avrgcc.compiler.symbols.DefSymbols>
         <avrgcc.compiler.directories.IncludePaths>
           <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
-            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\EasyButton</Value>
-            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire\utility</Value>
-            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\jled</Value>
             <Value>..\include</Value>
+            <Value>..\include\Modes</Value>
             <Value>..\include\States\BaseGrid</Value>
-            <Value>..\include\Strategies\Modes</Value>
             <Value>..\include\States\Machine</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
@@ -251,20 +254,21 @@
         </avrgcccpp.compiler.symbols.DefSymbols>
         <avrgcccpp.compiler.directories.IncludePaths>
           <ListValues>
+            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\mega</Value>
-            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\ArduinoSTL</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\EasyButton</Value>
-            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\FreeRTOS</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\HX711</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\LiquidCrystal_I2C</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Stepper</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\Wire\utility</Value>
-            <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.4.331\include</Value>
+            <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\jled</Value>
             <Value>..\include</Value>
+            <Value>..\include\Modes</Value>
             <Value>..\include\States\BaseGrid</Value>
-            <Value>..\include\Strategies\Modes</Value>
             <Value>..\include\States\Machine</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
@@ -318,6 +322,36 @@
     <Compile Include="include\Machine.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\Modes\BaseMode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode0_Default.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode1_ClawManualPlacedWaterBalloon.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode2_Quickness.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode3_GrabWaterBalloon.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode4_PlaceWaterballoonOnConveyorBelt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode5_Sorting.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode6_OpenAndCloseClaw.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode7_DriveFrameBackAndForth.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode8_SwitchingModes.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\RobotArm.h">
       <SubType>compile</SubType>
     </Compile>
@@ -345,6 +379,9 @@
     <Compile Include="include\States\Machine\BootUpState.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\States\Machine\EmergencyState.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\States\Machine\InitializeState.h">
       <SubType>compile</SubType>
     </Compile>
@@ -352,36 +389,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\States\Machine\StandbyState.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\BaseMode.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\Mode0_Default.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\Mode1_ClawManualPlacedWaterBalloon.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\Mode2_Quickness.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\Mode3_GrabWaterBalloon.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\Mode4_PlaceWaterballoonOnConveyorBelt.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\Mode5_Sorting.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\Mode6_OpenAndCloseClaw.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\Mode7_DriveFrameBackAndForth.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="include\Strategies\Modes\Mode8_SwitchingModes.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\TominatorPins.h">
@@ -426,6 +433,36 @@
     <Compile Include="src\Machine.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\Modes\BaseMode.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode0_Default.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode1_ClawManualPlacedWaterBalloon.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode2_Quickness.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode3_GrabWaterBalloon.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode4_PlaceWaterballoonOnConveyorBelt.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode5_Sorting.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode6_OpenAndCloseClaw.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode7_DriveFrameBackAndForth.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode8_SwitchingModes.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\RobotArm.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -453,6 +490,9 @@
     <Compile Include="src\States\Machine\BootUpState.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\States\Machine\EmergencyState.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\States\Machine\InitializeState.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -460,36 +500,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\States\Machine\StandbyState.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\BaseMode.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\Mode0_Default.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\Mode1_ClawManualPlacedWaterBalloon.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\Mode2_Quickness.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\Mode3_GrabWaterBalloon.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\Mode4_PlaceWaterballoonOnConveyorBelt.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\Mode5_Sorting.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\Mode6_OpenAndCloseClaw.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\Mode7_DriveFrameBackAndForth.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Strategies\Modes\Mode8_SwitchingModes.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\UltrasonicSensor.cpp">
@@ -510,17 +520,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="include\" />
-    <Folder Include="include\Strategies" />
+    <Folder Include="include\Modes\" />
     <Folder Include="include\States" />
     <Folder Include="include\States\BaseGrid" />
     <Folder Include="include\States\Machine" />
-    <Folder Include="include\Strategies\Modes\" />
     <Folder Include="src\" />
+    <Folder Include="src\Modes\" />
     <Folder Include="src\States" />
     <Folder Include="src\States\Machine" />
     <Folder Include="src\States\BaseGrid" />
-    <Folder Include="src\Strategies\" />
-    <Folder Include="src\Strategies\Modes\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
