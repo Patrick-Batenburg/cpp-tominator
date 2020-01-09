@@ -23,6 +23,7 @@ BaseGrid::BaseGrid(WaterBalloonType type) : BaseGrid()
 
 BaseGrid::~BaseGrid()
 {
+	this->waterBalloonPositions.clear();
 }
 
 void BaseGrid::Reset()

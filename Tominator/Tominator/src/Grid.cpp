@@ -8,11 +8,13 @@ Grid::Grid() : BaseGrid(WaterBalloonType::Unkown)
 
 Grid::Grid(vector<vector<WaterBalloon>> waterBalloonPositions) : Grid()
 {
+	this->waterBalloonPositions.clear();
 	this->waterBalloonPositions = waterBalloonPositions;
 }
 
 Grid::~Grid()
 {
+	this->waterBalloonPositions.clear();
 }
 
 void Grid::SelectNextPosition()

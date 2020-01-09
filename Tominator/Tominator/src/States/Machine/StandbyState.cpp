@@ -20,14 +20,15 @@ void StandbyState::Start(Machine* machine)
 
 	if (DEBUG)
 	{
-		std::vector<std::vector<WaterBalloon>> waterBalloonPositions
-		{
-			{ WaterBalloon(WaterBalloonType::Unkown, 2),	WaterBalloon(WaterBalloonType::Unkown, 1),		WaterBalloon(WaterBalloonType::Unkown, 1.5) },
-			{ WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1) },
-			{ WaterBalloon(WaterBalloonType::Unkown, 1),	WaterBalloon(WaterBalloonType::Unkown, 2),		WaterBalloon(WaterBalloonType::Unkown, 2) }
-		};
+		//std::vector<std::vector<WaterBalloon>> waterBalloonPositions
+		//{
+			//{ WaterBalloon(WaterBalloonType::Unkown, 2),	WaterBalloon(WaterBalloonType::Unkown, 1),		WaterBalloon(WaterBalloonType::Unkown, 1.5) },
+			//{ WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1) },
+			//{ WaterBalloon(WaterBalloonType::Unkown, 1),	WaterBalloon(WaterBalloonType::Unkown, 2),		WaterBalloon(WaterBalloonType::Unkown, 2) }
+		//};
 		
-		machine->SetGrid(Grid(waterBalloonPositions));
+		//machine->SetGrid(Grid());		
+		//waterBalloonPositions.clear();
 	}
 	else
 	{

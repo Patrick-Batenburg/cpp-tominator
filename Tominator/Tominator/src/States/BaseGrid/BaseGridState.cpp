@@ -16,7 +16,6 @@ BaseGridState::~BaseGridState()
 
 void BaseGridState::Next(BaseGrid* baseGrid)
 {
-	//baseGrid->SetState(this);
 }
 
 std::map<String, BaseGridStateType> BaseGridState::GetStateTypes()

@@ -257,12 +257,12 @@ void loop()
 	startButton.read();
 	resetButton.read();
 	emergencyButton.read();
-    HandleLEDs();
-	//DefaultModeTest();
+    //HandleLEDs();
+	DefaultModeTest();
 
 	Serial.print("Memory: ");
 	Serial.println(freeMemory(), DEC); 
-	//delay(3000);
+	delay(1000);
 }
 
 /*--------------------------------------------------*/
