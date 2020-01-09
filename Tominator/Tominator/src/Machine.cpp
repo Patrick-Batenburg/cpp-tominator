@@ -291,7 +291,7 @@ Grid Machine::GetGrid()
 
 void Machine::SetGrid(Grid value)
 {
-	//this->grid = value;
+	this->grid = value;
 }
 
 ConveyorBelt Machine::GetConveyorBelt()
