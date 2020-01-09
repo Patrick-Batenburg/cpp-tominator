@@ -4,6 +4,7 @@
 
 BaseMachineState::BaseMachineState()
 {
+	this->isFinished = false;
 	this->stateTypes[BASE_MACHINE_STATE] = BaseMachineStateType::BaseMachineType;
 	this->stateTypes[BOOT_UP_STATE] = BaseMachineStateType::BootUpStateType;
 	this->stateTypes[STANDBY_STATE] = BaseMachineStateType::StandbyStateType;
@@ -28,6 +29,16 @@ void BaseMachineState::EmergencyStop(Machine* machine)
 {
 	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, LOW);
 	machine->SetState(new EmergencyState());
+}
+
+bool BaseMachineState::IsFinished()
+{
+	return this->isFinished;
+}
+
+void BaseMachineState::Finished()
+{
+	this->isFinished = true;
 }
 
 std::map<String, BaseMachineStateType> BaseMachineState::GetStateTypes()

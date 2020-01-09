@@ -16,6 +16,7 @@ BaseGrid::BaseGrid()
 
 BaseGrid::BaseGrid(WaterBalloonType type) : BaseGrid()
 {
+	this->waterBalloonPositions.clear();
 	this->waterBalloonPositions = vector<vector<WaterBalloon>>(3, vector<WaterBalloon>(3, WaterBalloon(type)));
 	this->selectedCell.InitialType = type;
 }
@@ -24,8 +25,9 @@ BaseGrid::~BaseGrid()
 {
 }
 
-void BaseGrid::Clear()
+void BaseGrid::Reset()
 {
+	this->waterBalloonPositions.clear();
 	this->waterBalloonPositions = vector<vector<WaterBalloon>>(3, vector<WaterBalloon>(3, WaterBalloon(this->selectedCell.InitialType)));
 }
 

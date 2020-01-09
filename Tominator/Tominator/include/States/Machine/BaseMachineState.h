@@ -18,6 +18,7 @@ class Machine; // forward declaration
 class BaseMachineState
 {
 private:
+	bool isFinished;
 	std::map<String, BaseMachineStateType> stateTypes;
 
 public:
@@ -45,6 +46,9 @@ public:
 		Provides the Machine with a new boot up state.
 	*/
 	virtual void EmergencyStop(Machine* machine);
+
+	bool IsFinished();
+	void Finished();
 
 	/**
 		Gets the different grid states for making comparisons.

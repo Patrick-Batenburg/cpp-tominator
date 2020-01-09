@@ -41,7 +41,7 @@ public:
 	/**
 		Clears the 2D matrix to it's default values.
 	*/
-	void Clear();
+	void Reset();
 
 	/**
 		Gets the nearest unused cell.

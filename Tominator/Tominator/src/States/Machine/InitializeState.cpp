@@ -13,8 +13,10 @@ InitializeState::~InitializeState()
 
 void InitializeState::Start(Machine* machine)
 {
-	machine->SetState(new RunningState());
+	RunningState* state = new RunningState();
+	machine->SetState(state);
 	machine->StartMode();
+	state->Finished();
 }
 
 String InitializeState::ToString()

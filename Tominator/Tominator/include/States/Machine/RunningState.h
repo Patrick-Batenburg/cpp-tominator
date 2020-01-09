@@ -14,6 +14,7 @@ public:
 	*/
 	~RunningState();
 
+
 	/**
 		Returns a string that represents the current state.
 		Only useful for comparisons and debug purposes.
