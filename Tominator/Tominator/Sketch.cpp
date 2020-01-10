@@ -245,7 +245,7 @@ void setup()
 	emergencyButton.onPressed(OnEmergencyButtonPressed);
 	ConfigureLEDs();
 	
-	ControlPanel controlPanel = ControlPanel(lcd, RotaryEncoder(S4_ROTARY_ENCODER_CLK, S4_ROTARY_ENCODER_DT), startButton, resetButton, emergencyButton);
+	ControlPanel controlPanel = ControlPanel(lcd, RotaryEncoder(S4_ROTARY_ENCODER_CLK, S4_ROTARY_ENCODER_DT), startButton, resetButton, emergencyButton, startLED, resetLED);
 	machine = Machine(controlPanel);
 	Serial.begin(9600);
 	

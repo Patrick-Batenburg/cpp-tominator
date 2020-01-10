@@ -63,7 +63,6 @@ public:
 	*/
 	void HomeWithClaw();
 
-
 	/**
 		Opens the claw.
 	*/

@@ -35,6 +35,12 @@ public:
 		Initializes a new instance of the Machine class.
 	*/
 	Machine();
+
+	/**
+		Initializes a new instance of the Machine class.
+
+		@param controlPanel The control panel to use.
+	*/
 	Machine(ControlPanel controlPanel);
 
 	/**

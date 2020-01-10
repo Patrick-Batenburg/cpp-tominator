@@ -8,13 +8,15 @@ ControlPanel::ControlPanel()
 	pinMode(SCL, OUTPUT);
 }
 
-ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, EasyButton startButton, EasyButton resetButton, EasyButton emergencyStopButton)
-{
+ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, EasyButton startButton, EasyButton resetButton, EasyButton emergencyStopButton, JLed startLed, JLed resetLed)
+{	
 	this->lcd = lcd;
 	this->rotaryEncoder = rotaryEncoder;
 	this->startButton = startButton;
 	this->resetButton = resetButton;
 	this->emergencyStopButton = emergencyStopButton;
+	this->startLed = startLed;
+	this->resetLed = resetLed;
 }
 
 ControlPanel::~ControlPanel()
@@ -25,13 +27,85 @@ void ControlPanel::Print(String data1, String data2)
 {
 	lcd.clear();
 	lcd.home();
-	lcd.print(data1);
+	
+	if (data1 != "")
+	{
+		lcd.print(data1);
+	}
 	
 	if (data2 != "")
 	{
 		lcd.setCursor(0, 1);
 		lcd.print(data2);
 	}
+}
+
+void ControlPanel::Clear()
+{
+	lcd.clear();
+}
+
+void ControlPanel::ReadButtons()
+{
+	this->startButton.read();
+	this->resetButton.read();
+	this->emergencyStopButton.read();
+}
+
+void ControlPanel::UpdateLeds()
+{
+	this->startLed.Update();
+	this->resetLed.Update();
+}
+
+void ControlPanel::ConfigureStartLedOn()
+{
+	this->startLed.On();
+}
+
+void ControlPanel::ConfigureStartLedOff()
+{
+	this->startLed.Off();
+}
+
+void ControlPanel::ConfigureResetLedOn()
+{
+	this->resetLed.On();
+}
+
+void ControlPanel::ConfigureResetLedOff()
+{
+	this->resetLed.Off();
+}
+
+void ControlPanel::ConfigureBootUpLed()
+{
+	this->startLed.Blink(2000, 1000);
+	this->startLed.Forever();
+}
+
+void ControlPanel::ConfigureStandbyLed()
+{
+	this->resetLed.Blink(2000, 1000);
+	this->resetLed.Forever();
+}
+
+void ControlPanel::ConfigureInitializeLed()
+{
+	this->startLed.Blink(1000, 500);
+	this->startLed.Forever();
+}
+
+void ControlPanel::ConfigureRunningLed()
+{
+	this->startLed.Blink(500, 250);
+	this->startLed.Forever();
+}
+
+void ControlPanel::ConfigureEmergencyLed()
+{
+	this->resetLed.Blink(300, 150);
+	this->resetLed.Forever();
 }
 
 EasyButton ControlPanel::GetStartButton()

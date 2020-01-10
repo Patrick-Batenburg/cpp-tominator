@@ -22,6 +22,7 @@ public:
 		@return A string that represents the current mode.
 	*/
 	virtual String ToString();
+
 private:
 	/**
 		Defines a set of instructions.

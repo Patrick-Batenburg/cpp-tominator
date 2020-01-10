@@ -56,7 +56,6 @@ public:
 	*/
 	void CalculateType();
 
-	
 	/**
 		Gets the water balloon's weight.
 

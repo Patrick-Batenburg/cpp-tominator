@@ -47,7 +47,14 @@ public:
 	*/
 	virtual void EmergencyStop(Machine* machine);
 
+	/**
+		Checks whenever or not the state state has finished.
+	*/
 	bool IsFinished();
+
+	/**
+		Changes the state to finished.
+	*/
 	void Finished();
 
 	/**
