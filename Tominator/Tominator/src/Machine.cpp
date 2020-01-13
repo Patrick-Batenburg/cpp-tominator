@@ -1,5 +1,4 @@
 #include "Machine.h"
-#include "DCMotor.h"
 #include "BootUpState.h"
 #include "Mode0_Default.h"
 #include "Mode1_ClawManualPlacedWaterBalloon.h"
@@ -15,27 +14,19 @@
 
 Machine::Machine()
 {
-	DCMotor conveyorBeltDCMotor = DCMotor(PIN_CONVEYOR_BELT_IN1_DIRECTION, PIN_CONVEYOR_BELT_IN2_DIRECTION, PIN_CONVEYOR_BELT_PWM);
-	DCMotor carriageDCMotor = DCMotor(PIN_CARRIAGE_IN1_DIRECTION, PIN_CARRIAGE_IN2_DIRECTION, PIN_CARRIAGE_PWM);
-	DCMotor frameDCMotor = DCMotor(PIN_FRAME_IN1_DIRECTION, PIN_FRAME_IN2_DIRECTION, PIN_FRAME_PWM);
-	UltrasonicSensor gridSideSensor = UltrasonicSensor(B1_ULTRASONIC_TRIGGER, B1_ULTRASONIC_ECHO);
-	UltrasonicSensor sortingSideSensor = UltrasonicSensor(B2_ULTRASONIC_TRIGGER, B2_ULTRASONIC_ECHO);
-	Claw claw = Claw(STP_CLAW_PULSE, STP_CLAW_DIRECTION, REED9_HOMING_CLAW);
 	this->mode = new DefaultMode();
 	this->state = new BootUpState();
 	this->currentWaterBalloon = WaterBalloon();
-	this->grid = Grid();
-	this->conveyorBelt = ConveyorBelt(conveyorBeltDCMotor, REED3_CONVEYOR_BELT);
-	this->carriage = Carriage(carriageDCMotor, HALL_CARRIAGE_BOTTOM, HALL_CARRIAGE_MIDDLE, HALL_CARRIAGE_TOP);
-	this->frame = Frame(frameDCMotor, gridSideSensor, sortingSideSensor, REED1_GRID_SIDE, REED2_SORTING_SIDE, &this->grid, &this->conveyorBelt);
-	this->robotArm = RobotArm(STP_X_PULSE, STP_X_DIRECTION, REED7_HOMING_X, STP_Y_PULSE, STP_Y_DIRECTION, REED6_HOMING_Y, STP_Z_PULSE, STP_Z_DIRECTION, REED8_HOMING_Z, claw);
-	this->loadCell.begin(HX1_LOAD_CELL_DT, HX1_LOAD_CELL_SCK);
-	this->loadCell.set_scale(loadCellDivider);
-	this->loadCell.set_offset(loadCellOffset);
 }
 
-Machine::Machine(ControlPanel controlPanel) : Machine()
+Machine::Machine(Grid* grid, ConveyorBelt* conveyorBelt, Frame frame, Carriage carriage, RobotArm robotArm, HX711 loadCell, ControlPanel controlPanel) : Machine()
 {
+	this->grid = grid;
+	this->conveyorBelt = conveyorBelt;
+	this->frame = frame;
+	this->carriage = carriage;
+	this->robotArm = robotArm;
+	this->loadCell = loadCell;
 	this->controlPanel = controlPanel;
 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }
@@ -117,19 +108,19 @@ void Machine::SortWaterBalloons()
 	int sortingArea = 0;
 	int speed = 50;
 	int distance = 0;
-	this->conveyorBelt.GetDCMotor().SetSpeed(speed);
+	this->conveyorBelt->GetDCMotor().SetSpeed(speed);
 	this->carriage.GetDCMotor().SetSpeed(speed);
 
-	switch (this->conveyorBelt.GetState()->GetStateTypes()[this->conveyorBelt.GetState()->ToString()])
+	switch (this->conveyorBelt->GetState()->GetStateTypes()[this->conveyorBelt->GetState()->ToString()])
 	{
 		case BaseGridStateType::NoneRowEmptyStateType:
-			sortingArea = this->GetConveyorBelt().GetFirstRowType();
+			sortingArea = this->GetConveyorBelt()->GetFirstRowType();
 			break;		
 		case BaseGridStateType::FirstRowEmptyStateType:
-			sortingArea = this->GetConveyorBelt().GetSecondRowType();
+			sortingArea = this->GetConveyorBelt()->GetSecondRowType();
 			break;
 		case BaseGridStateType::SecondRowEmptyStateType:
-			sortingArea = this->GetConveyorBelt().GetThirdRowType();
+			sortingArea = this->GetConveyorBelt()->GetThirdRowType();
 			break;
 		case BaseGridStateType::BaseGridType:
 		case BaseGridStateType::ThirdRowEmptyStateType:
@@ -162,8 +153,8 @@ void Machine::SortWaterBalloons()
 		}
 	}
 	
-	this->conveyorBelt.HandleDCMotor();
-	this->conveyorBelt.GetState()->Next(&this->conveyorBelt);	
+	this->conveyorBelt->HandleDCMotor();
+	this->conveyorBelt->GetState()->Next(conveyorBelt);	
 }
 
 void Machine::WeighWaterBalloon()
@@ -183,10 +174,10 @@ void Machine::WeighWaterBalloon()
 	{
 		this->currentWaterBalloon.SetWeight(weight);
 
-		if (this->conveyorBelt.CanAddWaterBalloon(this->currentWaterBalloon))
+		if (this->conveyorBelt->CanAddWaterBalloon(this->currentWaterBalloon))
 		{
-			this->conveyorBelt.AddWaterBalloon(this->currentWaterBalloon);
-			this->grid.SelectNextPosition();
+			this->conveyorBelt->AddWaterBalloon(this->currentWaterBalloon);
+			this->grid->SelectNextPosition();
 		}
 	}
 }
@@ -251,12 +242,12 @@ void Machine::TurnOffCarriageMotor()
 
 void Machine::TurnOnConveyorBeltMotor(DirectionType direction)
 {
-	this->conveyorBelt.GetDCMotor().Start(direction);
+	this->conveyorBelt->GetDCMotor().Start(direction);
 }
 
 void Machine::TurnOffConveyorBeltMotor()
 {
-	this->conveyorBelt.GetDCMotor().Stop();
+	this->conveyorBelt->GetDCMotor().Stop();
 }
 
 BaseMachineState* Machine::GetState()
@@ -284,24 +275,14 @@ void Machine::SetMode(BaseMode* value)
 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }
 
-Grid Machine::GetGrid()
+Grid* Machine::GetGrid()
 {
 	return this->grid;
 }
 
-void Machine::SetGrid(Grid value)
-{
-	this->grid = value;
-}
-
-ConveyorBelt Machine::GetConveyorBelt()
+ConveyorBelt* Machine::GetConveyorBelt()
 {
 	return this->conveyorBelt;
-}
-
-void Machine::SetConveyorBelt(ConveyorBelt value)
-{
-	this->conveyorBelt = value;
 }
 
 ControlPanel Machine::GetControlPanel()

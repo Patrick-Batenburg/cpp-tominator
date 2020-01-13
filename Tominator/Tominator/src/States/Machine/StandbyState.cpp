@@ -13,8 +13,9 @@ StandbyState::~StandbyState()
 void StandbyState::Start(Machine* machine)
 {
 	machine->SetState(new InitializeState());
+	machine->GetControlPanel().ConfigureInitializeLed();
 	machine->SetCurrentWaterBalloon(WaterBalloon());
-	machine->GetConveyorBelt().Reset();
+	machine->GetConveyorBelt()->Reset();
 	//machine->SelectMode(machine->GetControlPanel().GetRotaryEncoder().GetCounter());
 	//machine->HomeRobotArm();
 
@@ -32,7 +33,7 @@ void StandbyState::Start(Machine* machine)
 	}
 	else
 	{
-		machine->GetGrid().Reset();
+		machine->GetGrid()->Reset();
 	}
 
 	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, HIGH);

@@ -14,7 +14,6 @@ Grid::Grid(vector<vector<WaterBalloon>> waterBalloonPositions) : Grid()
 
 Grid::~Grid()
 {
-	this->waterBalloonPositions.clear();
 }
 
 void Grid::SelectNextPosition()

@@ -17,17 +17,15 @@
 class Machine
 {
 private:
-	static long const loadCellOffset = 50682624;
-	static long const loadCellDivider = 5895655;
-	HX711 loadCell;
 	WaterBalloon currentWaterBalloon;
 	BaseMachineState* state;
 	BaseMode* mode;
-	Grid grid;
-	ConveyorBelt conveyorBelt;
-	RobotArm robotArm;
-	Carriage carriage;
+	Grid* grid;
+	ConveyorBelt* conveyorBelt;
 	Frame frame;
+	Carriage carriage;
+	RobotArm robotArm;
+	HX711 loadCell;
 	ControlPanel controlPanel;
 
 public:
@@ -39,10 +37,15 @@ public:
 	/**
 		Initializes a new instance of the Machine class.
 
-		@param controlPanel The control panel to use.
+		@param grid			The grid with water balloon positions.
+		@param conveyorBelt The conveyorBelt with water balloon positions.
+		@param frame		The frame of the machine.
+		@param carriage		The carriage of the machine.
+		@param robotArm		The robot arm of the machine.
+		@param loadCell		The load cell for weighting water balloons.
+		@param controlPanel The control panel of the machine.
 	*/
-	Machine(ControlPanel controlPanel);
-
+	Machine(Grid* grid, ConveyorBelt* conveyorBelt, Frame frame, Carriage carriage, RobotArm robotArm, HX711 loadCell, ControlPanel controlPanel);
 	/**
 		Deconstruct the instance of the Machine class.
 	*/
@@ -204,28 +207,14 @@ public:
 		
 		@return The grid object.
 	*/
-	Grid GetGrid();
-
-	/**
-		Sets the grid object.
-
-		@param value The grid object.
-	*/
-	void SetGrid(Grid value);
+	Grid* GetGrid();
 
 	/**
 		Gets the conveyor belt object.
 		
 		@return The conveyor belt object.
 	*/
-	ConveyorBelt GetConveyorBelt();
-
-	/**
-		Sets the conveyor belt object.
-
-		@param value The conveyor belt object.
-	*/
-	void SetConveyorBelt(ConveyorBelt value);
+	ConveyorBelt* GetConveyorBelt();
 
 	/**
 		Gets the control panel object.

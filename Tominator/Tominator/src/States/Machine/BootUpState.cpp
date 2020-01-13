@@ -14,6 +14,7 @@ BootUpState::~BootUpState()
 void BootUpState::Reset(Machine* machine)
 {
 	machine->SetState(new StandbyState());
+	machine->GetControlPanel().ConfigureStandbyLed();
 }
 
 String BootUpState::ToString()

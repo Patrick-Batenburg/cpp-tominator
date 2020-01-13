@@ -1,7 +1,5 @@
 ﻿#include "Machine.h"
 #include "EmergencyState.h"
-#include "RunningState.h"
-#include "BootUpState.h"
 #include <ArduinoSTL.h>
 #include <EasyButton.h>
 #include <jled.h>
@@ -22,15 +20,13 @@
 //#include <task.h>
 //#include <timers.h>
 
+static long const loadCellOffset = 50682624;
+static long const loadCellDivider = 5895655;
+
 Machine machine;
 EasyButton startButton = EasyButton(PIN_START_BUTTON);
 EasyButton resetButton = EasyButton(PIN_RESET_BUTTON);
 EasyButton emergencyButton = EasyButton(PIN_EMERGENCY_STOP_BUTTON);
-
-JLed startLED = JLed(P1_LED_STATE);
-JLed resetLED = JLed(P2_LED_STANDBY_EMERGENCY);
-JLed runningStateLED = JLed(P1_LED_STATE);
-JLed emergencyStateLED = JLed(P2_LED_STANDBY_EMERGENCY);
 
 //SemaphoreHandle_t semaphore;
 //void TaskMain(void* pvParameters);
@@ -93,11 +89,11 @@ void DefaultModeTest()
 	
 	Serial.println("Grid Before");
 	
-	for (int i = 0; i < machine.GetGrid().GetWaterBalloonPositions().size(); i++)
+	for (int i = 0; i < machine.GetGrid()->GetWaterBalloonPositions().size(); i++)
 	{
-		for (int j = 0; j < machine.GetGrid().GetWaterBalloonPositions()[i].size(); j++)
+		for (int j = 0; j < machine.GetGrid()->GetWaterBalloonPositions()[i].size(); j++)
 		{
-			WaterBalloon waterBalloon = WaterBalloon(machine.GetGrid().GetWaterBalloonPositions()[i][j].GetWeight());
+			WaterBalloon waterBalloon = WaterBalloon(machine.GetGrid()->GetWaterBalloonPositions()[i][j].GetWeight());
 			Serial.print(waterBalloon.GetType());
 			Serial.print(" ");
 		}
@@ -108,11 +104,11 @@ void DefaultModeTest()
 	Serial.println();
 	Serial.println("Conveyor Belt:");
 	
-	for (int i = 0; i < machine.GetConveyorBelt().GetWaterBalloonPositions().size(); i++)
+	for (int i = 0; i < machine.GetConveyorBelt()->GetWaterBalloonPositions().size(); i++)
 	{
-		for (int j = 0; j < machine.GetConveyorBelt().GetWaterBalloonPositions()[i].size(); j++)
+		for (int j = 0; j < machine.GetConveyorBelt()->GetWaterBalloonPositions()[i].size(); j++)
 		{
-			Serial.print(machine.GetConveyorBelt().GetWaterBalloonPositions()[i][j].GetType());
+			Serial.print(machine.GetConveyorBelt()->GetWaterBalloonPositions()[i][j].GetType());
 			Serial.print(" ");
 		}
 		
@@ -122,11 +118,11 @@ void DefaultModeTest()
 	Serial.println();
 	Serial.println("Grid After:");
 	
-	for (int i = 0; i < machine.GetGrid().GetWaterBalloonPositions().size(); i++)
+	for (int i = 0; i < machine.GetGrid()->GetWaterBalloonPositions().size(); i++)
 	{
-		for (int j = 0; j < machine.GetGrid().GetWaterBalloonPositions()[i].size(); j++)
+		for (int j = 0; j < machine.GetGrid()->GetWaterBalloonPositions()[i].size(); j++)
 		{
-			Serial.print(machine.GetGrid().GetWaterBalloonPositions()[i][j].GetType());
+			Serial.print(machine.GetGrid()->GetWaterBalloonPositions()[i][j].GetType());
 			Serial.print(" ");
 		}
 		
@@ -134,17 +130,16 @@ void DefaultModeTest()
 	}
 	
 	Serial.println();
-	Serial.println(row + ToString(machine.GetConveyorBelt().GetFirstRowType()));
+	Serial.println(row + ToString(machine.GetConveyorBelt()->GetFirstRowType()));
 	
 	row = "Row 2: ";
-	Serial.println(row + ToString(machine.GetConveyorBelt().GetSecondRowType()));
-	
+	Serial.println(row + ToString(machine.GetConveyorBelt()->GetSecondRowType()));
 	
 	row = "Row 3: ";
-	Serial.println(row + ToString(machine.GetConveyorBelt().GetThirdRowType()));
+	Serial.println(row + ToString(machine.GetConveyorBelt()->GetThirdRowType()));
 	Serial.println();
 	Serial.print("transported water balloons: ");
-	Serial.println(machine.GetConveyorBelt().GetTransportedWaterBalloons());
+	Serial.println(machine.GetConveyorBelt()->GetTransportedWaterBalloons());
 	Serial.println();
 
 	machine.EmergencyStopButtonPressed();
@@ -152,59 +147,27 @@ void DefaultModeTest()
 	Serial.println();
 	Serial.println();
 	machine.ResetButtonPressed();
-
 }
 
 void OnStartButtonPressed()
 {
+	delay(500);
 	machine.StartButtonPressed();
 	Serial.println("OnStartButtonPressed()");	
 }
 
 void OnResetButtonPressed()
 {
-	if (machine.GetState()->ToString() == RUNNING_STATE && machine.GetState()->IsFinished() == true)
-	{
-		machine.SetState(new BootUpState());
-	}
-	else
-	{
-		machine.ResetButtonPressed();
-		Serial.println("OnResetButtonPressed()");
-	}
+	delay(500);
+	machine.ResetButtonPressed();
+	Serial.println("OnResetButtonPressed()");
 }
 
 void OnEmergencyButtonPressed()
 {
+	delay(500);
 	machine.EmergencyStopButtonPressed();
 	Serial.println("OnEmergencyButtonPressed()");
-}
-
-void ConfigureLEDs()
-{
-	startLED.On();
-	resetLED.On();
-	runningStateLED.Blink(1000, 500);
-	runningStateLED.Forever();
-	emergencyStateLED.Blink(300, 150);
-	emergencyStateLED.Forever();
-}
-
-void HandleLEDs()
-{
-	switch (machine.GetState()->GetStateTypes()[machine.GetState()->ToString()])
-    {
-		case BaseMachineStateType::RunningStateType:
-			runningStateLED.Update();
-			break;
-		case BaseMachineStateType::BaseMachineType:
-			emergencyStateLED.Update();
-			break;
-		default:
-			startLED.Update();
-			resetLED.Update();
-			break;
-    }
 }
 
 //void InterruptHandler()
@@ -232,37 +195,52 @@ void setup()
 	//xTaskCreate(TaskMain,		(const portCHAR *) "Blink",			128,	NULL,	1,  NULL);
 	//xTaskCreate(TaskAnalogRead, (const portCHAR *) "AnalogRead",	128,	NULL,	2,  NULL);
 		
-	pinMode(LED_BUILTIN, OUTPUT);		
+	pinMode(LED_BUILTIN, OUTPUT);
+	
+	DCMotor conveyorBeltDCMotor = DCMotor(PIN_CONVEYOR_BELT_IN1_DIRECTION, PIN_CONVEYOR_BELT_IN2_DIRECTION, PIN_CONVEYOR_BELT_PWM);
+	DCMotor carriageDCMotor = DCMotor(PIN_CARRIAGE_IN1_DIRECTION, PIN_CARRIAGE_IN2_DIRECTION, PIN_CARRIAGE_PWM);
+	DCMotor frameDCMotor = DCMotor(PIN_FRAME_IN1_DIRECTION, PIN_FRAME_IN2_DIRECTION, PIN_FRAME_PWM);
+	UltrasonicSensor gridSideSensor = UltrasonicSensor(B1_ULTRASONIC_TRIGGER, B1_ULTRASONIC_ECHO);
+	UltrasonicSensor sortingSideSensor = UltrasonicSensor(B2_ULTRASONIC_TRIGGER, B2_ULTRASONIC_ECHO);
+	Claw claw = Claw(STP_CLAW_PULSE, STP_CLAW_DIRECTION, REED9_HOMING_CLAW);
+	Grid* grid = new Grid();
+
+	ConveyorBelt* conveyorBelt = new ConveyorBelt(conveyorBeltDCMotor, REED3_CONVEYOR_BELT);
+	Frame frame = Frame(frameDCMotor, gridSideSensor, sortingSideSensor, REED1_GRID_SIDE, REED2_SORTING_SIDE, grid, conveyorBelt);
+	Carriage carriage = Carriage(carriageDCMotor, HALL_CARRIAGE_BOTTOM, HALL_CARRIAGE_MIDDLE, HALL_CARRIAGE_TOP);
+	RobotArm robotArm = RobotArm(STP_X_PULSE, STP_X_DIRECTION, REED7_HOMING_X, STP_Y_PULSE, STP_Y_DIRECTION, REED6_HOMING_Y, STP_Z_PULSE, STP_Z_DIRECTION, REED8_HOMING_Z, claw);
+	RotaryEncoder rotaryEncoder = RotaryEncoder(S4_ROTARY_ENCODER_CLK, S4_ROTARY_ENCODER_DT);
+	JLed* startLed = new JLed(START_LED_STATE);
+	JLed* resetLed = new JLed(RESET_LED_STATE);
+	HX711 loadCell;
+	loadCell.begin(HX1_LOAD_CELL_DT, HX1_LOAD_CELL_SCK);	
+	
+	startButton.begin();
+	startButton.onPressed(OnStartButtonPressed);
+	resetButton.begin();
+	resetButton.onPressed(OnResetButtonPressed);
+	emergencyButton.begin();
+	emergencyButton.onPressed(OnEmergencyButtonPressed);
+	
 	LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
 	lcd.init();
 	lcd.backlight();
-	
-	startButton.begin();
-	resetButton.begin();
-	emergencyButton.begin();
-	startButton.onPressed(OnStartButtonPressed);
-	resetButton.onPressed(OnResetButtonPressed);
-	emergencyButton.onPressed(OnEmergencyButtonPressed);
-	ConfigureLEDs();
-	
-	ControlPanel controlPanel = ControlPanel(lcd, RotaryEncoder(S4_ROTARY_ENCODER_CLK, S4_ROTARY_ENCODER_DT), startButton, resetButton, emergencyButton, startLED, resetLED);
-	machine = Machine(controlPanel);
+
+	ControlPanel controlPanel = ControlPanel(lcd, rotaryEncoder, startButton, resetButton, emergencyButton, startLed, resetLed);
+
+	machine = Machine(grid, conveyorBelt, frame, carriage, robotArm, loadCell, controlPanel);
 	Serial.begin(9600);
-	
 	//vTaskStartScheduler();
 }
 
 void loop()
 {
-	startButton.read();
-	resetButton.read();
-	emergencyButton.read();
-    //HandleLEDs();
-	DefaultModeTest();
+	machine.GetControlPanel().UpdateLeds();
+	machine.GetControlPanel().ReadButtons();
+	//DefaultModeTest();
 
 	Serial.print("Memory: ");
 	Serial.println(freeMemory(), DEC); 
-	delay(1000);
 }
 
 /*--------------------------------------------------*/

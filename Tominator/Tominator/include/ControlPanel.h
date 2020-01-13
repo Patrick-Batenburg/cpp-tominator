@@ -9,8 +9,8 @@ class Machine;
 class ControlPanel
 {
 private:
-	JLed startLed = JLed(LED_BUILTIN);
-	JLed resetLed = JLed(LED_BUILTIN);
+	JLed* startLed;
+	JLed* resetLed;
 	EasyButton startButton;
 	EasyButton resetButton;
 	EasyButton emergencyStopButton;
@@ -34,7 +34,7 @@ public:
 		@param startLed				The built-in LED in the start button.
 		@param resetLed				The built-in LED in the reset button.
 	*/
-	ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, EasyButton startButton, EasyButton resetButton, EasyButton emergencyStopButton, JLed startLed, JLed resetLed);
+	ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, EasyButton startButton, EasyButton resetButton, EasyButton emergencyStopButton, JLed* startLed, JLed* resetLed);
 
 	/**
 		Deconstruct the instance of the ControlPanel class.

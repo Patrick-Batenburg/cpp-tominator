@@ -15,6 +15,11 @@ public:
 	~RunningState();
 
 	/**
+		Provides the Machine with a new boot-up state.
+	*/
+	virtual void Reset(Machine* machine);
+
+	/**
 		Returns a string that represents the current state.
 		Only useful for comparisons and debug purposes.
 		

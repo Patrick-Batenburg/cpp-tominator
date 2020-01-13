@@ -14,6 +14,7 @@ InitializeState::~InitializeState()
 void InitializeState::Start(Machine* machine)
 {
 	RunningState* state = new RunningState();
+	machine->GetControlPanel().ConfigureRunningLed();
 	machine->SetState(state);
 	machine->StartMode();
 	state->Finished();

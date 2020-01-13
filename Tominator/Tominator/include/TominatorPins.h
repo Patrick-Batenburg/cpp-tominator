@@ -40,8 +40,8 @@
 #define HX1_LOAD_CELL_SCK 41				// HX1 - SCK load cell
 #define HX1_LOAD_CELL_DT 42					// HX1 - DT load cell
 
-#define P1_LED_STATE 43						// P1 - led In bedrijf
-#define P2_LED_STANDBY_EMERGENCY 44			// P2 - Led Standby/Noodstop
+#define START_LED_STATE 43					// P1 - led In bedrijf
+#define RESET_LED_STATE 44					// P2 - Led Standby/Noodstop
 
 #define S4_ROTARY_ENCODER_DT 45				// S4 - Mode selectie, Rotary Encoder DT
 #define S4_ROTARY_ENCODER_CLK 46			// S4 - Mode selectie, Rotary Encoder CLK

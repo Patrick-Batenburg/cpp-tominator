@@ -19,7 +19,6 @@ ConveyorBelt::ConveyorBelt(DCMotor dcMotor, int reedPin) : ConveyorBelt()
 
 ConveyorBelt::~ConveyorBelt()
 {
-	this->waterBalloonPositions.clear();
 }
 
 bool ConveyorBelt::CanAddWaterBalloon(WaterBalloon waterBalloon)
