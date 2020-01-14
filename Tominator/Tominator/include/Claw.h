@@ -6,6 +6,8 @@ private:
 	int pulsePin;
 	int directionPin;
 	int homingPin;
+	static const int delay = 800;
+	static const int motorSteps = 1800;
 
 public:
 	/**
@@ -26,22 +28,17 @@ public:
 		Deconstruct the instance of the Claw class.
 	*/
 	~Claw();
-	
+
 	/**
 		Opens the claw.
-	*/
-	void Open();
+	*/	
+	void Open();	
 
 	/**
 		Closes the claw.
 	*/
 	void Close();
 
-	/**
-		Makes the claw return to its default position, which is open.
-	*/	
-	void Home();	
-	
 	/**
 		Gets the pulse pin.
 		

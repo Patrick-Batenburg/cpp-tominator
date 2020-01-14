@@ -11,7 +11,7 @@ ConveyorBelt::ConveyorBelt() : BaseGrid()
 	this->thirdRowType = WaterBalloonType::Empty;
 }
 
-ConveyorBelt::ConveyorBelt(DCMotor dcMotor, int reedPin) : ConveyorBelt()
+ConveyorBelt::ConveyorBelt(DCMotor* dcMotor, int reedPin) : ConveyorBelt()
 {
 	this->dcMotor = dcMotor;
 	this->reedPin = reedPin;
@@ -103,7 +103,7 @@ void ConveyorBelt::HandleDCMotor()
 	{
 		while (digitalRead(this->reedPin) == LOW)
 		{
-			this->dcMotor.Run();
+			this->dcMotor->Run();
 		}	
 	}
 }
@@ -161,7 +161,7 @@ void ConveyorBelt::SetState(BaseGridState* value)
 	}
 }
 
-DCMotor ConveyorBelt::GetDCMotor()
+DCMotor* ConveyorBelt::GetDCMotor()
 {
 	return this->dcMotor;
 }
@@ -174,4 +174,8 @@ void ConveyorBelt::SetTransportedWaterBalloons(int value)
 void ConveyorBelt::IncrementTransportedWaterBalloons()
 {
 	this->transportedWaterBalloons++;
+}
+
+void ConveyorBelt::Home()
+{
 }

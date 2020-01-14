@@ -18,10 +18,10 @@
 #define PIN_EMERGENCY_STOP_BUTTON 19		// Noodstop N/O
 
 #define PIN_ENABLE_STEPPER_MOTOR 30			// Stappenmotoren enable
-#define STP_X_PULSE 24						// STP1 X-as Pulse
-#define STP_X_DIRECTION 25					// STP1 X-as Direction
-#define STP_Y_PULSE 22						// STP2 Y-as Pulse
-#define STP_Y_DIRECTION 23					// STP2 Y-as Direction
+#define STP_X_PULSE 22						// STP1 X-as Pulse
+#define STP_X_DIRECTION 23					// STP1 X-as Direction
+#define STP_Y_PULSE 24						// STP2 Y-as Pulse
+#define STP_Y_DIRECTION 25					// STP2 Y-as Direction
 #define STP_Z_PULSE 26						// STP3 Z-as Pulse
 #define STP_Z_DIRECTION 27					// STP3 Z-as Direction
 #define STP_CLAW_PULSE 28					// STP4 grijper Pulse

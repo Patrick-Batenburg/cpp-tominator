@@ -108,8 +108,8 @@ void Machine::SortWaterBalloons()
 	int sortingArea = 0;
 	int speed = 50;
 	int distance = 0;
-	this->conveyorBelt->GetDCMotor().SetSpeed(speed);
-	this->carriage.GetDCMotor().SetSpeed(speed);
+	this->conveyorBelt->GetDCMotor()->SetSpeed(speed);
+	this->carriage.GetDCMotor()->SetSpeed(speed);
 
 	switch (this->conveyorBelt->GetState()->GetStateTypes()[this->conveyorBelt->GetState()->ToString()])
 	{
@@ -202,52 +202,66 @@ void Machine::HandleRobotArm(int x, int y, int z)
 	this->robotArm.HandleArm(x, y, z);
 }
 
-void Machine::HomeRobotArm(int homeWhat /*= 0*/)
+void Machine::Home(int homeWhat)
 {
 	switch (homeWhat)
 	{
-		case 1:
-			this->robotArm.Home();
-			break;
-		case 2:
-			this->robotArm.GetClaw().Home();
-			break;
 		case 0:
 		default:
-			this->robotArm.HomeWithClaw();
+			this->frame.Home();
+			this->carriage.Home();
+			this->conveyorBelt->Home();
+			this->robotArm.Home(true);
+			break;
+		case 1:
+			this->frame.Home();
+			break;
+		case 2:
+			this->carriage.Home();
+			break;
+		case 3:
+			this->conveyorBelt->Home();
+			break;
+		case 4:
+			this->robotArm.Home(true);
+			break;
+		case 5:
+			this->robotArm.Home();
+			break;
+		case 6:
+			this->robotArm.GetClaw().Open();
 			break;
 	}
-	
 }
 
 void Machine::TurnOnFrameMotor(DirectionType direction)
 {
-	this->frame.GetDCMotor().Start(direction);
+	this->frame.GetDCMotor()->Start(direction);
 }
 
 void Machine::TurnOffFrameMotor()
 {
-	this->frame.GetDCMotor().Stop();
+	this->frame.GetDCMotor()->Stop();
 }
 
 void Machine::TurnOnCarriageMotor(DirectionType direction)
 {
-	this->carriage.GetDCMotor().Start(direction);
+	this->carriage.GetDCMotor()->Start(direction);
 }
 
 void Machine::TurnOffCarriageMotor()
 {
-	this->carriage.GetDCMotor().Stop();
+	this->carriage.GetDCMotor()->Stop();
 }
 
 void Machine::TurnOnConveyorBeltMotor(DirectionType direction)
 {
-	this->conveyorBelt->GetDCMotor().Start(direction);
+	this->conveyorBelt->GetDCMotor()->Start(direction);
 }
 
 void Machine::TurnOffConveyorBeltMotor()
 {
-	this->conveyorBelt->GetDCMotor().Stop();
+	this->conveyorBelt->GetDCMotor()->Stop();
 }
 
 BaseMachineState* Machine::GetState()
@@ -288,6 +302,16 @@ ConveyorBelt* Machine::GetConveyorBelt()
 ControlPanel Machine::GetControlPanel()
 {
 	return this->controlPanel;
+}
+
+Carriage Machine::GetCarriage()
+{
+	return this->carriage;
+}
+
+Frame Machine::GetFrame()
+{
+	return this->frame;
 }
 
 WaterBalloon Machine::GetCurrentWaterBalloon()

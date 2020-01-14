@@ -115,14 +115,18 @@ public:
 	void HandleRobotArm(int x, int y, int z);
 
 	/**
-		Applies homing to the robot arm. By default it will home the X, Y, Z-axis and claw simultaneously.
+		Applies homing across the whole machine. By default it will home the frame, carriage, conveyor belt, the X, Y, Z-axis and claw in this exact order
 		
-		@param homeWhat Indicates what needs homing based on int-value.
-		0 = Homing is applied to the X, Y, Z-axis and claw (default).
-		1 = Homing is only applied to the X, Y and Z-axis
-		2 = Homing is only applied to the claw.
+		@param homeWhat Indicates what individual component needs homing based on int-value.
+		0 = Homing is applied to the frame, carriage, conveyor belt, the X, Y, Z-axis and claw (default).
+		1 - Homing is only applied to the frame.
+		2 - Homing is only applied to the carriage.
+		3 - Homing is only applied to the conveyor belt.
+		4 = Homing is only applied to the X, Y and Z-axis and the claw.
+		5 = Homing is only applied to the X, Y and Z-axis
+		6 = Homing is only applied to the claw.
 	*/
-	void HomeRobotArm(int homeWhat = 0);
+	void Home(int homeWhat = 0);
 	
 	/**
 		Turns the frame's DC motor on.
@@ -222,4 +226,18 @@ public:
 		@return The control panel object.
 	*/	
 	ControlPanel GetControlPanel();
+
+	/**
+		Gets the carriage object.
+		
+		@return The carriage object.
+	*/	
+	Carriage GetCarriage();
+
+	/**
+		Gets the frame object.
+		
+		@return The frame object.
+	*/	
+	Frame GetFrame();
 };

@@ -54,9 +54,9 @@ public:
 
 	/**
 		Makes the DC motor run.
-		@param delayInMilliseconds The delay in milliseconds that is needed for pulse width modulation. Default value is 30 milliseconds.
+		@param delay The delay in milliseconds that is needed for pulse width modulation. Default value is 30 milliseconds.
 	*/
-	void Run(int delayInMilliseconds = 30);
+	void Run(int delay = 0);
 
 	/**
 		Makes the DC motor brake and let it stop quickly.

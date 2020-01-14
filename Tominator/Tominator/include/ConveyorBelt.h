@@ -11,7 +11,7 @@ private:
 	int transportedWaterBalloons;
 	int transportedWaterBalloonsGoal;
 	int reedPin;
-	DCMotor dcMotor; 
+	DCMotor* dcMotor; 
 
 public:
 	/**
@@ -25,7 +25,7 @@ public:
 		@param dcMotor	The DCMotor object.
 		@param reedPin	The reed contact located under the wall strip.
 	*/
-	ConveyorBelt(DCMotor dcMotor, int reedPin);
+	ConveyorBelt(DCMotor* dcMotor, int reedPin);
 
 	/**
 		Deconstruct the instance of the ConveyorBelt class.
@@ -43,6 +43,11 @@ public:
 		Adds the specified water balloon to the 2D matrix.
 	*/
 	void AddWaterBalloon(WaterBalloon waterBalloon);
+
+	/**
+		Makes the conveyor belt return to its default position.
+	*/
+	void Home();
 
 	/**
 		Handles the DC motor. The DC motor can only run when sufficient water balloons are transported. See GetTransportedWaterBalloonsGoal().
@@ -124,7 +129,7 @@ public:
 		
 		@return The DC motor object.
 	*/
-	DCMotor GetDCMotor();
+	DCMotor* GetDCMotor();
 	
 private:
 	/**

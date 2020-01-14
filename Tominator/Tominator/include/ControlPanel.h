@@ -11,9 +11,9 @@ class ControlPanel
 private:
 	JLed* startLed;
 	JLed* resetLed;
-	EasyButton startButton;
-	EasyButton resetButton;
-	EasyButton emergencyStopButton;
+	EasyButton* startButton;
+	EasyButton* resetButton;
+	EasyButton* emergencyStopButton;
 	RotaryEncoder rotaryEncoder;
 	LiquidCrystal_I2C lcd;
 
@@ -34,7 +34,7 @@ public:
 		@param startLed				The built-in LED in the start button.
 		@param resetLed				The built-in LED in the reset button.
 	*/
-	ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, EasyButton startButton, EasyButton resetButton, EasyButton emergencyStopButton, JLed* startLed, JLed* resetLed);
+	ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, EasyButton* startButton, EasyButton* resetButton, EasyButton* emergencyStopButton, JLed* startLed, JLed* resetLed);
 
 	/**
 		Deconstruct the instance of the ControlPanel class.
@@ -114,21 +114,21 @@ public:
 		
 		@return The start button object.
 	*/
-	EasyButton GetStartButton();
+	EasyButton* GetStartButton();
 
 	/**
 		Gets the reset button object.
 		
 		@return The reset button object.
 	*/
-	EasyButton GetResetButton();
+	EasyButton* GetResetButton();
 
 	/**
 		Gets the emergency stop button object.
 		
 		@return The emergency stop button object.
 	*/
-	EasyButton GetEmergencyStopButton();
+	EasyButton* GetEmergencyStopButton();
 
 	/**
 		Gets the rotary encoder object.

@@ -5,7 +5,7 @@ Carriage::Carriage()
 {
 }
 
-Carriage::Carriage(DCMotor dcMotor, int hallSensorBottomPin, int hallSensorMiddlePin, int hallSensorTopPin) : Carriage()
+Carriage::Carriage(DCMotor* dcMotor, int hallSensorBottomPin, int hallSensorMiddlePin, int hallSensorTopPin) : Carriage()
 {
 	this->dcMotor = dcMotor;
 	this->hallSensorBottomPin = hallSensorBottomPin;
@@ -17,10 +17,17 @@ Carriage::~Carriage()
 {
 }
 
-void Carriage::HandleDCMotor(int speed, int goToHallSensor)
+void Carriage::HandleDCMotor(int speedPercentage, int goToHallSensor)
 {
 	bool motorTurnedOn = false;
-	this->GetDCMotor().SetSpeed(speed);
+	this->GetDCMotor()->SetSpeedInPercentage(speedPercentage);
+
+	Serial.print("bottom sensor: ");
+	Serial.println(digitalRead(this->hallSensorBottomPin));
+	Serial.print("middle sensor: ");
+	Serial.println(digitalRead(this->hallSensorMiddlePin));
+	Serial.print("top sensor: ");
+	Serial.println(digitalRead(this->hallSensorTopPin));
 
 	// If the carriage on the right height do nothing.
 	if (digitalRead(goToHallSensor) == LOW)
@@ -29,29 +36,31 @@ void Carriage::HandleDCMotor(int speed, int goToHallSensor)
 		switch (goToHallSensor)
 		{
 			case HALL_CARRIAGE_BOTTOM:
-				if (digitalRead(this->hallSensorMiddlePin) == HIGH || digitalRead(this->hallSensorTopPin)  == HIGH)
-				{
-					motorTurnedOn = true;
-					this->GetDCMotor().Start(DirectionType::Reverse);
-				}
+				motorTurnedOn = true;
+				this->GetDCMotor()->Start(DirectionType::Reverse);
 				break;
 			case HALL_CARRIAGE_MIDDLE:
-				if (digitalRead(this->hallSensorBottomPin) == HIGH)
+				if (digitalRead(this->hallSensorBottomPin) == LOW && digitalRead(this->hallSensorTopPin))
 				{
 					motorTurnedOn = true;
-					this->GetDCMotor().Start(DirectionType::Reverse);
+					this->GetDCMotor()->Start(DirectionType::Reverse);
 				}
-				else if (digitalRead(this->hallSensorTopPin) == HIGH)
+				else if (digitalRead(this->hallSensorTopPin) == LOW && digitalRead(this->hallSensorBottomPin))
 				{
 					motorTurnedOn = true;
-					this->GetDCMotor().Start(DirectionType::Forward);
+					this->GetDCMotor()->Start(DirectionType::Forward);
+				}
+				else
+				{
+					motorTurnedOn = true;
+					this->GetDCMotor()->Start(DirectionType::Reverse);
 				}
 				break;
 			case HALL_CARRIAGE_TOP:
-				if (digitalRead(this->hallSensorBottomPin) == HIGH || digitalRead(this->hallSensorMiddlePin) == HIGH)
+				if (digitalRead(this->hallSensorBottomPin) == LOW || digitalRead(this->hallSensorMiddlePin) == LOW)
 				{
 					motorTurnedOn = true;
-					this->GetDCMotor().Start(DirectionType::Forward);
+					this->GetDCMotor()->Start(DirectionType::Forward);
 				}
 				break;
 			default:
@@ -63,14 +72,36 @@ void Carriage::HandleDCMotor(int speed, int goToHallSensor)
 	// The sensor output is either LOW = 0 (false) or HIGH = 1 (true).
 	while (digitalRead(goToHallSensor) == LOW && motorTurnedOn)
 	{
-		this->GetDCMotor().Run();
+		this->GetDCMotor()->Run();
 	}
 	
 	// Stop the DC motor after reaching the destination.
-	this->GetDCMotor().Stop();
+	this->GetDCMotor()->Stop();
 }
 
-DCMotor Carriage::GetDCMotor()
+
+void Carriage::Home()
+{	
+	this->GetDCMotor()->Start(DirectionType::Reverse);
+	this->GetDCMotor()->SetSpeedInPercentage(100);
+	
+	while (true)
+	{
+		// If the homing pin is HIGH then we successfully managed to return back to the default position.
+		if (digitalRead(this->hallSensorBottomPin))
+		{
+			break;
+		}
+		else if (digitalRead(this->hallSensorBottomPin) == LOW)
+		{
+			this->GetDCMotor()->Run();
+		}
+	}
+	
+	this->GetDCMotor()->Stop();
+}
+
+DCMotor* Carriage::GetDCMotor()
 {
 	return this->dcMotor;
 }

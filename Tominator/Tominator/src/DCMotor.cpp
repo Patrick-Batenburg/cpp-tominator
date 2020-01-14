@@ -36,10 +36,14 @@ void DCMotor::Stop()
     digitalWrite(this->in2DirectionPin, LOW);
 }
 
-void DCMotor::Run(int delayInMilliseconds)
+void DCMotor::Run(int delay)
 {
 	analogWrite(this->pwmPin, this->speed);
-	delay(delayInMilliseconds);
+	
+	if (delay)
+	{
+		delayMicroseconds(delay);
+	}
 }
 
 void DCMotor::Brake()
@@ -51,7 +55,7 @@ void DCMotor::Brake()
 void DCMotor::SoftStart(DirectionType direction, int speedPrecentage, int timeInSeconds)
 {
 	this->Start(direction);
-	SetSpeedInPercentage(speedPrecentage);
+	this->SetSpeedInPercentage(speedPrecentage);
 	int delay = timeInSeconds * 1000 / this->speed;
 	
 	for(int i = 0; i < this->speed; i++)

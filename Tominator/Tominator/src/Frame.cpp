@@ -5,7 +5,7 @@ Frame::Frame()
 {
 } 
 
-Frame::Frame(DCMotor dcMotor, UltrasonicSensor gridSideUltrasonicSensor, UltrasonicSensor sortingSideUltrasonicSensor, int reedGridSidePin, int reedSortingSidePin, Grid* grid, ConveyorBelt* conveyorBelt) : Frame()
+Frame::Frame(DCMotor* dcMotor, UltrasonicSensor gridSideUltrasonicSensor, UltrasonicSensor sortingSideUltrasonicSensor, int reedGridSidePin, int reedSortingSidePin, Grid* grid, ConveyorBelt* conveyorBelt) : Frame()
 {
 	this->dcMotor = dcMotor;
 	this->gridSideUltrasonicSensor = gridSideUltrasonicSensor;
@@ -31,7 +31,7 @@ void Frame::HandleDCMotor(DirectionType direction)
 	bool nearingEnd = false;
 	bool reachedEnd = false;
 	
-	this->GetDCMotor().Start(direction);
+	this->GetDCMotor()->Start(direction);
 	
 	digitalWrite(this->gridSideUltrasonicSensor.GetTriggerPin(), LOW);
 	digitalWrite(this->sortingSideUltrasonicSensor.GetTriggerPin(), LOW);
@@ -40,8 +40,8 @@ void Frame::HandleDCMotor(DirectionType direction)
 	while(!reachedEnd)
 	{
 		speedPercentage += percentageIncrement;
-		this->GetDCMotor().SetSpeedInPercentage(speedPercentage);
-		this->GetDCMotor().Run();
+		this->GetDCMotor()->SetSpeedInPercentage(speedPercentage);
+		this->GetDCMotor()->Run();
 		
 		// DirectionType::Forward = true, go to sorting side.
 		// DirectionType::Reverse = false, go to grid side.
@@ -58,7 +58,7 @@ void Frame::HandleDCMotor(DirectionType direction)
 		
 		if (distance <= 30)
 		{
-			this->GetDCMotor().SmoothStop(duration);
+			this->GetDCMotor()->SmoothStop(duration);
 		}
 		
 		if (digitalRead(this->reedGridSidePin) == HIGH || digitalRead(this->reedSortingSidePin) == HIGH)
@@ -71,8 +71,7 @@ void Frame::HandleDCMotor(DirectionType direction)
 			}
 			
 			reachedEnd = true;
-			this->GetDCMotor().Stop();		
-			this->HandleDCMotorOffset(direction);
+			this->GetDCMotor()->Stop();		
 		}
 	}
 }
@@ -133,18 +132,41 @@ void Frame::HandleDCMotorOffset(DirectionType direction)
 	}
 	
 	distance = offset * speed;
-	this->GetDCMotor().Start(direction);
+	this->GetDCMotor()->Start(direction);
 	
 	while(distance > 0)
 	{
 		distance--;
-		this->GetDCMotor().Run();
+		this->GetDCMotor()->Run();
 	}
+	
+	this->GetDCMotor()->Stop();
 }
 
-DCMotor Frame::GetDCMotor()
+DCMotor* Frame::GetDCMotor()
 {
 	return this->dcMotor;
+}
+
+void Frame::Home()
+{
+	this->GetDCMotor()->Start(DirectionType::Forward);
+	this->GetDCMotor()->SetSpeedInPercentage(50);
+	
+	while (true)
+	{
+		// If the homing pin is HIGH then we successfully managed to return back to the default position.
+		if (digitalRead(this->reedGridSidePin) == LOW)
+		{
+			break;
+		}
+		else if (digitalRead(this->reedGridSidePin))
+		{
+			this->GetDCMotor()->Run();
+		}
+	}
+	
+	this->GetDCMotor()->Stop();
 }
 
 //void Frame::HandleFrame(DirectionType direction)

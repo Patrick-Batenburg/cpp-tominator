@@ -8,7 +8,7 @@ ControlPanel::ControlPanel()
 	pinMode(SCL, OUTPUT);
 }
 
-ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, EasyButton startButton, EasyButton resetButton, EasyButton emergencyStopButton, JLed* startLed, JLed* resetLed)
+ControlPanel::ControlPanel(LiquidCrystal_I2C lcd, RotaryEncoder rotaryEncoder, EasyButton* startButton, EasyButton* resetButton, EasyButton* emergencyStopButton, JLed* startLed, JLed* resetLed)
 {	
 	this->lcd = lcd;
 	this->rotaryEncoder = rotaryEncoder;
@@ -48,9 +48,9 @@ void ControlPanel::Clear()
 
 void ControlPanel::ReadButtons()
 {
-	this->startButton.read();
-	this->resetButton.read();
-	this->emergencyStopButton.read();
+	this->startButton->read();
+	this->resetButton->read();
+	this->emergencyStopButton->read();
 }
 
 void ControlPanel::UpdateLeds()
@@ -114,17 +114,17 @@ void ControlPanel::ConfigureEmergencyLed()
 	this->ConfigureStartLedOff();
 }
 
-EasyButton ControlPanel::GetStartButton()
+EasyButton* ControlPanel::GetStartButton()
 {
 	return this->startButton;
 }
 
-EasyButton ControlPanel::GetResetButton()
+EasyButton* ControlPanel::GetResetButton()
 {
 	return this->resetButton;
 }
 
-EasyButton ControlPanel::GetEmergencyStopButton()
+EasyButton* ControlPanel::GetEmergencyStopButton()
 {
 	return this->emergencyStopButton;
 }

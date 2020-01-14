@@ -22,35 +22,34 @@ Claw::~Claw()
 void Claw::Open()
 {
 	digitalWrite(this->directionPin, HIGH);
-	HandleStepper();
+	
+	while (true)
+	{
+		// If the homing pin is LOW then we successfully managed to return back to the default position. The claw is open.
+		if (digitalRead(this->homingPin) == LOW)
+		{
+			break;
+		}
+		else if (digitalRead(this->homingPin))
+		{
+			digitalWrite(this->pulsePin, HIGH);
+			delayMicroseconds(delay);
+			digitalWrite(this->pulsePin, LOW);
+			delayMicroseconds(delay);
+		}
+	}
 }
 
 void Claw::Close()
 {
 	digitalWrite(this->directionPin, LOW);
-	HandleStepper();
-}
 
-void Claw::Home()
-{
-	bool reachedEnd = false;
-	digitalWrite(this->directionPin, HIGH);
-	
-	while (!reachedEnd)
+	for (int i = 0; i < motorSteps; i++)
 	{
-		if (digitalRead(this->homingPin) == LOW)
-		{
-			digitalWrite(this->pulsePin, HIGH);
-			delayMicroseconds(400);
-			digitalWrite(this->pulsePin, LOW);
-			delayMicroseconds(400);
-		}
-
-		// If the homing pin is HIGH then we successfully managed to return back to the default position.
-		if (digitalRead(this->homingPin) == HIGH)
-		{
-			reachedEnd = true;
-		}
+		digitalWrite(this->pulsePin, HIGH);
+		delayMicroseconds(delay);
+		digitalWrite(this->pulsePin, LOW);
+		delayMicroseconds(delay);
 	}
 }
 
@@ -67,12 +66,4 @@ int Claw::GetDirectionPin()
 int Claw::GetHomingPin()
 {
 	return this->homingPin;
-}
-
-void Claw::HandleStepper()
-{
-	digitalWrite(this->pulsePin, HIGH);
-	delayMicroseconds(400);
-	digitalWrite(this->pulsePin, LOW);
-	delayMicroseconds(400);
 }

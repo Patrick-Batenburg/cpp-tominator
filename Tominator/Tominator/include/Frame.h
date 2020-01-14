@@ -7,7 +7,7 @@
 class Frame
 {
 private:
-	DCMotor dcMotor;
+	DCMotor* dcMotor;
 	int in2DirectionPin;
 	int pwmPin;
 	int reedGridSidePin;
@@ -34,7 +34,7 @@ public:
 		@param grid							The grid pointer object needed for relational data access.
 		@param conveyorBelt					The conveyor belt pointer object needed for relational data access.
 	*/
-	Frame(DCMotor dcMotor, UltrasonicSensor gridSideUltrasonicSensor, UltrasonicSensor sortingSideUltrasonicSensor, int reedGridSidePin, int reedSortingSidePin, Grid* grid, ConveyorBelt* conveyorBelt);
+	Frame(DCMotor* dcMotor, UltrasonicSensor gridSideUltrasonicSensor, UltrasonicSensor sortingSideUltrasonicSensor, int reedGridSidePin, int reedSortingSidePin, Grid* grid, ConveyorBelt* conveyorBelt);
 	
 	/**
 		Deconstruct the instance of the Frame class.
@@ -60,5 +60,7 @@ public:
 		
 		@return The DC motor object.
 	*/
-	DCMotor GetDCMotor();
+	DCMotor* GetDCMotor();
+	
+	void Home();
 };

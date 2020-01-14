@@ -4,7 +4,7 @@
 class Carriage
 {
 private:
-	DCMotor dcMotor;
+	DCMotor* dcMotor;
 	int hallSensorTopPin;
 	int hallSensorMiddlePin;
 	int hallSensorBottomPin;
@@ -23,7 +23,7 @@ public:
 		@param hallSensorMiddlePin	The hall sensor middle pin.
 		@param hallSensorTopPin		The hall sensor top pin.
 	*/
-	Carriage(DCMotor dcMotor, int hallSensorBottomPin, int hallSensorMiddlePin, int hallSensorTopPin);
+	Carriage(DCMotor* dcMotor, int hallSensorBottomPin, int hallSensorMiddlePin, int hallSensorTopPin);
 
 	/**
 		Deconstruct the instance of the Carriage class.
@@ -32,15 +32,20 @@ public:
 
 	/**
 		Handles the DC motor. The DC motor can only run when the carriage is not yet at the right height and a motor was turned on.
-		@param speed The speed of the DC motor.
-		@param goToHallSensor The hall sensor to reach and read output from.
+		@param speedPercentage	The speed in percentage.
+		@param goToHallSensor	The hall sensor to reach and read output from.
 	*/
-	void HandleDCMotor(int speed, int goToHallSensor);
+	void HandleDCMotor(int speedPercentage, int goToHallSensor);
+
+	/**
+		Makes the carriage return to its default position, which is at the bottom.
+	*/	
+	void Home();	
 
 	/**
 		Gets the DC motor object.
 		
 		@return The DC motor object.
 	*/
-	DCMotor GetDCMotor();
+	DCMotor* GetDCMotor();
 };
