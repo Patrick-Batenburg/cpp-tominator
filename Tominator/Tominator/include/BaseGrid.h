@@ -99,4 +99,11 @@ public:
 		@return The water balloon positions in a 2D matrix (3x3) representation.
 	*/
 	std::vector<std::vector<WaterBalloon>> GetWaterBalloonPositions();
+
+	/**
+		Sets the water balloon positions.
+		
+		@param value The new water balloon positions.
+	*/
+	void SetWaterBalloonPositions(std::vector<std::vector<WaterBalloon>> value);
 };

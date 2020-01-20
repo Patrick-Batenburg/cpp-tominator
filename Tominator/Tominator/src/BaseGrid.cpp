@@ -100,3 +100,9 @@ vector<vector<WaterBalloon>> BaseGrid::GetWaterBalloonPositions()
 {
 	return this->waterBalloonPositions;
 }
+
+void BaseGrid::SetWaterBalloonPositions(std::vector<std::vector<WaterBalloon>> value)
+{
+	this->waterBalloonPositions.clear();
+	this->waterBalloonPositions = value;
+}

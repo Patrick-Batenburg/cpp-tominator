@@ -16,26 +16,8 @@ void StandbyState::Start(Machine* machine)
 	machine->GetControlPanel().ConfigureInitializeLed();
 	machine->SetCurrentWaterBalloon(WaterBalloon());
 	machine->GetConveyorBelt()->Reset();
-	//machine->SelectMode(machine->GetControlPanel().GetRotaryEncoder().GetCounter());
-	//machine->HomeRobotArm();
-
-	if (DEBUG)
-	{
-		//std::vector<std::vector<WaterBalloon>> waterBalloonPositions
-		//{
-			//{ WaterBalloon(WaterBalloonType::Unkown, 2),	WaterBalloon(WaterBalloonType::Unkown, 1),		WaterBalloon(WaterBalloonType::Unkown, 1.5) },
-			//{ WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1.5),	WaterBalloon(WaterBalloonType::Unkown, 1) },
-			//{ WaterBalloon(WaterBalloonType::Unkown, 1),	WaterBalloon(WaterBalloonType::Unkown, 2),		WaterBalloon(WaterBalloonType::Unkown, 2) }
-		//};
-		
-		//machine->SetGrid(Grid());		
-		//waterBalloonPositions.clear();
-	}
-	else
-	{
-		machine->GetGrid()->Reset();
-	}
-
+	machine->Home(4);
+	machine->GetGrid()->Reset();
 	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, HIGH);
 }
 

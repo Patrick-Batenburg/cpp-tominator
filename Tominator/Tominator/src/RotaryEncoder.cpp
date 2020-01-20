@@ -3,6 +3,8 @@
 RotaryEncoder::RotaryEncoder()
 {
 	this->counter = 0;
+	this->currentStateCLK = 0;
+	this->lastStateCLK = 0;
 }
 
 RotaryEncoder::RotaryEncoder(int clkPin, int dtPin) : RotaryEncoder()
@@ -17,32 +19,39 @@ RotaryEncoder::~RotaryEncoder()
 {
 }
 
-void RotaryEncoder::CheckStateChange()
+void RotaryEncoder::Update()
 {
-	byte output1 = digitalRead(clkPin);
-	byte output2 = digitalRead(dtPin);
-	byte newState = (output2 << 1) | output1;
-	
-	if (this->state != newState)
-	{
-		if ((this->state == 0 && newState == 2) || (this->state == 1 && newState == 0) || (this->state == 2 && newState == 3) || (this->state == 3 && newState == 1))
+	// Read the current state of CLK
+	currentStateCLK = digitalRead(clkPin);
+
+	// If last and current state of CLK are different, then pulse occurred
+	// React to only 1 state change to avoid double count
+	if (currentStateCLK != lastStateCLK  && currentStateCLK == 1){
+
+		// If the DT state is different than the CLK state then
+		// the encoder is rotating CCW so decrement
+		if (digitalRead(dtPin) != currentStateCLK)
 		{
-			if (this->GetCounter() > 0)
-			{
-				counter--;
-			}
+			// Encoder is rotating CW so increment
+			counter++;
 		}
 		else
 		{
-			counter++;
+			counter--;
+			
+			if (this->counter < 0)
+			{
+				this->counter = 0;
+			}
 		}
-		
-		this->state = newState;
 	}
+
+	// Remember last CLK state
+	lastStateCLK = currentStateCLK;
 }
 
 int RotaryEncoder::GetCounter()
 {
-	CheckStateChange();
+	//CheckStateChange();
 	return this->counter;
 }

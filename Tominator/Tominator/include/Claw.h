@@ -3,11 +3,11 @@
 class Claw
 {
 private:
+	static const int delay = 800;
+	static const int motorSteps = 1800;
 	int pulsePin;
 	int directionPin;
 	int homingPin;
-	static const int delay = 800;
-	static const int motorSteps = 1800;
 
 public:
 	/**

@@ -11,6 +11,14 @@
 #include "Mode8_SwitchingModes.h"
 #include "TominatorPins.h"
 #include <LiquidCrystal_I2C.h>
+#include "Mode9_HomeRobotArm.h"
+#include "Mode10_ZAxisMovement.h"
+#include "Mode11_HomeXAxis.h"
+#include "Mode12_HomeYAxis.h"
+#include "Mode13_HomeZAxis.h"
+#include "Mode14_HomeClaw.h"
+#include "Modes\Mode15_CarriageBeyondTopSensor.h"
+#include "Modes\Mode16_SerialPrintSimulation.h"
 
 Machine::Machine()
 {
@@ -47,7 +55,7 @@ void Machine::StartMode()
 
 void Machine::SelectMode(int value)
 {
-	if (this->state->ToString() == STANDBY_STATE)
+	if (this->state->ToString() == STANDBY_STATE && this->rotaryEncoderCounter != this->GetControlPanel().GetRotaryEncoder()->GetCounter())
 	{
 		switch (value)
 		{
@@ -75,12 +83,39 @@ void Machine::SelectMode(int value)
 			case 8:
 				this->SetMode(new SwitchingModesMode());
 				break;
+			case 9:
+				this->SetMode(new HomeRobotArmMode());
+				break;
+			case 10:
+				this->SetMode(new ZAxisMovementMode());
+				break;
+			case 11:
+				this->SetMode(new HomeXAxisMode());
+				break;
+			case 12:
+				this->SetMode(new HomeYAxisMode());
+				break;
+			case 13:
+				this->SetMode(new HomeZAxisMode());
+				break;
+			case 14:
+				this->SetMode(new HomeClawMode());
+				break;
+			case 15:
+				// Unsafe. Mostly useful for storing the robot in a compact manner. Press emergency stop when at desired level.
+				this->SetMode(new CarriageBeyondTopSensorMode());
+				break;
+			case 16:
+				this->SetMode(new SerialPrintSimulationMode());
+				break;
 			case 0:
 			default:
 				this->SetMode(new DefaultMode());
 				break;
 		}
 	}
+	
+	this->rotaryEncoderCounter = this->GetControlPanel().GetRotaryEncoder()->GetCounter();
 }
 
 void Machine::StartButtonPressed()
@@ -153,27 +188,22 @@ void Machine::SortWaterBalloons()
 		}
 	}
 	
-	this->conveyorBelt->HandleDCMotor();
-	this->conveyorBelt->GetState()->Next(conveyorBelt);	
+	for (int i = 0; i < this->GetConveyorBelt()->GetTransportedWaterBalloonsGoal() / 3; i++)
+	{
+		this->conveyorBelt->Sort();
+		this->conveyorBelt->GetState()->Next(conveyorBelt);
+		
+	}	
 }
 
 void Machine::WeighWaterBalloon()
 {
 	float weight = 0;
-
-	if (DEBUG)
-	{
-		weight = this->currentWaterBalloon.GetWeight();
-	}
-	else
-	{
-		weight = this->loadCell.get_units(10);
-	}
+	weight = this->loadCell.get_units(10);
+	this->currentWaterBalloon.SetWeight(weight);
 	
-	if (weight >= 0.8)
+	if (weight >= 800)
 	{
-		this->currentWaterBalloon.SetWeight(weight);
-
 		if (this->conveyorBelt->CanAddWaterBalloon(this->currentWaterBalloon))
 		{
 			this->conveyorBelt->AddWaterBalloon(this->currentWaterBalloon);
@@ -211,7 +241,7 @@ void Machine::Home(int homeWhat)
 			this->frame.Home();
 			this->carriage.Home();
 			this->conveyorBelt->Home();
-			this->robotArm.Home(true);
+			this->robotArm.Home();
 			break;
 		case 1:
 			this->frame.Home();
@@ -223,13 +253,22 @@ void Machine::Home(int homeWhat)
 			this->conveyorBelt->Home();
 			break;
 		case 4:
-			this->robotArm.Home(true);
-			break;
-		case 5:
 			this->robotArm.Home();
 			break;
+		case 5:
+			this->robotArm.Home(1);
+			break;
 		case 6:
-			this->robotArm.GetClaw().Open();
+			this->robotArm.HomeXAxis();
+			break;
+		case 7:
+			this->robotArm.HomeYAxis();
+			break;
+		case 8:
+			this->robotArm.HomeZAxis();
+			break;
+		case 9:
+			this->robotArm.OpenClaw();
 			break;
 	}
 }

@@ -4,6 +4,16 @@
 class RobotArm
 {
 private:
+	static const int motorStepsGridY = 923;
+	static const int motorStepsZ = 800;
+	static const int motorStepsSortZ = 1200;
+	static const int motorStepsConveyorBelt = 675;
+	static const int motorStepsConveyorBeltX = 655;
+	static const int motorStepsConveyorXOffset = 450;
+	static const int motorStepsColumnZeroOffset = 200;
+	static const int motorStepsGridZ = 2333;
+	static const int delay = 1500;
+	static const int delayZAxis = 500;
 	int xPulsePin;
 	int xDirectionPin;
 	int xHomingPin;
@@ -54,9 +64,32 @@ public:
 	void HandleArm(int x, int y, int z);
 	
 	/**
-		Makes the robot arm return to its default position. x:0, y:0, z:0
+		Applies homing to the robot arm. By default it will home the X, Y, Z-axis and the claw.
+		
+		@param homeWhat Indicates what individual component needs homing based on int-value.
+		0 = Homing is applied to the the X, Y, Z-axis and claw (default).
+		1 - Homing is only applied to the X, Y, and Z-axis.
+		2 - Homing is only applied to the X-axis.
+		3 - Homing is only applied to the Y-axis.
+		4 = Homing is only applied to the Z-axis.
+		5 = Homing is only applied to the claw.
 	*/
-	void Home(bool homeClaw = false);
+	void Home(int homeWhat = 0);
+
+	/**
+		Applies homing o the X-axis.
+	*/
+	void HomeXAxis();
+
+	/**
+		Applies homing o the Y-axis.
+	*/
+	void HomeYAxis();
+
+	/**
+		Applies homing o the Z-axis.
+	*/
+	void HomeZAxis();
 
 	/**
 		Opens the claw.

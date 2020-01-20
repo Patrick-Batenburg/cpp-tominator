@@ -176,6 +176,65 @@ void ConveyorBelt::IncrementTransportedWaterBalloons()
 	this->transportedWaterBalloons++;
 }
 
+void ConveyorBelt::Sort()
+{
+	int counter = 0;
+	bool isUnderSensor = false;
+	this->GetDCMotor()->Start(DirectionType::Reverse);
+	this->GetDCMotor()->SetSpeedInPercentage(100);
+
+	if (digitalRead(this->reedPin))
+	{
+		isUnderSensor = true;
+	}
+	
+	while (isUnderSensor)
+	{
+		counter++;
+		this->GetDCMotor()->Run();
+
+		// Amount of motor steps needed to get a sufficient distance away from the reed pin.
+		if (digitalRead(this->reedPin) == LOW && counter > motorSteps)
+		{
+			isUnderSensor = false;
+		}
+	}
+	
+	while (true)
+	{
+		if (digitalRead(this->reedPin))
+		{
+			break;
+		}
+		else if (digitalRead(this->reedPin) == LOW)
+		{
+			this->GetDCMotor()->Run();
+		}
+	}
+	
+	this->GetDCMotor()->Stop();
+	
+	Serial.print("Flag: ");
+	Serial.println(counter);	
+}
+
 void ConveyorBelt::Home()
 {
+	this->GetDCMotor()->Start(DirectionType::Reverse);
+	this->GetDCMotor()->SetSpeedInPercentage(100);
+	
+	while (true)
+	{
+		// If the homing pin is HIGH then we successfully managed to return back to the default position.
+		if (digitalRead(this->reedPin))
+		{
+			break;
+		}
+		else if (digitalRead(this->reedPin) == LOW)
+		{
+			this->GetDCMotor()->Run();
+		}
+	}
+	
+	this->GetDCMotor()->Stop();
 }

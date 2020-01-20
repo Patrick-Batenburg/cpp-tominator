@@ -5,6 +5,7 @@
 class ConveyorBelt : public BaseGrid
 {
 private:
+	static const int motorSteps = 30000;
 	enum WaterBalloonType firstRowType;
 	enum WaterBalloonType secondRowType;
 	enum WaterBalloonType thirdRowType;
@@ -48,6 +49,8 @@ public:
 		Makes the conveyor belt return to its default position.
 	*/
 	void Home();
+
+	void Sort();
 
 	/**
 		Handles the DC motor. The DC motor can only run when sufficient water balloons are transported. See GetTransportedWaterBalloonsGoal().

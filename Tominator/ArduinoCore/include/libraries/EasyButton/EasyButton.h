@@ -31,6 +31,7 @@ public:
 #else
 	typedef void(*callback_t)();
 #endif
+	EasyButton() {}
 	EasyButton(uint8_t pin, uint32_t debounce_time = 35, bool pullup_enable = true, bool invert = true) : _pin(pin), _db_time(debounce_time), _invert(invert), _pu_enabled(pullup_enable) {}
 	~EasyButton() {}
 	// PUBLIC FUNCTIONS

@@ -16,6 +16,7 @@ void RunningState::Reset(Machine* machine)
 	{
 		machine->SetState(new BootUpState());
 		machine->GetControlPanel().ConfigureBootUpLed();
+		machine->Home(4);
 	}
 }
 

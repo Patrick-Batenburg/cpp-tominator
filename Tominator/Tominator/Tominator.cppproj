@@ -332,6 +332,27 @@
     <Compile Include="include\Modes\Mode0_Default.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\Modes\Mode10_ZAxisMovement.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode11_HomeXAxis.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode12_HomeYAxis.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode13_HomeZAxis.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode14_HomeClaw.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode15_CarriageBeyondTopSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode16_SerialPrintSimulation.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\Modes\Mode1_ClawManualPlacedWaterBalloon.h">
       <SubType>compile</SubType>
     </Compile>
@@ -354,6 +375,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\Modes\Mode8_SwitchingModes.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode9_HomeRobotArm.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\RobotArm.h">
@@ -443,6 +467,27 @@
     <Compile Include="src\Modes\Mode0_Default.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\Modes\Mode10_ZAxisMovement.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode11_HomeXAxis.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode12_HomeYAxis.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode13_HomeZAxis.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode14_HomeClaw.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode15_CarriageBeyondTopSensor.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode16_SerialPrintSimulation.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\Modes\Mode1_ClawManualPlacedWaterBalloon.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -465,6 +510,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Modes\Mode8_SwitchingModes.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode9_HomeRobotArm.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\RobotArm.cpp">

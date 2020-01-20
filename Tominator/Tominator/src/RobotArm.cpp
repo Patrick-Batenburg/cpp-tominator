@@ -34,7 +34,7 @@ RobotArm::RobotArm(int xPulsePin, int xDirectionPin, int xHomingPin, int yPulseP
 	pinMode(this->zPulsePin, OUTPUT);
 	pinMode(this->zDirectionPin, OUTPUT);
 	pinMode(this->zHomingPin, INPUT);
-	//this->HomeWithClaw();
+	this->Home();
 }
 
 RobotArm::~RobotArm()
@@ -48,120 +48,200 @@ void RobotArm::HandleArm(int newX, int newY, int newZ)
 	// x:2 y:0		x:2 y:1		x:2 y:2
 	// x:1 y:0		x:1 y:1		x:1 y:2
 	//
-	// Grid row. Default position = x:0 y:0
+	// Grid row. Default (home) position = x:0 y:0
 	// x:0 y:0		x:0 y:1		x:0 y:2
 	
-	// Set direction from the grid to the conveyor belt.
-	// X from bottom (x:0) to top (x:3), Y from left (y:0) to right (y:2), Z from up to down.
-	digitalWrite(this->xDirectionPin, HIGH);
-	digitalWrite(this->yDirectionPin, HIGH);
-	digitalWrite(this->zDirectionPin, HIGH);
-	
+	int stepsX = 0;
+	int stepsY = 0;
+	int stepsZ = 0;
+	int differenceX = 0;
+	int differenceY = 0;
+	int differenceZ = 0;
+
 	// Check robot arm boundaries.
 	newX = CheckXAxisBoundary(newX);
 	newY = CheckYAxisBoundary(newY);
-	
-	// Calculate new X, Y and Z-axis.
-	newX -= this->GetXAxis();
-	newY -= this->GetYAxis();
-	newZ -= this->GetZAxis();
-	
-	// If newX or newY are negative values then this mean go into the opposite direction,
-	// after that take the absolute values of newX or newY.
-	// Example go from the conveyor belt to the grid:
-	// newX = 0, this->GetXAxis() = 3.
-	// 0 - 3 = -3 = go form top (x:3) to bottom (x:0).
-	if (newX < 0)
+
+	// Set the direction to go to either the grid or the conveyor belt.
+	// X from bottom (x:0) to top (x:3), Y from left (y:0) to right (y:2), Z from up to down.	
+	// If the current X, Y and Z-axis are less than the passed parameters then the robot needs to go into the opposite direction.
+	if (this->GetXAxis() < newX)
 	{
-		digitalWrite(this->xDirectionPin, LOW);		
-		newX = abs(newX);
-	}
-	
-	if (newY < 0)
-	{
-		digitalWrite(this->yDirectionPin, LOW);
-		newY = abs(newY);
-	}
-	
-	// If newZ is negative then the claw must go down, otherwise if positive me
-	if (newZ < 0)
-	{
-		newZ = abs(newZ);
+		digitalWrite(this->xDirectionPin, HIGH);
 	}
 	else
 	{
-		digitalWrite(this->zDirectionPin, LOW);
+		digitalWrite(this->xDirectionPin, LOW);		
+	}
+	
+	if (this->GetYAxis() <= newY)
+	{
+		digitalWrite(this->yDirectionPin, LOW);
+	}
+	else
+	{
+		digitalWrite(this->yDirectionPin, HIGH);
 	}
 
-	this->SetXAxis(newX);
-	this->SetYAxis(newY);
-	this->SetYAxis(newZ);
-	
-	int steps = 455;
-	int stepsX = this->GetXAxis() * steps;
-	int stepsY = this->GetYAxis() * steps;
-	int stepsZ = this->GetZAxis() * steps;
-	bool reachedEnd = false;
-
-	// Handle X and Y-axis movement simultaneously with digitalWrite().
-	while (!reachedEnd)
+	if (this->GetZAxis() > newZ)
 	{
-		if (stepsX > 0)
+		digitalWrite(this->zDirectionPin, LOW);
+	}
+	else
+	{
+		digitalWrite(this->zDirectionPin, HIGH);
+	}
+	
+	// Calculate difference between new X, Y and Z-axis.
+	differenceX = abs(newX - this->GetXAxis());
+	differenceY = abs(newY - this->GetYAxis());
+	differenceZ = abs(newZ - this->GetZAxis());
+
+	// If current X-axis is 0 then the robot is already above the grid.
+	if (this->GetXAxis() == this->minimumBoundary)
+	{
+		// If newX is 0, then this means the robot stays under the grid. Only the Y-axis steps should be calculated.
+		if (differenceX == this->minimumBoundary)
 		{
-			stepsX--;
-			digitalWrite(this->xPulsePin, HIGH);
+			stepsY = differenceY * motorStepsGridY;
+			stepsZ = differenceZ * motorStepsGridZ;
 		}
-		
-		if (stepsY > 0)
+		else if (differenceX > this->minimumBoundary)
 		{
-			stepsY--;
-			digitalWrite(this->yPulsePin, HIGH);
-		}
-		
-		if (stepsX > 0 || stepsY > 0)
-		{
-			// If both X and Y-axis are called with digitalWrite() before a delay will make diagnonal movement possible.
-			delayMicroseconds(400);		
-			digitalWrite(this->xPulsePin, LOW);
-			digitalWrite(this->yPulsePin, LOW);
-			delayMicroseconds(400);
-		}
-		
-		// Handle Z-axis movement as last
-		if (stepsX == 0 && stepsY == 0)
-		{
-			if (stepsZ > 0)
+			// If newX is greater then 0, then the robot needs to go to the conveyor belt. An offset should be added to stay under the right row and column.			
+			if (differenceY > this->minimumBoundary)
 			{
-				stepsZ--;
-				digitalWrite(this->zPulsePin, HIGH);
-				delayMicroseconds(400);
-				digitalWrite(this->zPulsePin, LOW);
-				delayMicroseconds(400);
+				stepsY = differenceY * motorStepsConveyorBelt;
+			}
+			
+			if (newX > 1)
+			{
+				stepsX = differenceX * motorStepsConveyorBeltX + motorStepsConveyorXOffset;
 			}
 			else
 			{
-				reachedEnd = true;
+				stepsX = differenceX * motorStepsConveyorBelt + motorStepsConveyorXOffset;
 			}
+			
+			if (!this->GetYAxis() > minimumBoundary)
+			{
+				stepsY += motorStepsColumnZeroOffset;
+			}
+		}
+		
+		stepsZ = differenceZ * motorStepsZ;
+	}
+	else if (this->GetXAxis() > this->minimumBoundary) // If current X-axis is greater than 0, then the robot is somewhere on the conveyor belt.
+	{
+		// If newX is greater than 0, then the robot moves to another X-axis on the conveyor belt
+		if (differenceX > this->minimumBoundary)
+		{
+			stepsX = differenceX * motorStepsConveyorBelt;
+			stepsY = differenceY * motorStepsConveyorBelt;
+		}
+		else if (differenceX == this->minimumBoundary)
+		{
+			// The robot goes back to the grid if newX is 0.
+			stepsX = differenceX * motorStepsConveyorBelt + motorStepsConveyorXOffset;
+			stepsY = differenceY * motorStepsGridY;
+		}
+		
+		stepsZ = differenceZ * motorStepsZ;
+	}
+	
+	if (this->GetZAxis() != newZ)
+	{
+		while (stepsZ > 0)
+		{
+			stepsZ--;
+			digitalWrite(this->zPulsePin, HIGH);
+			delayMicroseconds(delayZAxis);
+			digitalWrite(this->zPulsePin, LOW);
+			delayMicroseconds(delayZAxis);
+		}
+		
+		this->SetZAxis(newZ);
+	}
+	
+	if (this->GetXAxis() != newX)
+	{
+		while (stepsX > 0)
+		{
+			stepsX--;
+			digitalWrite(this->xPulsePin, HIGH);
+			delayMicroseconds(delay);
+			digitalWrite(this->xPulsePin, LOW);
+			delayMicroseconds(delay);
+		}
+
+		this->SetXAxis(newX);
+	}
+
+	if (this->GetYAxis() != newY || this->GetXAxis() > this->minimumBoundary)
+	{
+		while (stepsY > 0)
+		{
+			stepsY--;
+			digitalWrite(this->yPulsePin, HIGH);
+			delayMicroseconds(delay);
+			digitalWrite(this->yPulsePin, LOW);
+			delayMicroseconds(delay);
+		}
+		
+		this->SetYAxis(newY);
+	}
+	
+	if (differenceZ > this->minimumBoundary)
+	{
+		int offset = 1300;
+		
+		while (offset > 0 && newZ == 3)
+		{
+			offset--;
+			digitalWrite(this->zPulsePin, HIGH);
+			delayMicroseconds(delayZAxis);
+			digitalWrite(this->zPulsePin, LOW);
+			delayMicroseconds(delayZAxis);			
 		}
 	}
 }
 
-void RobotArm::Home(bool homeClaw)
+void RobotArm::Home(int homeWhat)
 {
-	// Conveyor belt positions:
-	// x:3 y:0		x:3 y:1		x:3 y:2
-	// x:2 y:0		x:2 y:1		x:2 y:2
-	// x:1 y:0		x:1 y:1		x:1 y:2
-	//
-	// Grid row. Default position = x:0 y:0
-	// x:0 y:0		x:0 y:1		x:0 y:2
+	switch (homeWhat)
+	{
+		default:
+		case 0:
+			this->HomeXAxis();
+			this->HomeYAxis();
+			this->HomeZAxis();
+			this->OpenClaw();
+			break;
+		case 1:
+			this->HomeXAxis();
+			this->HomeYAxis();
+			this->HomeZAxis();
+			break;
+		case 2:
+			this->HomeXAxis();
+			break;
+		case 3:
+			this->HomeYAxis();
+			break;
+		case 4:
+			this->HomeZAxis();
+			break;
+		case 5:
+			this->OpenClaw();
+			break;
+	}
+}
 
-	int delay = 1500;
-	// Set direction from the conveyor belt to the grid. From top to bottom, from right to left.
+void RobotArm::HomeXAxis()
+{
+	// Set direction from the conveyor belt to the grid.
 	digitalWrite(this->xDirectionPin, LOW);
-	digitalWrite(this->yDirectionPin, HIGH);
-	digitalWrite(this->zDirectionPin, HIGH);
-
+	
 	while (true)
 	{
 		// If the homing pin is LOW then we successfully managed to return back to the default position.
@@ -173,14 +253,20 @@ void RobotArm::Home(bool homeClaw)
 		else if (digitalRead(this->xHomingPin))
 		{
 			digitalWrite(this->xPulsePin, HIGH);
-			delayMicroseconds(delay);
+			delayMicroseconds(this->delay);
 			digitalWrite(this->xPulsePin, LOW);
-			delayMicroseconds(delay);
+			delayMicroseconds(this->delay);
 		}
-	}
+	}	
+}
 
+void RobotArm::HomeYAxis()
+{
+	// Set direction from right to left.
+	digitalWrite(this->yDirectionPin, HIGH);
+	
 	while (true)
-	{	
+	{
 		// If the homing pin is LOW then we successfully managed to return back to the default position.
 		if (digitalRead(this->yHomingPin) == LOW)
 		{
@@ -190,14 +276,20 @@ void RobotArm::Home(bool homeClaw)
 		else if (digitalRead(this->yHomingPin))
 		{
 			digitalWrite(this->yPulsePin, HIGH);
-			delayMicroseconds(delay);
+			delayMicroseconds(this->delay);
 			digitalWrite(this->yPulsePin, LOW);
-			delayMicroseconds(delay);
+			delayMicroseconds(this->delay);
 		}
-	}	
+	}
+}
 
+void RobotArm::HomeZAxis()
+{
+	// Set direction from bottom to top.
+	digitalWrite(this->zDirectionPin, LOW);
+	
 	while (true)
-	{	
+	{
 		// If the homing pin is LOW then we successfully managed to return back to the default position.
 		if (digitalRead(this->zHomingPin) == LOW)
 		{
@@ -207,15 +299,10 @@ void RobotArm::Home(bool homeClaw)
 		else if (digitalRead(this->zHomingPin))
 		{
 			digitalWrite(this->zPulsePin, HIGH);
-			delayMicroseconds(delay);
+			delayMicroseconds(this->delayZAxis);
 			digitalWrite(this->zPulsePin, LOW);
-			delayMicroseconds(delay);
+			delayMicroseconds(this->delayZAxis);
 		}
-	}
-	
-	if (homeClaw)
-	{
-		this->claw.Open();
 	}
 }
 

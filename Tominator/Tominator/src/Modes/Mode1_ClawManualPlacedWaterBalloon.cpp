@@ -14,10 +14,8 @@ void ClawManualPlacedWaterBalloonMode::HandlePlaceholder(Machine* machine)
 	machine->OpenClaw();
 	machine->CloseClaw();				// Place water balloon manually in the claw and close it.
 	machine->WeighWaterBalloon();
-	machine->HandleRobotArm(0, 0, 0);	// Go to conveyor belt.
 	machine->OpenClaw();				// Let go of water balloon.
-
-	//machine->SortWaterBalloons();
+	machine->GetControlPanel().Print("Weight: " + String(machine->GetCurrentWaterBalloon().GetWeight()), "Finished");
 }
 
 String ClawManualPlacedWaterBalloonMode::ToString()

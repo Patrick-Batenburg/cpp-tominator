@@ -27,7 +27,8 @@ private:
 	RobotArm robotArm;
 	HX711 loadCell;
 	ControlPanel controlPanel;
-
+	int rotaryEncoderCounter;
+	
 public:
 	/**
 		Initializes a new instance of the Machine class.
@@ -123,8 +124,11 @@ public:
 		2 - Homing is only applied to the carriage.
 		3 - Homing is only applied to the conveyor belt.
 		4 = Homing is only applied to the X, Y and Z-axis and the claw.
-		5 = Homing is only applied to the X, Y and Z-axis
-		6 = Homing is only applied to the claw.
+		5 = Homing is only applied to the X, Y and Z-axis.
+		6 = Homing is only applied to the X-axis
+		7 = Homing is only applied to the Y-axis
+		8 = Homing is only applied to the Z-axis
+		9 = Homing is only applied to the claw.
 	*/
 	void Home(int homeWhat = 0);
 	

@@ -11,9 +11,11 @@ PlaceWaterballoonOnConveyorBeltMode::~PlaceWaterballoonOnConveyorBeltMode()
 
 void PlaceWaterballoonOnConveyorBeltMode::HandlePlaceholder(Machine* machine)
 {
+	machine->Home(4);
+	machine->HandleRobotArm(0, 0, 3);	// Make arm go down in the Z-axis.
 	machine->CloseClaw();				// Grab water balloon.
 	machine->WeighWaterBalloon();
-	machine->HandleRobotArm(0, 0, 0);	// Go to conveyor belt.
+	machine->HandleRobotArm(3, 2, 3);	// Make arm go down in the Z-axis.
 	machine->OpenClaw();				// Let go of water balloon.
 }
 

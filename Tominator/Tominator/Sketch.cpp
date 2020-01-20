@@ -20,8 +20,11 @@
 //#include <task.h>
 //#include <timers.h>
 
-static long const loadCellOffset = 50682624;
-static long const loadCellDivider = 5895655;
+static float const loadCellCalibrationFactor = 232;
+EasyButton startButton = EasyButton(PIN_START_BUTTON);
+EasyButton resetButton = EasyButton(PIN_RESET_BUTTON);
+EasyButton emergencyButton = EasyButton(PIN_EMERGENCY_STOP_BUTTON);
+HX711 loadCell;
 
 Machine machine;
 
@@ -29,135 +32,22 @@ Machine machine;
 //void TaskMain(void* pvParameters);
 //void TaskAnalogRead(void* pvParameters);
 
-inline const String ToString(WaterBalloonType value)
-{
-	switch (value)
-	{
-		case WaterBalloonType::Empty:
-		return "Empty";
-		case WaterBalloonType::Small:
-		return "Small";
-		case WaterBalloonType::Medium:
-		return "Medium";
-		case WaterBalloonType::Large:
-		return "Large";
-		case WaterBalloonType::Unkown:
-		return "Unkown";
-		default:
-		return "No value";
-	}
-}
-
-void DefaultModeTest()
-{
-	String row = "Row 1: ";
-	
-	Serial.println("State Test:");
-
-	Serial.print("Current state: " + machine.GetState()->ToString());
-	Serial.println();
-	Serial.println();
-	
-	machine.ResetButtonPressed();
-	Serial.print("Current state: " + machine.GetState()->ToString());
-	Serial.println();
-	Serial.println();
-	
-	machine.StartButtonPressed();
-	Serial.print("Current state: " + machine.GetState()->ToString());
-	Serial.println();
-	Serial.println();
-	
-	//machine.EmergencyStopButtonPressed();
-	//Serial.print("Current state: " + machine.GetState()->ToString());
-	//Serial.println();
-	//Serial.println();
-	
-	machine.StartButtonPressed();
-	Serial.print("Current state: " + machine.GetState()->ToString());
-	Serial.println();
-	Serial.println();
-	
-	//machine.EmergencyStopButtonPressed();
-	//Serial.print("Current state: " + machine.GetState()->ToString());
-	//Serial.println();
-	//Serial.println();
-
-	
-	Serial.println("Grid Before");
-	
-	for (int i = 0; i < machine.GetGrid()->GetWaterBalloonPositions().size(); i++)
-	{
-		for (int j = 0; j < machine.GetGrid()->GetWaterBalloonPositions()[i].size(); j++)
-		{
-			WaterBalloon waterBalloon = WaterBalloon(machine.GetGrid()->GetWaterBalloonPositions()[i][j].GetWeight());
-			Serial.print(waterBalloon.GetType());
-			Serial.print(" ");
-		}
-		
-		Serial.println();
-	}
-	
-	Serial.println();
-	Serial.println("Conveyor Belt:");
-	
-	for (int i = 0; i < machine.GetConveyorBelt()->GetWaterBalloonPositions().size(); i++)
-	{
-		for (int j = 0; j < machine.GetConveyorBelt()->GetWaterBalloonPositions()[i].size(); j++)
-		{
-			Serial.print(machine.GetConveyorBelt()->GetWaterBalloonPositions()[i][j].GetType());
-			Serial.print(" ");
-		}
-		
-		Serial.println();
-	}
-	
-	Serial.println();
-	Serial.println("Grid After:");
-	
-	for (int i = 0; i < machine.GetGrid()->GetWaterBalloonPositions().size(); i++)
-	{
-		for (int j = 0; j < machine.GetGrid()->GetWaterBalloonPositions()[i].size(); j++)
-		{
-			Serial.print(machine.GetGrid()->GetWaterBalloonPositions()[i][j].GetType());
-			Serial.print(" ");
-		}
-		
-		Serial.println();
-	}
-	
-	Serial.println();
-	Serial.println(row + ToString(machine.GetConveyorBelt()->GetFirstRowType()));
-	
-	row = "Row 2: ";
-	Serial.println(row + ToString(machine.GetConveyorBelt()->GetSecondRowType()));
-	
-	row = "Row 3: ";
-	Serial.println(row + ToString(machine.GetConveyorBelt()->GetThirdRowType()));
-	Serial.println();
-	Serial.print("transported water balloons: ");
-	Serial.println(machine.GetConveyorBelt()->GetTransportedWaterBalloons());
-	Serial.println();
-
-	machine.EmergencyStopButtonPressed();
-	Serial.print("Current state: " + machine.GetState()->ToString());
-	Serial.println();
-	Serial.println();
-	machine.ResetButtonPressed();
-}
-
 void OnStartButtonPressed()
 {
 	delay(500);
-	//machine.StartButtonPressed();
-	machine.HandleRobotArm(1, 0, 0);
+	machine.StartButtonPressed();
+	//machine.GetCarriage().HandleDCMotor(100, HALL_CARRIAGE_BOTTOM);
+	//machine.HandleRobotArm(0, 0, 3);	// Make arm go down in the Z-axis.
+	//machine.Home(4);	// Make arm go down in the Z-axis.
+	//machine.HandleRobotArm(0, 0, -2);	// Make arm go down in the Z-axis.
+	machine.OpenClaw();
 }
 
 void OnResetButtonPressed()
 {
 	delay(500);
-	//machine.ResetButtonPressed();
-	machine.Home(5);
+	machine.ResetButtonPressed();
+	//machine.Home(2);
 }
 
 void OnEmergencyButtonPressed()
@@ -193,20 +83,16 @@ void setup()
 	//xTaskCreate(TaskAnalogRead, (const portCHAR *) "AnalogRead",	128,	NULL,	2,  NULL);
 		
 	pinMode(LED_BUILTIN, OUTPUT);
-	HX711 loadCell;
 	loadCell.begin(HX1_LOAD_CELL_DT, HX1_LOAD_CELL_SCK);
-
-	EasyButton* startButton = new EasyButton(PIN_START_BUTTON);
-	startButton->begin();
-	startButton->onPressed(OnStartButtonPressed);
-
-	EasyButton* resetButton = new EasyButton(PIN_RESET_BUTTON);
-	resetButton->begin();
-	resetButton->onPressed(OnResetButtonPressed);
-
-	EasyButton* emergencyButton = new EasyButton(PIN_EMERGENCY_STOP_BUTTON);
-	emergencyButton->begin();
-	emergencyButton->onPressed(OnEmergencyButtonPressed);
+	loadCell.set_scale(loadCellCalibrationFactor);
+	loadCell.tare();
+		
+	startButton.begin();
+	resetButton.begin();
+	emergencyButton.begin();
+	startButton.onPressed(OnStartButtonPressed);
+	resetButton.onPressed(OnResetButtonPressed);
+	emergencyButton.onPressed(OnEmergencyButtonPressed);
 	
 	LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
 	lcd.init();
@@ -226,7 +112,7 @@ void setup()
 	Frame frame = Frame(frameDCMotor, gridSideSensor, sortingSideSensor, REED1_GRID_SIDE, REED2_SORTING_SIDE, grid, conveyorBelt);
 	Carriage carriage = Carriage(carriageDCMotor, HALL_CARRIAGE_BOTTOM, HALL_CARRIAGE_MIDDLE, HALL_CARRIAGE_TOP);
 	RobotArm robotArm = RobotArm(STP_X_PULSE, STP_X_DIRECTION, REED7_HOMING_X, STP_Y_PULSE, STP_Y_DIRECTION, REED6_HOMING_Y, STP_Z_PULSE, STP_Z_DIRECTION, REED8_HOMING_Z, claw);
-	RotaryEncoder rotaryEncoder = RotaryEncoder(S4_ROTARY_ENCODER_CLK, S4_ROTARY_ENCODER_DT);
+	RotaryEncoder* rotaryEncoder = new RotaryEncoder(S4_ROTARY_ENCODER_CLK, S4_ROTARY_ENCODER_DT);
 	ControlPanel controlPanel = ControlPanel(lcd, rotaryEncoder, startButton, resetButton, emergencyButton, startLed, resetLed);
 
 	machine = Machine(grid, conveyorBelt, frame, carriage, robotArm, loadCell, controlPanel);
@@ -236,12 +122,12 @@ void setup()
 
 void loop()
 {
-	machine.GetControlPanel().UpdateLeds();
-	machine.GetControlPanel().ReadButtons();
-	//DefaultModeTest();
-
-	Serial.print("Memory: ");
-	Serial.println(freeMemory(), DEC); 
+	machine.GetControlPanel().Update();
+	machine.SelectMode(machine.GetControlPanel().GetRotaryEncoder()->GetCounter());
+	
+	//Serial.print("Memory: ");
+	//Serial.println(freeMemory(), DEC);
+	//delay(500);
 }
 
 /*--------------------------------------------------*/

@@ -29,15 +29,15 @@ WaterBalloon::~WaterBalloon()
 
 void WaterBalloon::CalculateType()
 {
-	if (this->weight >= 0.8 && this->weight <= 1.2)
+	if (this->weight >= 800 && this->weight <= 1200)
 	{
 		this->SetType(WaterBalloonType::Small);
 	}
-	else if (this->weight >= 1.3 && this->weight <= 1.7)
+	else if (this->weight >= 1300 && this->weight <= 1700)
 	{
 		this->SetType(WaterBalloonType::Medium);
 	}
-	else if (this->weight >= 1.8 && this->weight <= 2.2)
+	else if (this->weight >= 1800 && this->weight <= 2200)
 	{
 		this->SetType(WaterBalloonType::Large);
 	}

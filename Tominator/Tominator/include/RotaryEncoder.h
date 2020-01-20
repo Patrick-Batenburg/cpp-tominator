@@ -7,7 +7,8 @@ private:
 	int clkPin;
 	int dtPin;
 	int counter;
-	byte state;
+	int currentStateCLK;
+	int lastStateCLK;
 
 public:
 	/**
@@ -28,7 +29,7 @@ public:
 	/**
 		Determines whenever or not a rotation left or right occurred and updates the counter accordingly.
 	*/
-	void CheckStateChange();
+	void Update();
 
 	/**
 		Gets the amount of times when there was counted forward or backwards.
