@@ -134,5 +134,5 @@ void SerialPrintSimulationMode::HandlePlaceholder(Machine* machine)
 
 String SerialPrintSimulationMode::ToString()
 {
-	return MODE15;
+	return MODE16;
 }

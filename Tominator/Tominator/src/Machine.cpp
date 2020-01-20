@@ -19,6 +19,9 @@
 #include "Mode14_HomeClaw.h"
 #include "Modes\Mode15_CarriageBeyondTopSensor.h"
 #include "Modes\Mode16_SerialPrintSimulation.h"
+#include "Mode17_HomeConveyorBelt.h"
+#include "Mode18_SortConveyorBelt.h"
+#include "Modes\Mode19_HomeCarriage.h"
 
 Machine::Machine()
 {
@@ -108,6 +111,15 @@ void Machine::SelectMode(int value)
 			case 16:
 				this->SetMode(new SerialPrintSimulationMode());
 				break;
+			case 17:
+				this->SetMode(new HomeConveyorBeltMode());
+				break;
+			case 18:
+				this->SetMode(new SortConveyorBeltMode());
+				break;
+			case 19:
+				this->SetMode(new HomeCarriageMode());
+				break;
 			case 0:
 			default:
 				this->SetMode(new DefaultMode());
@@ -192,7 +204,6 @@ void Machine::SortWaterBalloons()
 	{
 		this->conveyorBelt->Sort();
 		this->conveyorBelt->GetState()->Next(conveyorBelt);
-		
 	}	
 }
 

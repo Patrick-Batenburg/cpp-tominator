@@ -353,6 +353,12 @@
     <Compile Include="include\Modes\Mode16_SerialPrintSimulation.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\Modes\Mode17_HomeConveyorBelt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode18_SortConveyorBelt.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\Modes\Mode1_ClawManualPlacedWaterBalloon.h">
       <SubType>compile</SubType>
     </Compile>
@@ -486,6 +492,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Modes\Mode16_SerialPrintSimulation.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode17_HomeConveyorBelt.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode18_SortConveyorBelt.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode19_HomeCarriage.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode19_HomeCarriage.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Modes\Mode1_ClawManualPlacedWaterBalloon.cpp">

@@ -34,7 +34,7 @@ RobotArm::RobotArm(int xPulsePin, int xDirectionPin, int xHomingPin, int yPulseP
 	pinMode(this->zPulsePin, OUTPUT);
 	pinMode(this->zDirectionPin, OUTPUT);
 	pinMode(this->zHomingPin, INPUT);
-	this->Home();
+	//this->Home();
 }
 
 RobotArm::~RobotArm()
