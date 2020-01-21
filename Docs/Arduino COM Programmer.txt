@@ -1,0 +1,15 @@
+Atmel Studio -> Tools -> External Tools...
+
+Use the path to your Arduino installation
+Command:
+C:\Program Files (x86)\Arduino\hardware\tools\avr\bin\avrdude.exe
+
+Arguments:
+-C"C:\Program Files (x86)\Arduino\hardware\tools\avr\etc\avrdude.conf" -patmega2560 -cwiring -P\\.\COM5 -b115200 -D -Uflash:w:"$(ProjectDir)Debug\$(TargetName).hex":i
+
+Change -P argument to the used COM port such as:
+-P\\.\COM1
+-P\\.\COM2
+-P\\.\COM3
+-P\\.\COM4
+etc...
