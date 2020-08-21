@@ -1,18 +1,18 @@
 #pragma once
 #include "BaseMode.h"
 
-class CarriageBeyondTopSensorMode : public BaseMode
+class OpenAndCloseClawMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the CarriageBeyondTopSensorMode class.
+		Initializes a new instance of the OpenAndCloseClawMode class.
 	*/
-	CarriageBeyondTopSensorMode();
+	OpenAndCloseClawMode();
 
 	/**
-		Deconstruct the instance of the CarriageBeyondTopSensorMode class.
+		Deconstruct the instance of the OpenAndCloseClawMode class.
 	*/
-	~CarriageBeyondTopSensorMode();
+	~OpenAndCloseClawMode();
 	
 	void Initialize(Machine* machine);
 

@@ -1,18 +1,20 @@
 #pragma once
 #include "BaseMode.h"
 
-class PlaceWaterballoonOnConveyorBeltMode : public BaseMode
+class SortingSideSimulationMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the PlaceWaterballoonOnConveyorBeltMode class.
+		Initializes a new instance of the SortingSideSimulation class.
 	*/
-	PlaceWaterballoonOnConveyorBeltMode();
+	SortingSideSimulationMode();
 
 	/**
-		Deconstruct the instance of the PlaceWaterballoonOnConveyorBeltMode class.
+		Deconstruct the instance of the SortingSideSimulation class.
 	*/
-	~PlaceWaterballoonOnConveyorBeltMode();
+	~SortingSideSimulationMode();
+	
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

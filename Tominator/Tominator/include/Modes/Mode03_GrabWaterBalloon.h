@@ -1,18 +1,18 @@
 #pragma once
 #include "BaseMode.h"
 
-class CarriageBeyondTopSensorMode : public BaseMode
+class GrabWaterBalloonMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the CarriageBeyondTopSensorMode class.
+		Initializes a new instance of the GrabWaterBalloonMode class.
 	*/
-	CarriageBeyondTopSensorMode();
+	GrabWaterBalloonMode();
 
 	/**
-		Deconstruct the instance of the CarriageBeyondTopSensorMode class.
+		Deconstruct the instance of the GrabWaterBalloonMode class.
 	*/
-	~CarriageBeyondTopSensorMode();
+	~GrabWaterBalloonMode();
 	
 	void Initialize(Machine* machine);
 

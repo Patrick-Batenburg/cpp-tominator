@@ -9,6 +9,11 @@ HomeZAxisMode::~HomeZAxisMode()
 {
 }
 
+void HomeZAxisMode::Initialize(Machine* machine)
+{
+
+}
+
 void HomeZAxisMode::HandlePlaceholder(Machine* machine)
 {
 	machine->Home(8);

@@ -9,6 +9,11 @@ HomeClawMode::~HomeClawMode()
 {
 }
 
+void HomeClawMode::Initialize(Machine* machine)
+{
+
+}
+
 void HomeClawMode::HandlePlaceholder(Machine* machine)
 {
 	machine->Home(9);

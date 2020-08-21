@@ -1,18 +1,20 @@
 #pragma once
 #include "BaseMode.h"
 
-class DriveFrameBackAndForthMode : public BaseMode
+class ClawManualPlacedWaterBalloonMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the DriveFrameBackAndForthMode class.
+		Initializes a new instance of the ClawManualPlacedWaterBalloonMode class.
 	*/
-	DriveFrameBackAndForthMode();
+	ClawManualPlacedWaterBalloonMode();
 
 	/**
-		Deconstruct the instance of the DriveFrameBackAndForthMode class.
+		Deconstruct the instance of the ClawManualPlacedWaterBalloonMode class.
 	*/
-	~DriveFrameBackAndForthMode();
+	~ClawManualPlacedWaterBalloonMode();
+	
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

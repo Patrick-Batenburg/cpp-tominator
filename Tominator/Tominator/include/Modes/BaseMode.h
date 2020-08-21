@@ -17,6 +17,8 @@ public:
 		Deconstruct the instance of the BaseMode class.
 	*/
 	~BaseMode();
+	
+	virtual void Initialize(Machine* machine);
 
 	/**
 		Provides the Machine with a set of instructions.

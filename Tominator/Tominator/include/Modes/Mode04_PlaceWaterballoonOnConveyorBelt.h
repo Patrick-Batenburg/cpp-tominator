@@ -1,18 +1,20 @@
 #pragma once
 #include "BaseMode.h"
 
-class HomeRobotArmMode : public BaseMode
+class PlaceWaterballoonOnConveyorBeltMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the HomeRobotArmMode class.
+		Initializes a new instance of the PlaceWaterballoonOnConveyorBeltMode class.
 	*/
-	HomeRobotArmMode();
+	PlaceWaterballoonOnConveyorBeltMode();
 
 	/**
-		Deconstruct the instance of the HomeRobotArmMode class.
+		Deconstruct the instance of the PlaceWaterballoonOnConveyorBeltMode class.
 	*/
-	~HomeRobotArmMode();
+	~PlaceWaterballoonOnConveyorBeltMode();
+
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

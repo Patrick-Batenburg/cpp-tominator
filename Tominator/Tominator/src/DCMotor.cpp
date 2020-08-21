@@ -69,7 +69,7 @@ void DCMotor::SmoothStop(int timeInSeconds)
 	int delay = timeInSeconds * 1000 / this->speed;
 
 	for(int i = this->speed; i > 0; i--)
-	{
+	{		
 		this->Run(delay);
 	}
 	

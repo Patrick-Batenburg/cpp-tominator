@@ -14,6 +14,8 @@ public:
 	*/
 	~HomeConveyorBeltMode();
 
+	void Initialize(Machine* machine);
+
 	/**
 		Returns a string that represents the current mode.
 		Only useful for comparisons and debug purposes.

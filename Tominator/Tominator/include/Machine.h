@@ -47,11 +47,12 @@ public:
 		@param controlPanel The control panel of the machine.
 	*/
 	Machine(Grid* grid, ConveyorBelt* conveyorBelt, Frame frame, Carriage carriage, RobotArm robotArm, HX711 loadCell, ControlPanel controlPanel);
+	
 	/**
 		Deconstruct the instance of the Machine class.
 	*/
 	~Machine();
-
+	
 	/**
 		Executes a set of instructions defined in a mode as long the machine resides in the correct state.
 	*/
@@ -98,7 +99,7 @@ public:
 		Closes the robot arm's claw.
 	*/
 	void CloseClaw();
-	
+		
 	/**
 		Handles the frame to reach its destination.
 		
@@ -107,13 +108,13 @@ public:
 	void HandleFrame(DirectionType direction);
 
 	/**
-		Handles the X, Y and Z-axis of the robot arm.
+		Handles the X, Y and Z-axis of the robot arm in this exact order. -1 means the axis is skipped.
 
 		@param x The X-axis the robot needs to go to.
 		@param y The Y-axis the robot needs to go to.
 		@param z The Z-axis the robot needs to go to.
 	*/
-	void HandleRobotArm(int x, int y, int z);
+	void HandleRobotArm(int x = -1, int y = -1, int z = -1);
 
 	/**
 		Applies homing across the whole machine. By default it will home the frame, carriage, conveyor belt, the X, Y, Z-axis and claw in this exact order
@@ -244,4 +245,11 @@ public:
 		@return The frame object.
 	*/	
 	Frame GetFrame();
+	
+	/**
+		Gets the robot arm object.
+		
+		@return The robot arm object.
+	*/	
+	RobotArm GetRobotArm();
 };

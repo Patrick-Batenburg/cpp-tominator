@@ -9,6 +9,11 @@ HomeXAxisMode::~HomeXAxisMode()
 {
 }
 
+void HomeXAxisMode::Initialize(Machine* machine)
+{
+
+}
+
 void HomeXAxisMode::HandlePlaceholder(Machine* machine)
 {
 	machine->Home(6);

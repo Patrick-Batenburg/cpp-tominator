@@ -9,16 +9,12 @@ BaseGrid::BaseGrid()
 	this->currentRow = 0;
 	this->currentColumn = 0;
 	this->state = new NoneRowEmptyState();
-	this->selectedCell.Row = this->currentRow;
-	this->selectedCell.Column = this->currentColumn;
-	this->selectedCell.InitialType = WaterBalloonType::Empty;
 }
 
 BaseGrid::BaseGrid(WaterBalloonType type) : BaseGrid()
 {
 	this->waterBalloonPositions.clear();
 	this->waterBalloonPositions = vector<vector<WaterBalloon>>(3, vector<WaterBalloon>(3, WaterBalloon(type)));
-	this->selectedCell.InitialType = type;
 }
 
 BaseGrid::~BaseGrid()
@@ -28,41 +24,10 @@ BaseGrid::~BaseGrid()
 void BaseGrid::Reset()
 {
 	this->waterBalloonPositions.clear();
-	this->waterBalloonPositions = vector<vector<WaterBalloon>>(3, vector<WaterBalloon>(3, WaterBalloon(this->selectedCell.InitialType)));
-}
-
-Cell BaseGrid::GetNearestUnusedCell(bool reiterating)
-{
-	if (reiterating)
-	{
-		for (int i = 0; i < this->GetWaterBalloonPositions().size(); i++)
-		{
-			for (int j = 0; j < this->GetWaterBalloonPositions()[i].size(); j++)
-			{
-				if (this->GetWaterBalloonPositions()[i][j].GetType() == this->selectedCell.InitialType)
-				{
-					this->selectedCell.Row = i;
-					this->selectedCell.Column = j;
-				}
-			}
-		}
-	}
-	else
-	{
-		for (int i = this->selectedCell.Row; i < this->GetWaterBalloonPositions().size(); i++)
-		{
-			for (int j = this->selectedCell.Column; j < this->GetWaterBalloonPositions()[i].size(); j++)
-			{
-				if (this->GetWaterBalloonPositions()[i][j].GetType() == this->selectedCell.InitialType)
-				{
-					this->selectedCell.Row = i;
-					this->selectedCell.Column = j;
-				}
-			}
-		}
-	}
-	
-	return this->selectedCell;
+	this->waterBalloonPositions = vector<vector<WaterBalloon>>(3, vector<WaterBalloon>(3, WaterBalloon()));
+	this->SetState(new NoneRowEmptyState());
+	this->SetCurrentRow(0);
+	this->SetCurrentColumn(0);
 }
 
 int BaseGrid::GetCurrentRow()

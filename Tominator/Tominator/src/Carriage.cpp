@@ -17,17 +17,14 @@ Carriage::~Carriage()
 {
 }
 
+// HALL_CARRIAGE_TOP 33
+// HALL_CARRIAGE_MIDDLE 34
+// HALL_CARRIAGE_BOTTOM 35	
+
 void Carriage::HandleDCMotor(int speedPercentage, int goToHallSensor)
 {
 	bool motorTurnedOn = false;
 	this->GetDCMotor()->SetSpeedInPercentage(speedPercentage);
-
-	Serial.print("bottom sensor: ");
-	Serial.println(digitalRead(this->hallSensorBottomPin));
-	Serial.print("middle sensor: ");
-	Serial.println(digitalRead(this->hallSensorMiddlePin));
-	Serial.print("top sensor: ");
-	Serial.println(digitalRead(this->hallSensorTopPin));
 
 	// If the carriage on the right height do nothing.
 	if (digitalRead(goToHallSensor) == LOW)
@@ -40,19 +37,18 @@ void Carriage::HandleDCMotor(int speedPercentage, int goToHallSensor)
 				this->GetDCMotor()->Start(DirectionType::Reverse);
 				break;
 			case HALL_CARRIAGE_MIDDLE:
+				motorTurnedOn = true;
+				
 				if (digitalRead(this->hallSensorBottomPin) == LOW && digitalRead(this->hallSensorTopPin))
 				{
-					motorTurnedOn = true;
 					this->GetDCMotor()->Start(DirectionType::Reverse);
 				}
 				else if (digitalRead(this->hallSensorTopPin) == LOW && digitalRead(this->hallSensorBottomPin))
 				{
-					motorTurnedOn = true;
 					this->GetDCMotor()->Start(DirectionType::Forward);
 				}
 				else
 				{
-					motorTurnedOn = true;
 					this->GetDCMotor()->Start(DirectionType::Reverse);
 				}
 				break;

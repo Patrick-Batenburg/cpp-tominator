@@ -41,3 +41,6 @@
 #define MODE18 "MODE18"
 #define MODE19 "MODE19"
 #define MODE20 "MODE20"
+#define MODE21 "MODE21"
+#define MODE22 "MODE22"
+#define MODE23 "MODE23"

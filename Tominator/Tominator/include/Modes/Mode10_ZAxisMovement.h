@@ -13,6 +13,8 @@ public:
 		Deconstruct the instance of the ZAxisMovementMode class.
 	*/
 	~ZAxisMovementMode();
+	
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

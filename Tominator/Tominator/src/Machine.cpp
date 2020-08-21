@@ -1,27 +1,32 @@
 #include "Machine.h"
 #include "BootUpState.h"
-#include "Mode0_Default.h"
-#include "Mode1_ClawManualPlacedWaterBalloon.h"
-#include "Mode2_Quickness.h"
-#include "Mode3_GrabWaterBalloon.h"
-#include "Mode4_PlaceWaterballoonOnConveyorBelt.h"
-#include "Mode5_Sorting.h"
-#include "Mode6_OpenAndCloseClaw.h"
-#include "Mode7_DriveFrameBackAndForth.h"
-#include "Mode8_SwitchingModes.h"
 #include "TominatorPins.h"
 #include <LiquidCrystal_I2C.h>
-#include "Mode9_HomeRobotArm.h"
+#include "NoneRowEmptyState.h"
+#include "Mode00_Default.h"
+#include "Mode01_Quickness.h"
+#include "Mode02_ClawManualPlacedWaterBalloon.h"
+#include "Mode03_GrabWaterBalloon.h"
+#include "Mode04_PlaceWaterballoonOnConveyorBelt.h"
+#include "Mode05_ClawSortingMode.h"
+#include "Mode06_OpenAndCloseClaw.h"
+#include "Mode07_DriveFrameBackAndForth.h"
+#include "Mode08_SwitchingModes.h"
+#include "Mode09_HomeRobotArm.h"
 #include "Mode10_ZAxisMovement.h"
 #include "Mode11_HomeXAxis.h"
 #include "Mode12_HomeYAxis.h"
 #include "Mode13_HomeZAxis.h"
 #include "Mode14_HomeClaw.h"
-#include "Modes\Mode15_CarriageBeyondTopSensor.h"
-#include "Modes\Mode16_SerialPrintSimulation.h"
+#include "Mode15_CarriageBeyondTopSensor.h"
+#include "Mode16_SerialPrintSimulation.h"
 #include "Mode17_HomeConveyorBelt.h"
-#include "Mode18_SortConveyorBelt.h"
-#include "Modes\Mode19_HomeCarriage.h"
+#include "Mode18_ConveyorBeltSorting.h"
+#include "Mode19_HomeCarriage.h"
+#include "Mode20_HomeCarriageToTop.h"
+#include "Mode21_SortingSideSimulation.h"
+#include "Mode22_FrameSortingSideOffset.h"
+#include "Mode23_ZAxisUpAndDown.h"
 
 Machine::Machine()
 {
@@ -47,7 +52,7 @@ Machine::~Machine()
 }
 
 void Machine::StartMode()
-{	
+{
 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 	
 	if (this->state->ToString() == RUNNING_STATE)
@@ -63,10 +68,10 @@ void Machine::SelectMode(int value)
 		switch (value)
 		{
 			case 1:
-				this->SetMode(new ClawManualPlacedWaterBalloonMode());
+				this->SetMode(new QuicknessMode());
 				break;
 			case 2:
-				this->SetMode(new QuicknessMode());
+				this->SetMode(new ClawManualPlacedWaterBalloonMode());
 				break;
 			case 3:
 				this->SetMode(new GrabWaterBalloonMode());
@@ -75,7 +80,7 @@ void Machine::SelectMode(int value)
 				this->SetMode(new PlaceWaterballoonOnConveyorBeltMode());
 				break;
 			case 5:
-				this->SetMode(new SortingMode());
+				this->SetMode(new ClawSortingMode());
 				break;
 			case 6:
 				this->SetMode(new OpenAndCloseClawMode());
@@ -115,10 +120,22 @@ void Machine::SelectMode(int value)
 				this->SetMode(new HomeConveyorBeltMode());
 				break;
 			case 18:
-				this->SetMode(new SortConveyorBeltMode());
+				this->SetMode(new ConveyorBeltSortingMode());
 				break;
 			case 19:
 				this->SetMode(new HomeCarriageMode());
+				break;
+			case 20:
+				this->SetMode(new HomeCarriageToTopMode());
+				break;
+			case 21:
+				this->SetMode(new SortingSideSimulationMode());
+				break;
+			case 22:
+				this->SetMode(new FrameSortingSideOffsetMode());
+				break;				
+			case 23:
+				this->SetMode(new ZAxisUpAndDownMode());
 				break;
 			case 0:
 			default:
@@ -147,79 +164,69 @@ void Machine::EmergencyStopButtonPressed()
 
 void Machine::SortWaterBalloons()
 {
-	// Empty = 0
-	// Small = 1
-	// Medium = 2
-	// Large = 3
-	// Unkown = 4
+	// 0 = Bottom
+	// 1 = Middle
+	// 2 = Top
 	int sortingArea = 0;
-	int speed = 50;
-	int distance = 0;
-	this->conveyorBelt->GetDCMotor()->SetSpeed(speed);
-	this->carriage.GetDCMotor()->SetSpeed(speed);
+	int conveyorBeltSpeed = 50;
+	int carriageSpeed = 100;
+	this->conveyorBelt->GetDCMotor()->SetSpeed(conveyorBeltSpeed);
+	this->carriage.GetDCMotor()->SetSpeed(carriageSpeed);
 
 	switch (this->conveyorBelt->GetState()->GetStateTypes()[this->conveyorBelt->GetState()->ToString()])
 	{
-		case BaseGridStateType::NoneRowEmptyStateType:
-			sortingArea = this->GetConveyorBelt()->GetFirstRowType();
-			break;		
 		case BaseGridStateType::FirstRowEmptyStateType:
-			sortingArea = this->GetConveyorBelt()->GetSecondRowType();
+			sortingArea = 1;
 			break;
 		case BaseGridStateType::SecondRowEmptyStateType:
-			sortingArea = this->GetConveyorBelt()->GetThirdRowType();
+			sortingArea = 2;
 			break;
 		case BaseGridStateType::BaseGridType:
-		case BaseGridStateType::ThirdRowEmptyStateType:
+		case BaseGridStateType::NoneRowEmptyStateType:
 		default:
 			sortingArea = 0;
 			break;
 	}
 
-	while (distance > 0)
+	switch (sortingArea)
 	{
-		distance--;
-
-		// Adjust height of the carriage based on the int-value.
-		// 1 = Bottom area, 2 = Middle area, 3 = Top area.
-		switch (sortingArea)
-		{
-			case WaterBalloonType::Small:
-				this->carriage.HandleDCMotor(speed, HALL_CARRIAGE_BOTTOM);
-				break;
-			case WaterBalloonType::Medium:
-				this->carriage.HandleDCMotor(speed, HALL_CARRIAGE_MIDDLE);
-				break;
-			case WaterBalloonType::Large:
-				this->carriage.HandleDCMotor(speed, HALL_CARRIAGE_TOP);
-				break;		
-			case WaterBalloonType::Empty:
-			case WaterBalloonType::Unkown:
-			default:
-				break;
-		}
+		case 0:
+			this->carriage.HandleDCMotor(carriageSpeed, HALL_CARRIAGE_BOTTOM);
+			break;
+		case 1:
+			this->carriage.HandleDCMotor(carriageSpeed, HALL_CARRIAGE_MIDDLE);
+			break;
+		case 2:
+			this->carriage.HandleDCMotor(carriageSpeed, HALL_CARRIAGE_TOP);
+			break;
+		default:
+			break;
 	}
 	
-	for (int i = 0; i < this->GetConveyorBelt()->GetTransportedWaterBalloonsGoal() / 3; i++)
+	if (sortingArea != 0)
 	{
-		this->conveyorBelt->Sort();
-		this->conveyorBelt->GetState()->Next(conveyorBelt);
-	}	
+		this->GetFrame().HandleDCMotorOffset(false);
+	}
+	
+	this->conveyorBelt->Sort();
+	this->conveyorBelt->GetState()->Next(conveyorBelt);
 }
 
 void Machine::WeighWaterBalloon()
 {
-	float weight = 0;
-	weight = this->loadCell.get_units(10);
+	float weight = this->loadCell.get_units();
 	this->currentWaterBalloon.SetWeight(weight);
 	
-	if (weight >= 800)
+	while (this->currentWaterBalloon.GetType() == WaterBalloonType::Unkown)
 	{
-		if (this->conveyorBelt->CanAddWaterBalloon(this->currentWaterBalloon))
-		{
-			this->conveyorBelt->AddWaterBalloon(this->currentWaterBalloon);
-			this->grid->SelectNextPosition();
-		}
+		weight = this->loadCell.get_units();
+		this->currentWaterBalloon.SetWeight(weight);
+	}
+	
+	if (this->conveyorBelt->CanAddWaterBalloon(this->currentWaterBalloon))
+	{
+		this->conveyorBelt->AddWaterBalloon(this->currentWaterBalloon);
+		this->grid->SelectNextPosition();
 	}
 }
 
@@ -240,11 +247,26 @@ void Machine::HandleFrame(DirectionType direction)
 
 void Machine::HandleRobotArm(int x, int y, int z)
 {
-	this->robotArm.HandleArm(x, y, z);
+	int negative = -1;
+	
+	if (x != negative)
+	{
+		this->robotArm.HandleXAxis(x);
+	}
+	
+	if (y != negative)
+	{
+		this->robotArm.HandleYAxis(y);
+	}
+
+	if (z != negative)
+	{
+		this->robotArm.HandleZAxis(z);
+	}	
 }
 
 void Machine::Home(int homeWhat)
-{
+{	
 	switch (homeWhat)
 	{
 		case 0:
@@ -322,7 +344,6 @@ BaseMachineState* Machine::GetState()
 void Machine::SetState(BaseMachineState* value)
 {
 	delete this->state;
-	
 	this->state = value;
 	this->controlPanel.Print(this->GetState()->ToString(), this->GetMode()->ToString());
 }
@@ -362,6 +383,11 @@ Carriage Machine::GetCarriage()
 Frame Machine::GetFrame()
 {
 	return this->frame;
+}
+
+RobotArm Machine::GetRobotArm()
+{
+	return this->robotArm;
 }
 
 WaterBalloon Machine::GetCurrentWaterBalloon()

@@ -9,6 +9,11 @@ HomeYAxisMode::~HomeYAxisMode()
 {
 }
 
+void HomeYAxisMode::Initialize(Machine* machine)
+{
+
+}
+
 void HomeYAxisMode::HandlePlaceholder(Machine* machine)
 {
 	machine->Home(7);

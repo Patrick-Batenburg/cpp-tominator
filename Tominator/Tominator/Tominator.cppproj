@@ -329,7 +329,7 @@
     <Compile Include="include\Modes\BaseMode.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode0_Default.h">
+    <Compile Include="include\Modes\Mode00_Default.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\Modes\Mode10_ZAxisMovement.h">
@@ -356,37 +356,49 @@
     <Compile Include="include\Modes\Mode17_HomeConveyorBelt.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode18_SortConveyorBelt.h">
+    <Compile Include="include\Modes\Mode18_ConveyorBeltSorting.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\Modes\Mode19_HomeCarriage.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode1_ClawManualPlacedWaterBalloon.h">
+    <Compile Include="include\Modes\Mode02_ClawManualPlacedWaterBalloon.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode2_Quickness.h">
+    <Compile Include="include\Modes\Mode20_HomeCarriageToTop.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode3_GrabWaterBalloon.h">
+    <Compile Include="include\Modes\Mode21_SortingSideSimulation.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode4_PlaceWaterballoonOnConveyorBelt.h">
+    <Compile Include="include\Modes\Mode01_Quickness.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode5_Sorting.h">
+    <Compile Include="include\Modes\Mode03_GrabWaterBalloon.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode6_OpenAndCloseClaw.h">
+    <Compile Include="include\Modes\Mode04_PlaceWaterballoonOnConveyorBelt.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode7_DriveFrameBackAndForth.h">
+    <Compile Include="include\Modes\Mode05_ClawSortingMode.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode8_SwitchingModes.h">
+    <Compile Include="include\Modes\Mode06_OpenAndCloseClaw.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="include\Modes\Mode9_HomeRobotArm.h">
+    <Compile Include="include\Modes\Mode07_DriveFrameBackAndForth.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode08_SwitchingModes.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode09_HomeRobotArm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode22_FrameSortingSideOffset.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\Modes\Mode23_ZAxisUpAndDown.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\RobotArm.h">
@@ -473,7 +485,7 @@
     <Compile Include="src\Modes\BaseMode.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode0_Default.cpp">
+    <Compile Include="src\Modes\Mode00_Default.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Modes\Mode10_ZAxisMovement.cpp">
@@ -500,37 +512,49 @@
     <Compile Include="src\Modes\Mode17_HomeConveyorBelt.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode18_SortConveyorBelt.cpp">
+    <Compile Include="src\Modes\Mode18_ConveyorBeltSorting.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\Modes\Mode19_HomeCarriage.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode1_ClawManualPlacedWaterBalloon.cpp">
+    <Compile Include="src\Modes\Mode02_ClawManualPlacedWaterBalloon.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode2_Quickness.cpp">
+    <Compile Include="src\Modes\Mode20_HomeCarriageTop.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode3_GrabWaterBalloon.cpp">
+    <Compile Include="src\Modes\Mode21_SortingSideSimulation.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode4_PlaceWaterballoonOnConveyorBelt.cpp">
+    <Compile Include="src\Modes\Mode01_Quickness.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode5_Sorting.cpp">
+    <Compile Include="src\Modes\Mode03_GrabWaterBalloon.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode6_OpenAndCloseClaw.cpp">
+    <Compile Include="src\Modes\Mode04_PlaceWaterballoonOnConveyorBelt.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode7_DriveFrameBackAndForth.cpp">
+    <Compile Include="src\Modes\Mode05_ClawSorting.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode8_SwitchingModes.cpp">
+    <Compile Include="src\Modes\Mode06_OpenAndCloseClaw.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Modes\Mode9_HomeRobotArm.cpp">
+    <Compile Include="src\Modes\Mode07_DriveFrameBackAndForth.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode08_SwitchingModes.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode09_HomeRobotArm.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode22_FrameSortingSideOffset.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Modes\Mode23_ZAxisUpAndDown.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\RobotArm.cpp">

@@ -7,12 +7,12 @@ Frame::Frame()
 
 Frame::Frame(DCMotor* dcMotor, UltrasonicSensor gridSideUltrasonicSensor, UltrasonicSensor sortingSideUltrasonicSensor, int reedGridSidePin, int reedSortingSidePin, Grid* grid, ConveyorBelt* conveyorBelt) : Frame()
 {
+	this->grid = grid;
 	this->dcMotor = dcMotor;
 	this->gridSideUltrasonicSensor = gridSideUltrasonicSensor;
 	this->sortingSideUltrasonicSensor = sortingSideUltrasonicSensor;
 	this->reedGridSidePin = reedGridSidePin;
 	this->reedSortingSidePin = reedSortingSidePin;
-	this->grid = grid;
 	this->conveyorBelt = conveyorBelt;
 	pinMode(reedGridSidePin, INPUT);
 	pinMode(reedSortingSidePin, INPUT);
@@ -24,6 +24,7 @@ Frame::~Frame()
 
 void Frame::HandleDCMotor(DirectionType direction)
 {
+	UltrasonicSensor ultrasonicSensor;
 	int speedPercentage = 20;
 	int percentageIncrement = 2;
 	long duration = 0;
@@ -33,9 +34,14 @@ void Frame::HandleDCMotor(DirectionType direction)
 	
 	this->GetDCMotor()->Start(direction);
 	
-	digitalWrite(this->gridSideUltrasonicSensor.GetTriggerPin(), LOW);
-	digitalWrite(this->sortingSideUltrasonicSensor.GetTriggerPin(), LOW);
-	delayMicroseconds(2);
+	if (direction == DirectionType::Forward)
+	{
+		ultrasonicSensor = this->gridSideUltrasonicSensor;
+	}
+	else
+	{
+		ultrasonicSensor = this->sortingSideUltrasonicSensor;	
+	}
 	
 	while(!reachedEnd)
 	{
@@ -43,84 +49,65 @@ void Frame::HandleDCMotor(DirectionType direction)
 		this->GetDCMotor()->SetSpeedInPercentage(speedPercentage);
 		this->GetDCMotor()->Run();
 		
-		// DirectionType::Forward = true, go to sorting side.
-		// DirectionType::Reverse = false, go to grid side.
-		if (direction)
-		{
-			duration = this->sortingSideUltrasonicSensor.GetDuration();
-		}
-		else
-		{
-			duration = this->gridSideUltrasonicSensor.GetDuration();
-		}
+		duration = ultrasonicSensor.GetDuration();	
+		distance = duration / 2 / 29.1;
 		
-		distance = duration * 0.034 / 2;
-		
-		if (distance <= 30)
+		if (distance <= 135)
 		{
-			this->GetDCMotor()->SmoothStop(duration);
-		}
-		
-		if (digitalRead(this->reedGridSidePin) == HIGH || digitalRead(this->reedSortingSidePin) == HIGH)
-		{
-			bool isAtGridSide = false;
-			
-			if (digitalRead(this->reedGridSidePin) == HIGH)
-			{
-				isAtGridSide = true;
-			}
-			
+			this->GetDCMotor()->Stop();
 			reachedEnd = true;
-			this->GetDCMotor()->Stop();		
 		}
 	}
 }
 
-void Frame::HandleDCMotorOffset(DirectionType direction)
+void Frame::HandleDCMotorOffset(bool isAtGridSide)
 {
-	int speed = 50;
+	int iterations = 5;
+	UltrasonicSensor ultrasonicSensor;
+	long duration = 0;
 	int distance = 0;
 	int offset = 0;
-	DirectionType oldDirection = direction;
-	
-	// Inverse direction.
-	if (direction == DirectionType::Forward)
+	int minRange = 0;
+	int maxRange = 0;
+	DirectionType forward = DirectionType::Reverse;
+	DirectionType reverse = DirectionType::Forward;
+
+	if (isAtGridSide)
 	{
-		direction = DirectionType::Reverse;
+		BaseGridState* state = this->grid->GetState();
+		ultrasonicSensor = this->gridSideUltrasonicSensor;
+		forward = DirectionType::Forward;
+		reverse = DirectionType::Reverse;
+		
+		switch (state->GetStateTypes()[state->ToString()])
+		{
+			case BaseGridStateType::FirstRowEmptyStateType:
+				offset = 130;
+				break;
+			case BaseGridStateType::SecondRowEmptyStateType:
+				offset = 160;
+				break;
+			case BaseGridStateType::BaseGridType:
+			case BaseGridStateType::NoneRowEmptyStateType:
+			case BaseGridStateType::ThirdRowEmptyStateType:
+			default:
+				break;
+		}
 	}
 	else
-	{
-		direction = DirectionType::Forward;	
-	}
-	
-	// DirectionType::Forward = true, is at sorting side.
-	if (oldDirection == DirectionType::Forward)
-	{
-		switch (this->conveyorBelt->GetState()->GetStateTypes()[this->conveyorBelt->GetState()->ToString()])
-		{
-			case BaseGridStateType::FirstRowEmptyStateType:
-				offset = 1;
-				break;
-			case BaseGridStateType::SecondRowEmptyStateType:
-				offset = 2;
-				break;
-			case BaseGridStateType::BaseGridType:
-			case BaseGridStateType::NoneRowEmptyStateType:
-			case BaseGridStateType::ThirdRowEmptyStateType:
-			default:
-				offset = 0;
-				break;
-		}
-	}
-	else // DirectionType::Reverse = false, is at grid side.
 	{	
-		switch (this->grid->GetState()->GetStateTypes()[this->grid->GetState()->ToString()])
+		BaseGridState* state = this->conveyorBelt->GetState();
+		ultrasonicSensor = this->sortingSideUltrasonicSensor;
+		forward = DirectionType::Reverse;
+		reverse = DirectionType::Forward;
+		
+		switch (state->GetStateTypes()[state->ToString()])
 		{
 			case BaseGridStateType::FirstRowEmptyStateType:
-				offset = 1;
+				offset = 108;
 				break;
 			case BaseGridStateType::SecondRowEmptyStateType:
-				offset = 2;
+				offset = 82;
 				break;
 			case BaseGridStateType::BaseGridType:
 			case BaseGridStateType::NoneRowEmptyStateType:
@@ -131,12 +118,43 @@ void Frame::HandleDCMotorOffset(DirectionType direction)
 		}
 	}
 	
-	distance = offset * speed;
-	this->GetDCMotor()->Start(direction);
+	minRange = offset - 2;
+	maxRange = offset + 2;
 	
-	while(distance > 0)
+	this->GetDCMotor()->Start(DirectionType::Reverse);
+	this->GetDCMotor()->SetSpeedInPercentage(100);
+	
+	while(true)
 	{
-		distance--;
+		if (isAtGridSide)
+		{
+			distance = ultrasonicSensor.GetDuration() / 2 / 29.1;
+		}
+		else
+		{
+			distance = 0;
+						
+			for (int i = 0; i < iterations; i++)
+			{
+				distance += ultrasonicSensor.GetDuration() / 2 / 29.1;
+			}
+						
+			distance /= iterations;
+		}
+			
+		if (distance > maxRange)
+		{
+			this->GetDCMotor()->Start(forward);
+		}
+		else if (distance < minRange)
+		{
+			this->GetDCMotor()->Start(reverse);
+		}
+		else if (distance > minRange && distance < maxRange)
+		{
+			break;
+		}
+			
 		this->GetDCMotor()->Run();
 	}
 	
@@ -168,79 +186,3 @@ void Frame::Home()
 	
 	this->GetDCMotor()->Stop();
 }
-
-//void Frame::HandleFrame(DirectionType direction)
-//{
-	//int speed = 50;
-	//int speedIncrement = 5;
-	//int speedOffset = 40;
-	//long duration = 0;
-	//int distance = 0;
-	//bool nearingEnd = false;
-	//bool reachedEnd = false;
-	//
-	//this->GetDCMotor().Start(direction);
-	//
-	//digitalWrite(this->gridSideUltrasonicSensor.GetTriggerPin(), LOW);
-	//digitalWrite(this->sortingSideUltrasonicSensor.GetTriggerPin(), LOW);
-//
-	//delayMicroseconds(2);
-	//
-	//while(!reachedEnd)
-	//{
-		//speed += speedIncrement;
-		//this->GetDCMotor().SetSpeed(speed);
-		//this->GetDCMotor().Run();
-		//
-		//// DirectionType::Forward = true, go to sorting side.
-		//// DirectionType::Reverse = false, go to grid side.
-		//if (direction)
-		//{
-			//digitalWrite(this->sortingSideUltrasonicSensor.GetTriggerPin(), HIGH);
-			//delayMicroseconds(10);
-			//digitalWrite(this->sortingSideUltrasonicSensor.GetTriggerPin(), LOW);
-			//duration = pulseIn(this->sortingSideUltrasonicSensor.GetEchoPin(), HIGH);
-		//}
-		//else
-		//{
-			//digitalWrite(this->gridSideUltrasonicSensor.GetTriggerPin(), HIGH);
-			//delayMicroseconds(10);
-			//digitalWrite(this->gridSideUltrasonicSensor.GetTriggerPin(), LOW);
-			//duration = pulseIn(this->gridSideUltrasonicSensor.GetEchoPin(), HIGH);
-		//}
-		//
-		//distance = duration * 0.034 / 2;
-		//
-		//if (distance <= 30 && distance > 15)
-		//{
-			//speedIncrement = speed / speedOffset * -1;
-		//}
-		//else if (distance <= 15 && nearingEnd == false)
-		//{
-			//speedIncrement = speed / speedOffset * -1;
-			//nearingEnd = true;
-		//}
-		//
-		//if (digitalRead(this->reedGridSidePin) == HIGH || digitalRead(this->reedSortingSidePin) == HIGH)
-		//{
-			//bool isAtGridSide = false;
-			//
-			//if (digitalRead(this->reedGridSidePin) == HIGH)
-			//{
-				//isAtGridSide = true;
-			//}
-			//
-			//reachedEnd = true;
-			//this->GetDCMotor().Stop();
-			//
-			//if (direction == DirectionType::Forward)
-			//{
-				//this->HandleFrameOffset(isAtGridSide, DirectionType::Reverse);
-			//}
-			//else
-			//{
-				//this->HandleFrameOffset(isAtGridSide, DirectionType::Forward);
-			//}
-		//}
-	//}
-//}

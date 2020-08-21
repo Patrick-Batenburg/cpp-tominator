@@ -1,18 +1,20 @@
 #pragma once
 #include "BaseMode.h"
 
-class GrabWaterBalloonMode : public BaseMode
+class ZAxisUpAndDownMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the GrabWaterBalloonMode class.
+		Initializes a new instance of the ZAxisUpAndDownMode class.
 	*/
-	GrabWaterBalloonMode();
+	ZAxisUpAndDownMode();
 
 	/**
-		Deconstruct the instance of the GrabWaterBalloonMode class.
+		Deconstruct the instance of the ZAxisUpAndDownMode class.
 	*/
-	~GrabWaterBalloonMode();
+	~ZAxisUpAndDownMode();
+	
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

@@ -21,6 +21,13 @@ ConveyorBelt::~ConveyorBelt()
 {
 }
 
+void ConveyorBelt::Reset()
+{
+	BaseGrid::Reset();
+	this->SetTransportedWaterBalloons(0);
+	this->SetTransportedWaterBalloonsGoal(9);
+}
+
 bool ConveyorBelt::CanAddWaterBalloon(WaterBalloon waterBalloon)
 {
 	bool suceeded = false;
@@ -31,15 +38,15 @@ bool ConveyorBelt::CanAddWaterBalloon(WaterBalloon waterBalloon)
 	// Essentially, assigning duplicate types to a row type variable is what we want to avoid here.
 	if (this->waterBalloonPositions[0][0].GetType() == WaterBalloonType::Empty || this->waterBalloonPositions[0][0].GetType() == waterBalloon.GetType())
 	{
-		this->firstRowType = waterBalloon.GetType();
+		this->SetFirstRowType(waterBalloon.GetType());
 	}
 	else if (this->waterBalloonPositions[1][0].GetType() == WaterBalloonType::Empty || this->waterBalloonPositions[1][0].GetType() == waterBalloon.GetType())
 	{
-		this->secondRowType = waterBalloon.GetType();
+		this->SetSecondRowType(waterBalloon.GetType());
 	}
 	else if (this->waterBalloonPositions[2][0].GetType() == WaterBalloonType::Empty || this->waterBalloonPositions[2][0].GetType() == waterBalloon.GetType())
 	{
-		this->thirdRowType = waterBalloon.GetType();
+		this->SetThirdRowType(waterBalloon.GetType());
 	}
 
 	// If the water balloon type matches any of the 3 row type variables, set the corresponding row. 
@@ -153,14 +160,6 @@ void ConveyorBelt::SetTransportedWaterBalloonsGoal(int value)
 	this->transportedWaterBalloonsGoal = value;
 }
 
-void ConveyorBelt::SetState(BaseGridState* value)
-{
-	if (this->GetTransportedWaterBalloons() == this->GetTransportedWaterBalloonsGoal())
-	{
-		this->state = value;
-	}
-}
-
 DCMotor* ConveyorBelt::GetDCMotor()
 {
 	return this->dcMotor;
@@ -212,10 +211,7 @@ void ConveyorBelt::Sort()
 		}
 	}
 	
-	this->GetDCMotor()->Stop();
-	
-	Serial.print("Flag: ");
-	Serial.println(counter);	
+	this->GetDCMotor()->Stop();	
 }
 
 void ConveyorBelt::Home()

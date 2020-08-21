@@ -13,6 +13,8 @@ public:
 		Deconstruct the instance of the HomeXAxisMode class.
 	*/
 	~HomeXAxisMode();
+	
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

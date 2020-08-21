@@ -9,6 +9,11 @@ HomeCarriageMode::~HomeCarriageMode()
 {
 }
 
+void HomeCarriageMode::Initialize(Machine* machine)
+{
+
+}
+
 void HomeCarriageMode::HandlePlaceholder(Machine* machine)
 {
 	machine->Home(2);

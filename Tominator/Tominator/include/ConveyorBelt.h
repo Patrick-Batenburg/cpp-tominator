@@ -32,7 +32,9 @@ public:
 		Deconstruct the instance of the ConveyorBelt class.
 	*/
 	~ConveyorBelt();
-
+	
+	virtual void Reset();
+	
 	/**
 		Determines whenever or not the specified water balloon can be put onto the conveyor belt.
 		
@@ -119,13 +121,6 @@ public:
 		@param value The new goal.
 	*/
 	void SetTransportedWaterBalloonsGoal(int value);
-
-	/**
-		Sets the goal of transported water balloons needed.
-		
-		@param value The new state.
-	*/
-	virtual void SetState(BaseGridState* value);
 
 	/**
 		Gets the DC motor object.

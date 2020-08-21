@@ -3,12 +3,12 @@
 #include "DCMotor.h"
 #include "Grid.h"
 #include "ConveyorBelt.h"
+#include "ControlPanel.h"
 
 class Frame
 {
 private:
 	DCMotor* dcMotor;
-	int in2DirectionPin;
 	int pwmPin;
 	int reedGridSidePin;
 	int reedSortingSidePin;
@@ -47,13 +47,13 @@ public:
 		@param direction The direction the DC motor is spinning into. DirectionType::Forward = go to sorting side. DirectionType::Reverse = go to grid side.
 	*/	
 	void HandleDCMotor(DirectionType direction);
-
+	
 	/**
 		Handles the DC motor offset. The frame should be at either the grid or sorting side by know. Depending on a couple variables an offset needs to be made in some cases.
 		
 		@param direction The direction the DC motor is spinning into. DirectionType::Forward = is at sorting side. DirectionType::Reverse = is at grid side.
 	*/	
-	void HandleDCMotorOffset(DirectionType direction);
+	void HandleDCMotorOffset(bool isAtGridSide);
 
 	/**
 		Gets the DC motor object.

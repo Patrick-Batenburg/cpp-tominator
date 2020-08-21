@@ -1,4 +1,4 @@
-#include "Mode3_GrabWaterBalloon.h"
+#include "Mode03_GrabWaterBalloon.h"
 #include "Machine.h"
 
 GrabWaterBalloonMode::GrabWaterBalloonMode()
@@ -7,6 +7,11 @@ GrabWaterBalloonMode::GrabWaterBalloonMode()
 
 GrabWaterBalloonMode::~GrabWaterBalloonMode()
 {
+}
+
+void GrabWaterBalloonMode::Initialize(Machine* machine)
+{
+
 }
 
 void GrabWaterBalloonMode::HandlePlaceholder(Machine* machine)

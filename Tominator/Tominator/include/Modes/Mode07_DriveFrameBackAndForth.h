@@ -1,18 +1,20 @@
 #pragma once
 #include "BaseMode.h"
 
-class OpenAndCloseClawMode : public BaseMode
+class DriveFrameBackAndForthMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the OpenAndCloseClawMode class.
+		Initializes a new instance of the DriveFrameBackAndForthMode class.
 	*/
-	OpenAndCloseClawMode();
+	DriveFrameBackAndForthMode();
 
 	/**
-		Deconstruct the instance of the OpenAndCloseClawMode class.
+		Deconstruct the instance of the DriveFrameBackAndForthMode class.
 	*/
-	~OpenAndCloseClawMode();
+	~DriveFrameBackAndForthMode();
+
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

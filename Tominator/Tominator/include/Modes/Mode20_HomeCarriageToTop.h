@@ -1,19 +1,20 @@
 #pragma once
 #include "BaseMode.h"
-#include "WaterBalloon.h"
 
-class DefaultMode : public BaseMode
+class HomeCarriageToTopMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the DefaultMode class.
+		Initializes a new instance of the HomeCarriageToTopMode class.
 	*/
-	DefaultMode();
+	HomeCarriageToTopMode();
 
 	/**
-		Deconstruct the instance of the DefaultMode class.
+		Deconstruct the instance of the HomeCarriageToTopMode class.
 	*/
-	~DefaultMode();
+	~HomeCarriageToTopMode();
+
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

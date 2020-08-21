@@ -9,6 +9,11 @@ BaseMode::~BaseMode()
 {
 }
 
+void BaseMode::Initialize(Machine* machine)
+{
+
+}
+
 void BaseMode::Execute(Machine* machine)
 {
 	this->HandlePlaceholder(machine);

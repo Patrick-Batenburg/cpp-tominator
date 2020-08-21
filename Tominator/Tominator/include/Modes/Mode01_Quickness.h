@@ -1,18 +1,20 @@
 #pragma once
 #include "BaseMode.h"
 
-class ClawManualPlacedWaterBalloonMode : public BaseMode
+class QuicknessMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the ClawManualPlacedWaterBalloonMode class.
+		Initializes a new instance of the QuicknessMode class.
 	*/
-	ClawManualPlacedWaterBalloonMode();
+	QuicknessMode();
 
 	/**
-		Deconstruct the instance of the ClawManualPlacedWaterBalloonMode class.
+		Deconstruct the instance of the QuicknessMode class.
 	*/
-	~ClawManualPlacedWaterBalloonMode();
+	~QuicknessMode();
+	
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

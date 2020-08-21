@@ -1,19 +1,17 @@
 #pragma once
 #include "Claw.h"
+#include "DCMotor.h"
 
 class RobotArm
 {
 private:
-	static const int motorStepsGridY = 923;
-	static const int motorStepsZ = 800;
-	static const int motorStepsSortZ = 1200;
-	static const int motorStepsConveyorBelt = 675;
-	static const int motorStepsConveyorBeltX = 655;
-	static const int motorStepsConveyorXOffset = 450;
-	static const int motorStepsColumnZeroOffset = 200;
-	static const int motorStepsGridZ = 2333;
+	static const int motorStepsX = 680;
+	static const int motorStepsY = 680;
+	static const int motorStepsZ = 10200;
+	static const int motorStepsOffsetX = 395;
+	static const int motorStepsOffsetY = 200;
 	static const int delay = 1500;
-	static const int delayZAxis = 500;
+	static const int delayZAxis = 700;
 	int xPulsePin;
 	int xDirectionPin;
 	int xHomingPin;
@@ -23,9 +21,9 @@ private:
 	int zPulsePin;
 	int zDirectionPin;
 	int zHomingPin;
-	int x;
-	int y;
-	int z;
+	int* x;
+	int* y;
+	int* z;
 	int minimumBoundary;
 	int maximumXBoundary;
 	int maximumYBoundary;
@@ -36,7 +34,7 @@ public:
 		Initializes a new instance of the RobotArm class.
 	*/
 	RobotArm();
-	
+
 	/**
 		Initializes a new instance of the RobotArm class.
 
@@ -57,15 +55,28 @@ public:
 		Deconstruct the instance of the RobotArm class.
 	*/
 	~RobotArm();
-	
+
 	/**
-		Handles the X, Y and Z-axis of the robot arm.
+		Handles the X-axis of the robot arm.
 	*/
-	void HandleArm(int x, int y, int z);
+	void HandleXAxis(int newX);
+
+	/**
+		Handles the Y-axis of the robot arm.
+	*/
+	void HandleYAxis(int newY);
+
+	/**
+		Handles the Z-axis of the robot arm.
+	*/
+	void HandleZAxis(int newZ, int extraSteps = 0, int lessSteps = 0);
+	void HandleZAxisOffset(int steps, uint8_t direction);
 	
+	void HandleYAxisOffset(DirectionType direction, int offset = 0);
+
 	/**
 		Applies homing to the robot arm. By default it will home the X, Y, Z-axis and the claw.
-		
+
 		@param homeWhat Indicates what individual component needs homing based on int-value.
 		0 = Homing is applied to the the X, Y, Z-axis and claw (default).
 		1 - Homing is only applied to the X, Y, and Z-axis.

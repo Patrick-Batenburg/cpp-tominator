@@ -1,18 +1,20 @@
 #pragma once
 #include "BaseMode.h"
 
-class SwitchingModesMode : public BaseMode
+class ClawSortingMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the SwitchingModesMode class.
+		Initializes a new instance of the SortingMode class.
 	*/
-	SwitchingModesMode();
+	ClawSortingMode();
 
 	/**
-		Deconstruct the instance of the SwitchingModesMode class.
+		Deconstruct the instance of the SortingMode class.
 	*/
-	~SwitchingModesMode();
+	~ClawSortingMode();
+	
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

@@ -24,5 +24,5 @@ public:
 	/**
 		Updates the selected row and column.
 	*/
-	void SelectNextPosition();
+	void SelectNextPosition(); 
 };

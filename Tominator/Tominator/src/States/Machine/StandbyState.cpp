@@ -16,8 +16,9 @@ void StandbyState::Start(Machine* machine)
 	machine->GetControlPanel().ConfigureInitializeLed();
 	machine->SetCurrentWaterBalloon(WaterBalloon());
 	machine->GetConveyorBelt()->Reset();
-	//machine->Home(4);
 	machine->GetGrid()->Reset();
+	machine->OpenClaw();
+	machine->GetMode()->Initialize(machine);
 	digitalWrite(PIN_ENABLE_STEPPER_MOTOR, HIGH);
 }
 

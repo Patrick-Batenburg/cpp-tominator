@@ -9,9 +9,13 @@ ZAxisMovementMode::~ZAxisMovementMode()
 {
 }
 
-void ZAxisMovementMode::HandlePlaceholder(Machine* machine)
+void ZAxisMovementMode::Initialize(Machine* machine)
 {
 	machine->Home(4);
+}
+
+void ZAxisMovementMode::HandlePlaceholder(Machine* machine)
+{
 	machine->CloseClaw();
 	machine->HandleRobotArm(1, 0, 3);
 }

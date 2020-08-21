@@ -17,6 +17,8 @@ public:
 	*/
 	~SerialPrintSimulationMode();
 
+	void Initialize(Machine* machine);
+
 	/**
 		A helper function for printing water balloons. Returns a string that represents a water balloon. 
 		

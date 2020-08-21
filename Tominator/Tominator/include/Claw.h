@@ -4,7 +4,7 @@ class Claw
 {
 private:
 	static const int delay = 800;
-	static const int motorSteps = 1800;
+	static const int motorSteps = 2200;
 	int pulsePin;
 	int directionPin;
 	int homingPin;

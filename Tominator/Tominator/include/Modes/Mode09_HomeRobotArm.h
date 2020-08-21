@@ -1,18 +1,18 @@
 #pragma once
 #include "BaseMode.h"
 
-class CarriageBeyondTopSensorMode : public BaseMode
+class HomeRobotArmMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the CarriageBeyondTopSensorMode class.
+		Initializes a new instance of the HomeRobotArmMode class.
 	*/
-	CarriageBeyondTopSensorMode();
+	HomeRobotArmMode();
 
 	/**
-		Deconstruct the instance of the CarriageBeyondTopSensorMode class.
+		Deconstruct the instance of the HomeRobotArmMode class.
 	*/
-	~CarriageBeyondTopSensorMode();
+	~HomeRobotArmMode();
 	
 	void Initialize(Machine* machine);
 

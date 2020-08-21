@@ -25,7 +25,6 @@ void Grid::SelectNextPosition()
 		if (this->GetCurrentRow() == 2)
 		{
 			this->GetState()->Next(this);
-			this->SetCurrentRow(0);
 		}
 		else
 		{

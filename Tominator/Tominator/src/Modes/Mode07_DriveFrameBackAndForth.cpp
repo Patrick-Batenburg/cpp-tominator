@@ -1,4 +1,4 @@
-#include "Mode7_DriveFrameBackAndForth.h"
+#include "Mode07_DriveFrameBackAndForth.h"
 #include "Machine.h"
 
 DriveFrameBackAndForthMode::DriveFrameBackAndForthMode()
@@ -9,9 +9,13 @@ DriveFrameBackAndForthMode::~DriveFrameBackAndForthMode()
 {
 }
 
-void DriveFrameBackAndForthMode::HandlePlaceholder(Machine* machine)
+void DriveFrameBackAndForthMode::Initialize(Machine* machine)
 {
 	machine->TurnOnFrameMotor(DirectionType::Forward);
+}
+
+void DriveFrameBackAndForthMode::HandlePlaceholder(Machine* machine)
+{
 	machine->HandleFrame(DirectionType::Forward);
 	machine->HandleFrame(DirectionType::Reverse);
 }

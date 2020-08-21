@@ -3,18 +3,11 @@
 #include "BaseGridState.h"
 #include <vector>
 
-struct Cell {
-	int Row;
-	int Column;
-	WaterBalloonType InitialType;
-};
-
 class BaseGrid
 {
 private:
 	int currentRow;
 	int currentColumn;
-	Cell selectedCell;
 
 protected:
 	std::vector<std::vector<WaterBalloon>> waterBalloonPositions;
@@ -41,15 +34,7 @@ public:
 	/**
 		Clears the 2D matrix to it's default values.
 	*/
-	void Reset();
-
-	/**
-		Gets the nearest unused cell.
-		
-		@param reiterating Determines whenever or not to start from the beginning.	
-		@return The cell that is unused.
-	*/	
-	Cell GetNearestUnusedCell(bool reiterating = true); 
+	virtual void Reset();
 
 	/**
 		Gets the current selected row.

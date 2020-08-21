@@ -1,4 +1,4 @@
-#include "Mode8_SwitchingModes.h"
+#include "Mode08_SwitchingModes.h"
 #include "Machine.h"
 #include "StandbyState.h"
 
@@ -8,6 +8,11 @@ SwitchingModesMode::SwitchingModesMode()
 
 SwitchingModesMode::~SwitchingModesMode()
 {
+}
+
+void SwitchingModesMode::Initialize(Machine* machine)
+{
+
 }
 
 void SwitchingModesMode::HandlePlaceholder(Machine* machine)

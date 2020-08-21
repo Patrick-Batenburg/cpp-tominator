@@ -1,18 +1,20 @@
 #pragma once
 #include "BaseMode.h"
 
-class QuicknessMode : public BaseMode
+class ConveyorBeltSortingMode : public BaseMode
 {
 public:
 	/**
-		Initializes a new instance of the QuicknessMode class.
+		Initializes a new instance of the SortConveyorBeltMode class.
 	*/
-	QuicknessMode();
+	ConveyorBeltSortingMode();
 
 	/**
-		Deconstruct the instance of the QuicknessMode class.
+		Deconstruct the instance of the SortConveyorBeltMode class.
 	*/
-	~QuicknessMode();
+	~ConveyorBeltSortingMode();
+
+	void Initialize(Machine* machine);
 
 	/**
 		Returns a string that represents the current mode.

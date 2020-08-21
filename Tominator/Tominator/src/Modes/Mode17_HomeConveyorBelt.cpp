@@ -9,6 +9,11 @@ HomeConveyorBeltMode::~HomeConveyorBeltMode()
 {
 }
 
+void HomeConveyorBeltMode::Initialize(Machine* machine)
+{
+
+}
+
 void HomeConveyorBeltMode::HandlePlaceholder(Machine* machine)
 {
 	machine->Home(3);
